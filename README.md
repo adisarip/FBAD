@@ -8,7 +8,7 @@ To design, develop and deploy application-specific accelerators targeting domain
    git fetch origin  
    git rebase origin/main  
 ```
-- resolve the merge conflicts if any.  
+- resolve the merge conflicts if any and then do a "git push".  
 
 ## References
 OpenCL API Specification [[HTML](https://www.khronos.org/registry/OpenCL/specs/3.0-unified/html/OpenCL_API.html)] [[PDF](https://www.khronos.org/registry/OpenCL/specs/3.0-unified/pdf/OpenCL_API.pdf)]  
