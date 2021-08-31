@@ -2,9 +2,9 @@
 To design, develop and deploy application-specific accelerators targeting domains such as computer vision, speech processing, natural language processing and genomics.
 
 ## References
-__OpenCL API Specification__ [[HTML](https://www.khronos.org/registry/OpenCL/specs/3.0-unified/html/OpenCL_API.html)] [[PDF](https://www.khronos.org/registry/OpenCL/specs/3.0-unified/pdf/OpenCL_API.pdf)]  
-__OpenCL C Language Specification__ [[HTML](https://www.khronos.org/registry/OpenCL/specs/3.0-unified/html/OpenCL_C.html)] [[PDF](https://www.khronos.org/registry/OpenCL/specs/3.0-unified/pdf/OpenCL_C.pdf)]  
-__OpenCL C++ Language Specification__ [[HTML](https://www.khronos.org/registry/OpenCL/specs/2.2/html/OpenCL_Cxx.html)] [[PDF](https://www.khronos.org/registry/OpenCL/specs/2.2/pdf/OpenCL_Cxx.pdf)]
+OpenCL API Specification [[HTML](https://www.khronos.org/registry/OpenCL/specs/3.0-unified/html/OpenCL_API.html)] [[PDF](https://www.khronos.org/registry/OpenCL/specs/3.0-unified/pdf/OpenCL_API.pdf)]  
+OpenCL C Language Specification [[HTML](https://www.khronos.org/registry/OpenCL/specs/3.0-unified/html/OpenCL_C.html)] [[PDF](https://www.khronos.org/registry/OpenCL/specs/3.0-unified/pdf/OpenCL_C.pdf)]  
+OpenCL C++ Language Specification [[HTML](https://www.khronos.org/registry/OpenCL/specs/2.2/html/OpenCL_Cxx.html)] [[PDF](https://www.khronos.org/registry/OpenCL/specs/2.2/pdf/OpenCL_Cxx.pdf)]
 
 [OpenCL C Bindings/Headers](https://github.com/KhronosGroup/OpenCL-Headers)  
 [OpenCL C++ Bindings/Headers](https://github.com/KhronosGroup/OpenCL-CLHPP)  
