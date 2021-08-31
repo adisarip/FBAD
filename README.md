@@ -4,8 +4,9 @@ To design, develop and deploy application-specific accelerators targeting domain
 ## Important
 - Always do a "git pull", before making any change to the files in the repo.
 - Before doing a git push do the following two steps
-> git fetch origin  
-> git rebase origin/main    
+```git fetch origin  
+   git rebase origin/main  
+```
 - resolve the merge conflicts if any.  
 
 ## References
