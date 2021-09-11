@@ -18,5 +18,5 @@ OpenCL C++ Language Specification [[HTML](https://www.khronos.org/registry/OpenC
 [OpenCL C Bindings/Headers](https://github.com/KhronosGroup/OpenCL-Headers)  
 [OpenCL C++ Bindings/Headers](https://github.com/KhronosGroup/OpenCL-CLHPP)  
 [C++ for OpenCL](https://www.khronos.org/opencl/assets/CXX_for_OpenCL.html)  
-
+[List of FPGA pragmas](https://www.xilinx.com/html_docs/xilinx2019_1/sdaccel_doc/hls-pragmas-okr1504034364623.html)
 
