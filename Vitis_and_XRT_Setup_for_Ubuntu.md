@@ -160,7 +160,7 @@ After the above steps exit from brash and re-start the system.
 > __STEP-6: (Vitis Acceleration Dev Environment Init)__  
 > - Initialize the environment every time when you want to work on Vitis as follows:  
 > - Open a `terminal` window  and source the vitis enviroment as `. ~/set_vitis_env`. Enter sudo password if asked for.  
-> - Vitis environment with XRT setup for FPGA Acceleration Development is complete.  
+> - Vitis environment setup with XRT for FPGA Acceleration Development is complete.  
 &nbsp;
 
 - __After the above steps are completed you are now set to execute the Vitis tutorials 1 & 2, availale at  - https://xilinx.github.io/xup_compute_acceleration  as required.__  
