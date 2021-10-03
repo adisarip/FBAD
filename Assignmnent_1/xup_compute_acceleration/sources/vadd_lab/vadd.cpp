@@ -76,7 +76,7 @@ void swtime (int *buffer_a, int *buffer_b, int *sw_results  , unsigned int num_e
     sw_results[i] = buffer_a[i] + buffer_b[i] ; 
   }
   auto end = high_resolution_clock::now() ; 
-  cout << "Time taken for software addition:\n"<< duration_cast<milliseconds>(end - start).count() << " ms \n";
+  std::cout << "Time taken for software addition:\n"<< duration_cast<microseconds>(end - start).count() << " us \n";
 }
 int main(int argc, char **argv) {
   
@@ -214,7 +214,7 @@ int main(int argc, char **argv) {
   OCL_CHECK(err, err = q.finish());
   
   
-  cout << "Time take to transfer the data = " <<   duration_cast<milliseconds>(high_resolution_clock::now() - st).count() << " ms \n";
+  std::cout << "Time take to transfer the data = " <<   duration_cast<microseconds>(high_resolution_clock::now() - st).count() << " us \n";
   
   // Launching the Kernels
   std::cout << "Launching Hardware Kernel..." << std::endl;
@@ -222,21 +222,21 @@ int main(int argc, char **argv) {
   OCL_CHECK(err, err = q.enqueueTask(krnl_vadd));
   // wait for the kernel to finish their operations
   OCL_CHECK(err, err = q.finish());
-  cout << "Time take to run the kernel = " <<   duration_cast<milliseconds>(high_resolution_clock::now() - st).count() << " ms \n";
+  std::cout << "Time take to run the kernel = " <<   duration_cast<microseconds>(high_resolution_clock::now() - st).count() << " us \n";
 
   // Copy Result from Device Global Memory to Host Local Memory
   std::cout << "Getting Hardware Results..." << std::endl;
   st = high_resolution_clock::now() ; 
   OCL_CHECK(err, err = q.enqueueMigrateMemObjects({buffer_output},CL_MIGRATE_MEM_OBJECT_HOST));
   OCL_CHECK(err, err = q.finish());
-  cout << "Time take to transfer the data back = " <<   duration_cast<milliseconds>(high_resolution_clock::now() - st).count() << " ms \n";
+  std::cout << "Time take to transfer the data back = " <<   duration_cast<microseconds>(high_resolution_clock::now() - st).count() << " us \n";
 
   // OpenCL Host Code Ends
 
   st = high_resolution_clock::now(); 
 
   swtime(buffer_a.data(), buffer_b.data(), sw_results.data()) ; 
-  cout << "Time take to run in cpu =" <<   duration_cast<milliseconds>(high_resolution_clock::now() - st).count() << " ms \n";
+  std::cout << "Time take to run in cpu =" <<   duration_cast<microseconds>(high_resolution_clock::now() - st).count() << " us \n";
 
   // Compare the device results with software results
   bool match = verify(sw_results.data(), hw_results.data(), num_elements);
