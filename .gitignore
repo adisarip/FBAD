@@ -33,4 +33,4 @@
 
 # Directories
 .DS_Store
-
+.vscode
