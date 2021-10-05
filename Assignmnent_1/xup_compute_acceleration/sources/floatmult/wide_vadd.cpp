@@ -136,7 +136,7 @@ int main(int argc, char *argv[])
                                            CL_MAP_WRITE,
                                            0,
                                            BUFSIZE * sizeof(float));
-    uint32_t *b = (float *)q.enqueueMapBuffer(b_buf,
+    float *b = (float *)q.enqueueMapBuffer(b_buf,
                                               CL_TRUE,
                                               CL_MAP_WRITE,
                                               0,
@@ -151,8 +151,8 @@ int main(int argc, char *argv[])
     et.add("Populating buffer inputs");
     for (uint32_t i = 0; i < BUFSIZE; i++)
     {
-        a[i] = i;
-        b[i] = 2 * i;
+        a[i] = (float)(i);
+        b[i] = (float)(2 * i);
     }
     et.finish();
 
