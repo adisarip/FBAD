@@ -16,7 +16,7 @@ int main(int argc, char **argv)
         return EXIT_FAILURE;
     }
     char *binaryFile = argv[1];
-    int N  , Q;
+    int N  ;
     if (argc == 3)
     {
         try
@@ -30,26 +30,13 @@ int main(int argc, char **argv)
     }
     else
     {
-        N = 4096;
+        N = 256;
     }
-    if (argc == 4){
-        try 
-        {
-            Q = stoi(argv[2]);
-        }
-        catch (invalid_argument val)
-        {
-            cerr << "Invalid argument" << endl;
-        }
-    }
-    else
-    {
-        Q = 32;
-    }
-    vector<float, aligned_allocator<float>> data(N * 256);
-    vector<float, aligned_allocator<float>> query(Q * 256);
     
-    vector<int, aligned_allocator<int>> res(Q);
+    vector<float, aligned_allocator<float>> data(N * 256);
+    vector<float, aligned_allocator<float>> query(256);
+    
+    vector<int, aligned_allocator<int>> res(1);
 
     cl::Device device;
     cl::Context context;
@@ -62,7 +49,7 @@ int main(int argc, char **argv)
 
     auto fileBuf = xcl::read_binary_file(binaryFile);
     cl::Program::Binaries bins{{fileBuf.data(), fileBuf.size()}};
-    bool valid_device = false;
+    // bool valid_device = false;
     for (unsigned int i = 0; i < devices.size(); i++)
     {
         device = devices[i];
@@ -85,7 +72,7 @@ int main(int argc, char **argv)
             std::cout << "Device[" << i << "]: program successful!\n";
             // Creating Kernel
             OCL_CHECK(err, krnl_fir = cl::Kernel(program, "matrix_multiply", &err));
-            valid_device = true;
+            // valid_device = true;
             break; // we break because we found a valid device
         }
     }
@@ -106,21 +93,16 @@ int main(int argc, char **argv)
             data[i * 256 + j] /= temp_sum;
         }
     }
-    
-    for (int i = 0; i < Q; i++)
+    temp_sum = 0 ; 
+    for (int j = 0; j < 256; j++)
     {
-        temp_sum = 0 ; 
-        for (int j = 0; j < 256; j++)
-        {
-            query[i * 256 + j] = static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
-            temp_sum +=query[i * 256 + j]*query[i * 256 + j];
-        }
-        temp_sum = sqrt(temp_sum);
-        for (int j = 0; j < 256; j++)
-        {
-            data[i * 256 + j] /= temp_sum;
-        }
-        
+        query[j] = static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
+        temp_sum +=query[j]*query[j];
+    }
+    temp_sum = sqrt(temp_sum);
+    for (int j = 0; j < 256; j++)
+    {
+        data[j] /= temp_sum;
     }
 
     OCL_CHECK(err, cl::Buffer buffer_input1(context,
@@ -135,10 +117,9 @@ int main(int argc, char **argv)
                                             CL_MEM_USE_HOST_PTR | CL_MEM_WRITE_ONLY,
                                             Q*sizeof(int), res.data(), &err));
     OCL_CHECK(err, err = krnl_fir.setArg( 0 ,buffer_input1 ) ) ; 
-    OCL_CHECK(err, err = krnl_fir.setArg(1 , buffer_input2 ) ; 
+    OCL_CHECK(err, err = krnl_fir.setArg(1 , buffer_input2 )) ; 
     OCL_CHECK(err , err = krnl_fir.setArg(2 , N) ) ; 
-    OCL_CHECK(err , err = krnl_fir.setArg(3 , Q) ) ; 
-    OCL_CHECK(err , err = krnl_fir.setArg(4 , buffer_output)) ; 
+    OCL_CHECK(err , err = krnl_fir.setArg(3 , buffer_output)) ; 
     OCL_CHECK(err, err = q.enqueueMigrateMemObjects({buffer_input1, buffer_input2}, 0 /* 0 means from host*/));
     OCL_CHECK(err, err = q.finish());
     // Launching the Kernels
@@ -148,5 +129,7 @@ int main(int argc, char **argv)
     
     OCL_CHECK(err, err = q.enqueueMigrateMemObjects({buffer_output},CL_MIGRATE_MEM_OBJECT_HOST));
     OCL_CHECK(err, err = q.finish());
+    
+    cout<< << "Finish \n" ; 
     return 0  ; 
 }
