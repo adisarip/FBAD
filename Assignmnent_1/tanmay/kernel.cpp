@@ -3,9 +3,9 @@
 
 extern "C"{
     void matrix_multiply(float *data  , float *query , int N , int  Q , int *res ){
-#pragma HLS INTERFACE m_axi port = data max_read_burst_length = 32  offset = slave bundle = gmem
-#pragma HLS INTERFACE m_axi port = query max_read_burst_length = 32  offset = slave bundle = gmem1
-#pragma HLS INTERFACE m_axi port = res max_write_burst_length = 32 offset = slave bundle = gmem2
+#pragma HLS INTERFACE m_axi port = data max_read_burst_length = 64  offset = slave bundle = gmem
+#pragma HLS INTERFACE m_axi port = query max_read_burst_length = 64  offset = slave bundle = gmem1
+#pragma HLS INTERFACE m_axi port = res max_write_burst_length = 64 offset = slave bundle = gmem2
 #pragma HLS INTERFACE s_axilite port = data bundle = control
 #pragma HLS INTERFACE s_axilite port = query bundle = control
 #pragma HLS INTERFACE s_axilite port = res bundle = control
@@ -19,7 +19,7 @@ extern "C"{
         int n = N  , q  ; 
         
         for (int i = 0 ; i < Q +3 ; i+= 4){
-
+            #pragma HLS LOOP_TRIPCOUNT min=4 max = 32
             if( Q < i +  4){
                 q = Q;
             }else {
@@ -32,12 +32,14 @@ extern "C"{
                 query_local[j -i]  = query [j];
             }
             INI:for(int j = 0 ; j < q-i ; j++){
+                #pragma HLS LOOP_TRIPCOUNT min=2 max = 4 
                 #pragma HLS unroll factor=4
                 query_a_val[j]= 0;
             }
             Main:for(int j = 0  ; j< n ; j++){
                 #pragma HLS DATAFLOW
                 #pragma HLS stream variable=data_val depth=256
+                #pragma HLS LOOP_TRIPCOUNT min=256 max = 4096
                 
                 query_cal[0] = 0 ;
                 query_cal[1] = 0 ;
@@ -47,6 +49,7 @@ extern "C"{
                 M_rd:for (int k = 0; k < 256; k++)
                 {
                     #pragma HLS pipeline
+                    #pragma HLS LOOP_TRIPCOUNT min=2 max = 4 
                     data_val[k] = data[k + j*256];
                 }
 
@@ -55,7 +58,7 @@ extern "C"{
                     #pragma HLS pipeline
                     for (int  l = 0; l < q-i; l++)
                     {
-                        #pragma HLS LOOP_TRIPCOUNT min=1 max=4
+                        #pragma HLS LOOP_TRIPCOUNT min=2 max=4
                         #pragma HLS unroll factor=4
                         query_cal[l] += data_val[k] * query_local[l*256+k];
                     }
@@ -63,7 +66,7 @@ extern "C"{
 
                 M_uans:for (int k = 0; k < q-i; k++)
                 {
-                    #pragma HLS LOOP_TRIPCOUNT min=1 max=4
+                    #pragma HLS LOOP_TRIPCOUNT min=2 max=4
                     #pragma HLS unroll factor=4
                     if(query_cal[k] > query_a_val[k]){
                         query_a_val[k] = query_cal[k];
@@ -74,7 +77,8 @@ extern "C"{
             Write_ans:for (int j = i; j < q; j++)
             {
                 #pragma HLS unroll factor=4
-                res[j]= query_ans[j]; 
+                #pragma HLS LOOP_TRIPCOUNT min=2 max = 4 
+                res[j]= query_ans[j-i]; 
             }
         }
     }

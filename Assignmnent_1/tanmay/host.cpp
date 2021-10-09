@@ -55,7 +55,7 @@ int main(int argc, char **argv)
     cl::Context context;
     cl::CommandQueue q;
     cl::Program program;
-    cl::Kernel ;
+    cl::Kernel krnl_fir;
     cl_int err;
 
     auto devices = xcl::get_xil_devices();
