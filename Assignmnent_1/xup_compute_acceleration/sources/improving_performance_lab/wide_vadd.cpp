@@ -27,7 +27,6 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
 EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 **********/
 
-
 #include "event_timer.hpp"
 
 #include <iostream>
@@ -37,12 +36,13 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 // Xilinx OpenCL and XRT includes
 #include "xilinx_ocl.hpp"
 
-#define NUM_BUFS 10
+#define NUM_BUFS 8
 
 void vadd_sw(uint32_t *a, uint32_t *b, uint32_t *c, uint32_t size)
 {
 #pragma omp parallel for
-    for (int i = 0; i < size; i++) {
+    for (int i = 0; i < size; i++)
+    {
         c[i] = a[i] + b[i];
     }
 }
@@ -53,7 +53,8 @@ int subdivide_buffer(std::vector<cl::Buffer> &divided, cl::Buffer buf_in, cl_mem
     size_t size;
     size = buf_in.getInfo<CL_MEM_SIZE>();
 
-    if (size / num_divisions <= 4096) {
+    if (size / num_divisions <= 4096)
+    {
         return -1;
     }
 
@@ -61,21 +62,26 @@ int subdivide_buffer(std::vector<cl::Buffer> &divided, cl::Buffer buf_in, cl_mem
 
     int err;
     region.origin = 0;
-    region.size   = size / num_divisions;
+    region.size = size / num_divisions;
 
     // Round region size up to nearest 4k for efficient burst behavior
-    if (region.size % 4096 != 0) {
+    if (region.size % 4096 != 0)
+    {
         region.size += (4096 - (region.size % 4096));
     }
 
-    for (int i = 0; i < num_divisions; i++) {
-        if (i == num_divisions - 1) {
-            if ((region.origin + region.size) > size) {
+    for (int i = 0; i < num_divisions; i++)
+    {
+        if (i == num_divisions - 1)
+        {
+            if ((region.origin + region.size) > size)
+            {
                 region.size = size - region.origin;
             }
         }
         cl::Buffer buf = buf_in.createSubBuffer(flags, CL_BUFFER_CREATE_TYPE_REGION, &region, &err);
-        if (err != CL_SUCCESS) {
+        if (err != CL_SUCCESS)
+        {
             return err;
         }
         divided.push_back(buf);
@@ -103,7 +109,8 @@ int enqueue_subbuf_vadd(cl::CommandQueue &q, cl::Kernel &krnl, cl::Event &event,
     q.enqueueMigrateMemObjects(in_vec, 0, &tx_events, &m_event);
     krnl_events.push_back(m_event);
     tx_events.push_back(m_event);
-    if (tx_events.size() > 1) {
+    if (tx_events.size() > 1)
+    {
         tx_events[0] = tx_events[1];
         tx_events.pop_back();
     }
@@ -115,7 +122,8 @@ int enqueue_subbuf_vadd(cl::CommandQueue &q, cl::Kernel &krnl, cl::Event &event,
 
     q.enqueueTask(krnl, &krnl_events, &k_event);
     krnl_events.push_back(k_event);
-    if (rx_events.size() == 1) {
+    if (rx_events.size() == 1)
+    {
         krnl_events.push_back(rx_events[0]);
         rx_events.pop_back();
     }
@@ -126,35 +134,36 @@ int enqueue_subbuf_vadd(cl::CommandQueue &q, cl::Kernel &krnl, cl::Event &event,
     return 0;
 }
 
-
 int main(int argc, char *argv[])
 {
     // Initialize an event timer we'll use for monitoring the application
     EventTimer et;
     // Check if the binary file is passed as argument
     if (argc < 2 || argc > 4)
-        {
-            std::cout << "Usage: " << argv[0] << " <XCLBIN File>" << std::endl;
-            return EXIT_FAILURE;
-        }
-        // Copy binary name
-        char *binaryName = argv[1];
-        // Get target and set BUFSIZE 1024 times bigger for hw runs
-        uint32_t BUFSIZE;
-        if (argc == 3)
-        {
-            BUFSIZE = std::stoi(argv[2]);
-        }
-        else
-        {
-            char *target = getenv("XCL_EMULATION_MODE");
-            BUFSIZE = (strcmp( target, "hw") == 0) ? (1024 * 1024 * 32) : (1024 * 32);
-        }
-    std::cout << "-- Parallelizing the Data Path --" << std::endl << std::endl;
+    {
+        std::cout << "Usage: " << argv[0] << " <XCLBIN File>" << std::endl;
+        return EXIT_FAILURE;
+    }
+    // Copy binary name
+    char *binaryName = argv[1];
+    // Get target and set BUFSIZE 1024 times bigger for hw runs
+    uint32_t BUFSIZE;
+    if (argc == 3)
+    {
+        BUFSIZE = std::stoi(argv[2]);
+    }
+    else
+    {
+        char *target = getenv("XCL_EMULATION_MODE");
+        BUFSIZE = (strcmp(target, "hw") == 0) ? (1024 * 1024 * 32) : (1024 * 32);
+    }
+    std::cout << "-- Parallelizing the Data Path --" << std::endl
+              << std::endl;
 
     // Initialize the runtime (including a command queue) and load the
     // FPGA image
-    std::cout << "Loading " << binaryName << " to program the board" << std::endl << std::endl;
+    std::cout << "Loading " << binaryName << " to program the board" << std::endl
+              << std::endl;
     et.add("OpenCL Initialization");
 
     // This application will use the first Xilinx device found in the system
@@ -162,7 +171,7 @@ int main(int argc, char *argv[])
     xocl.initialize(binaryName);
 
     cl::CommandQueue q = xocl.get_command_queue();
-    cl::Kernel krnl    = xocl.get_kernel("wide_vadd");
+    cl::Kernel krnl = xocl.get_kernel("wide_vadd");
     et.finish();
 
     /// New code for example 01
@@ -171,11 +180,8 @@ int main(int argc, char *argv[])
 
     // Map our user-allocated buffers as OpenCL buffers using a shared
     // host pointer
+
     et.add("Allocate contiguous OpenCL buffers");
-    cl_mem_ext_ptr_t bank_ext;
-    bank_ext.flags = 2 | XCL_MEM_TOPOLOGY;
-    bank_ext.obj   = NULL;
-    bank_ext.param = 0;
     cl::Buffer a_buf(xocl.get_context(),
                      static_cast<cl_mem_flags>(CL_MEM_READ_ONLY),
                      BUFSIZE * sizeof(uint32_t),
@@ -191,26 +197,17 @@ int main(int argc, char *argv[])
                      BUFSIZE * sizeof(uint32_t),
                      NULL,
                      NULL);
-    cl::Buffer d_buf(xocl.get_context(),
-                     static_cast<cl_mem_flags>(CL_MEM_READ_WRITE |
-                                               CL_MEM_ALLOC_HOST_PTR |
-                                               CL_MEM_EXT_PTR_XILINX),
-                     BUFSIZE * sizeof(uint32_t),
-                     &bank_ext,
-                     NULL);
+    uint32_t *d = new uint32_t[BUFSIZE];
     et.finish();
 
-    // Set vadd kernel arguments. We do this before mapping the buffers to allow XRT
-    // to allocate the buffers in the appropriate memory banks for the selected
-    // kernels. For buffer 'd' we explicitly set a bank above, but this buffer is
-    // never migrated to the Alveo card so this mapping is theoretical.
-    et.add("Set kernel arguments");
+    // Although we'll change these later, we'll set the buffers as kernel
+    // arguments prior to mapping so that XRT can resolve the physical memory
+    // in which they need to be allocated
     krnl.setArg(0, a_buf);
     krnl.setArg(1, b_buf);
     krnl.setArg(2, c_buf);
-    krnl.setArg(3, BUFSIZE);
 
-    et.add("Map buffers to user space pointers");
+    et.add("Map buffers to userspace pointers");
     uint32_t *a = (uint32_t *)q.enqueueMapBuffer(a_buf,
                                                  CL_TRUE,
                                                  CL_MAP_WRITE,
@@ -221,15 +218,16 @@ int main(int argc, char *argv[])
                                                  CL_MAP_WRITE,
                                                  0,
                                                  BUFSIZE * sizeof(uint32_t));
-    uint32_t *d = (uint32_t *)q.enqueueMapBuffer(d_buf,
+    uint32_t *c = (uint32_t *)q.enqueueMapBuffer(c_buf,
                                                  CL_TRUE,
-                                                 CL_MAP_WRITE | CL_MAP_READ,
+                                                 CL_MAP_READ,
                                                  0,
                                                  BUFSIZE * sizeof(uint32_t));
     et.finish();
 
     et.add("Populating buffer inputs");
-    for (uint32_t i = 0; i < BUFSIZE; i++) {
+    for (int i = 0; i < BUFSIZE; i++)
+    {
         a[i] = i;
         b[i] = 2 * i;
     }
@@ -240,6 +238,7 @@ int main(int argc, char *argv[])
     vadd_sw(a, b, d, BUFSIZE);
     et.finish();
 
+    // Send the buffers down to the Alveo card
     et.add("Memory object migration enqueue");
     q.enqueueUnmapMemObject(a_buf, a);
     q.enqueueUnmapMemObject(b_buf, b);
@@ -251,7 +250,8 @@ int main(int argc, char *argv[])
 
     std::array<cl::Event, NUM_BUFS> kernel_events;
 
-    for (int i = 0; i < NUM_BUFS; i++) {
+    for (int i = 0; i < NUM_BUFS; i++)
+    {
         enqueue_subbuf_vadd(q, krnl, kernel_events[i], a_bufs[i], b_bufs[i], c_bufs[i]);
     }
 
@@ -260,11 +260,12 @@ int main(int argc, char *argv[])
 
     et.finish();
 
-
     // Verify the results
     bool verified = true;
-    for (uint32_t i = 0; i < BUFSIZE; i++) {
-        if (c[i] != d[i]) {
+    for (uint32_t i = 0; i < BUFSIZE; i++)
+    {
+        if (c[i] != d[i])
+        {
             verified = false;
             std::cout << "ERROR: software and hardware vadd do not match: "
                       << c[i] << "!=" << d[i] << " at position " << i << std::endl;
@@ -272,14 +273,16 @@ int main(int argc, char *argv[])
         }
     }
 
-    if (verified) {
+    if (verified)
+    {
         std::cout
             << std::endl
             << "OCL-mapped contiguous buffer example complete successfully!"
             << std::endl
             << std::endl;
     }
-    else {
+    else
+    {
         std::cout
             << std::endl
             << "OCL-mapped contiguous buffer example complete! (with errors)"
@@ -289,13 +292,10 @@ int main(int argc, char *argv[])
 
     std::cout << "--------------- Key execution times ---------------" << std::endl;
 
-
     q.enqueueUnmapMemObject(a_buf, a);
     q.enqueueUnmapMemObject(b_buf, b);
     q.enqueueUnmapMemObject(c_buf, c);
-    q.enqueueUnmapMemObject(d_buf, d);
     q.finish();
-
 
     et.print();
 }
