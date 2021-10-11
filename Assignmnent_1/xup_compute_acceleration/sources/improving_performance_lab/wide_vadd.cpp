@@ -33,6 +33,8 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <memory>
 #include <string>
 
+#include <omp.h>
+
 // Xilinx OpenCL and XRT includes
 #include "xilinx_ocl.hpp"
 
@@ -70,7 +72,7 @@ int subdivide_buffer(std::vector<cl::Buffer> &divided, cl::Buffer buf_in, cl_mem
         region.size += (4096 - (region.size % 4096));
     }
 
-    for (int i = 0; i < num_divisions; i++)
+    for (uint i = 0; i < num_divisions; i++)
     {
         if (i == num_divisions - 1)
         {
@@ -155,7 +157,7 @@ int main(int argc, char *argv[])
     else
     {
         char *target = getenv("XCL_EMULATION_MODE");
-        BUFSIZE = (strcmp(target, "hw") == 0) ? (1024 * 1024 * 32) : (1024 * 32);
+        BUFSIZE = (1024 * 64);//(strcmp(target, "hw") == 0) ? (1024 * 1024 * 32) : (1024 * 32);
     }
     std::cout << "-- Parallelizing the Data Path --" << std::endl
               << std::endl;
@@ -292,8 +294,8 @@ int main(int argc, char *argv[])
 
     std::cout << "--------------- Key execution times ---------------" << std::endl;
 
-    q.enqueueUnmapMemObject(a_buf, a);
-    q.enqueueUnmapMemObject(b_buf, b);
+    //q.enqueueUnmapMemObject(a_buf, a);
+    //q.enqueueUnmapMemObject(b_buf, b);
     q.enqueueUnmapMemObject(c_buf, c);
     q.finish();
 

@@ -79,7 +79,7 @@ extern "C"
         // Input vector size for integer vectors. However kernel is directly
         // accessing 512bit data (total 16 elements). So total number of read
         // from global memory is calculated here:
-        int size_in16 = (size - 1) / VECTOR_SIZE + 1;
+        int size_in16 = size;
 
         //Per iteration of this loop perform BUFFER_SIZE vector addition
         for (int i = 0; i < size_in16; i += BUFFER_SIZE) {
