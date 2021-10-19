@@ -1,0 +1,1007 @@
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./cos_sim cos_sim.awsxclbin
+[INFO] Usage: ./cos_sim <XCLBIN File> <num_elements>
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./cos_sim cos_sim.awsxclbin 10
+[INFO] No Of Vectors: 10
+[INFO] No Of Elements: 2560
+[INFO] Loading cos_sim.awsxclbin to program the board.
+[INFO] Cosine Similarity experiment completed successfully!
+[INFO] Max cosine value [SW]: [2] : 0.162271
+[INFO] Max cosine value [HW]: [2] : 0.162271
+--------------- Key execution times ---------------
+[ET] Create Data Set                  :    0.096 ms
+[ET] Compute Cosine Similarity on CPU :    0.272 ms
+[ET] Subdividing Buffers              :    0.006 ms
+[ET] Send/Execute/Receive buffers     :    0.130 ms
+[ET] Wait for the kernel to complete  :    0.383 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./cos_sim cos_sim.awsxclbin 10
+[INFO] No Of Vectors: 10
+[INFO] No Of Elements: 2560
+[INFO] Loading cos_sim.awsxclbin to program the board.
+[INFO] Cosine Similarity experiment completed successfully!
+[INFO] Max cosine value [SW]: [1] : 0.00195058
+[INFO] Max cosine value [HW]: [1] : 0.00195058
+--------------- Key execution times ---------------
+[ET] Create Data Set                  :    0.096 ms
+[ET] Compute Cosine Similarity on CPU :    0.234 ms
+[ET] Subdividing Buffers              :    0.005 ms
+[ET] Send/Execute/Receive buffers     :    0.234 ms
+[ET] Wait for the kernel to complete  :    0.265 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./cos_sim cos_sim.awsxclbin 100
+[INFO] No Of Vectors: 100
+[INFO] No Of Elements: 25600
+[INFO] Loading cos_sim.awsxclbin to program the board.
+[INFO] Cosine Similarity experiment completed successfully!
+[INFO] Max cosine value [SW]: [37] : 0.0479837
+[INFO] Max cosine value [HW]: [37] : 0.0479837
+--------------- Key execution times ---------------
+[ET] Create Data Set                  :    0.730 ms
+[ET] Compute Cosine Similarity on CPU :    0.229 ms
+[ET] Subdividing Buffers              :    0.015 ms
+[ET] Send/Execute/Receive sub buffers :    0.385 ms
+[ET] Wait for kernels to complete     :    0.921 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./cos_sim cos_sim.awsxclbin 1000
+[INFO] No Of Vectors: 1000
+[INFO] No Of Elements: 256000
+[INFO] Loading cos_sim.awsxclbin to program the board.
+[INFO] Cosine Similarity experiment completed successfully!
+[INFO] Max cosine value [SW]: [596] : 0.140166
+[INFO] Max cosine value [HW]: [596] : 0.140166
+--------------- Key execution times ---------------
+[ET] Create Data Set                  :    7.048 ms
+[ET] Compute Cosine Similarity on CPU :    0.312 ms
+[ET] Subdividing Buffers              :    0.021 ms
+[ET] Send/Execute/Receive sub buffers :    0.677 ms
+[ET] Wait for kernels to complete     :    0.927 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./cos_sim cos_sim.awsxclbin 10000
+[INFO] No Of Vectors: 10000
+[INFO] No Of Elements: 2560000
+[INFO] Loading cos_sim.awsxclbin to program the board.
+[INFO] Cosine Similarity experiment completed successfully!
+[INFO] Max cosine value [SW]: [2258] : 0.211667
+[INFO] Max cosine value [HW]: [2258] : 0.211667
+--------------- Key execution times ---------------
+[ET] Create Data Set                  :   70.529 ms
+[ET] Compute Cosine Similarity on CPU :    0.843 ms
+[ET] Subdividing Buffers              :    0.022 ms
+[ET] Send/Execute/Receive sub buffers :    0.444 ms
+[ET] Wait for kernels to complete     :    2.389 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./cos_sim cos_sim.awsxclbin 10000
+[INFO] No Of Vectors: 10000
+[INFO] No Of Elements: 2560000
+[INFO] Loading cos_sim.awsxclbin to program the board.
+[INFO] Cosine Similarity experiment completed successfully!
+[INFO] Max cosine value [SW]: [5916] : 0.233859
+[INFO] Max cosine value [HW]: [5916] : 0.233859
+--------------- Key execution times ---------------
+[ET] Create Data Set                  :   74.755 ms
+[ET] Compute Cosine Similarity on CPU :    0.879 ms
+[ET] Subdividing Buffers              :    0.023 ms
+[ET] Send/Execute/Receive sub buffers :    0.475 ms
+[ET] Wait for kernels to complete     :    2.268 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./cos_sim cos_sim.awsxclbin 10000
+[INFO] No Of Vectors: 10000
+[INFO] No Of Elements: 2560000
+[INFO] Loading cos_sim.awsxclbin to program the board.
+[INFO] Cosine Similarity experiment completed successfully!
+[INFO] Max cosine value [SW]: [7213] : 0.212369
+[INFO] Max cosine value [HW]: [7213] : 0.212369
+--------------- Key execution times ---------------
+[ET] Create Data Set                  :   69.764 ms
+[ET] Compute Cosine Similarity on CPU :    0.779 ms
+[ET] Subdividing Buffers              :    0.017 ms
+[ET] Send/Execute/Receive sub buffers :    0.428 ms
+[ET] Wait for kernels to complete     :    2.357 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./cos_sim cos_sim.awsxclbin 10000
+[INFO] No Of Vectors: 10000
+[INFO] No Of Elements: 2560000
+[INFO] Loading cos_sim.awsxclbin to program the board.
+[INFO] Cosine Similarity experiment completed successfully!
+[INFO] Max cosine value [SW]: [4615] : 0.20378
+[INFO] Max cosine value [HW]: [4615] : 0.20378
+--------------- Key execution times ---------------
+[ET] Create Data Set                  :   69.730 ms
+[ET] Compute Cosine Similarity on CPU :    0.806 ms
+[ET] Subdividing Buffers              :    0.018 ms
+[ET] Send/Execute/Receive sub buffers :    0.483 ms
+[ET] Wait for kernels to complete     :    2.173 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./cos_sim cos_sim.awsxclbin 100000
+[INFO] No Of Vectors: 100000
+[INFO] No Of Elements: 25600000
+[INFO] Loading cos_sim.awsxclbin to program the board.
+[INFO] Cosine Similarity experiment completed successfully!
+[INFO] Max cosine value [SW]: [71109] : 0.264867
+[INFO] Max cosine value [HW]: [71109] : 0.264867
+--------------- Key execution times ---------------
+[ET] Create Data Set                  :  703.401 ms
+[ET] Compute Cosine Similarity on CPU :    5.876 ms
+[ET] Subdividing Buffers              :    0.023 ms
+[ET] Send/Execute/Receive sub buffers :    0.481 ms
+[ET] Wait for kernels to complete     :   16.366 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./cos_sim cos_sim.awsxclbin 100000
+[INFO] No Of Vectors: 100000
+[INFO] No Of Elements: 25600000
+[INFO] Loading cos_sim.awsxclbin to program the board.
+[INFO] Cosine Similarity experiment completed successfully!
+[INFO] Max cosine value [SW]: [82147] : 0.274142
+[INFO] Max cosine value [HW]: [82147] : 0.274142
+--------------- Key execution times ---------------
+[ET] Create Data Set                  :  703.057 ms
+[ET] Compute Cosine Similarity on CPU :    5.830 ms
+[ET] Subdividing Buffers              :    0.024 ms
+[ET] Send/Execute/Receive sub buffers :    0.484 ms
+[ET] Wait for kernels to complete     :   16.263 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ vim ../src/
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ cd ../src/
+[ec2-user@ip-172-31-88-240 src]$
+[ec2-user@ip-172-31-88-240 src]$
+[ec2-user@ip-172-31-88-240 src]$ ls -lt
+total 40
+-rw-rw-r-- 1 ec2-user ec2-user 15490 Oct 19 13:20 cos_sim.cpp
+-rw-rw-r-- 1 ec2-user ec2-user  3585 Oct 19 09:24 event_timer.cpp
+-rw-rw-r-- 1 ec2-user ec2-user  2202 Oct 19 09:24 event_timer.hpp
+-rw-rw-r-- 1 ec2-user ec2-user  2828 Oct 19 09:24 line_exception.hpp
+-rw-rw-r-- 1 ec2-user ec2-user  5007 Oct 19 09:24 xilinx_ocl.cpp
+-rw-rw-r-- 1 ec2-user ec2-user  3840 Oct 19 09:24 xilinx_ocl.hpp
+[ec2-user@ip-172-31-88-240 src]$ r
+-bash: r: command not found
+[ec2-user@ip-172-31-88-240 src]$
+[ec2-user@ip-172-31-88-240 src]$ cd -
+/home/ec2-user/workspace/cos_sim/Hardware
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ l
+total 294672
+-rw-rw-r-- 1 ec2-user ec2-user      1561 Oct 19 09:52 makefile
+drwxrwxr-x 2 ec2-user ec2-user        64 Oct 19 09:53 src
+-rwxrwxr-x 1 ec2-user ec2-user   1039904 Oct 19 09:53 cos_sim
+-rw-rw-r-- 1 ec2-user ec2-user      1148 Oct 19 09:53 cos_sim_Hardware.build.ui.log
+-rw-rw-r-- 1 ec2-user ec2-user       199 Oct 19 09:53 guidance.pb
+-rw-rw-r-- 1 ec2-user ec2-user       735 Oct 19 09:53 guidance.json
+-rw-rw-r-- 1 ec2-user ec2-user    337460 Oct 19 09:53 guidance.html
+-rw-rw-r-- 1 ec2-user ec2-user 300294929 Oct 19 12:20 cos_sim.xclbin
+-rw-rw-r-- 1 ec2-user ec2-user     48480 Oct 19 13:19 cos_sim.awsxclbin
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ make
+g++ -std=c++1y -DVITIS_PLATFORM=xilinx_aws-vu9p-f1_shell-v04261818_201920_2 -D__USE_XOPEN2K8 -I/opt/xilinx/xrt/include/ -I/tools/Xilinx/Vivado/2021.1/include/ -O2 -g -Wall -c -fmessage-length=0 -fopenmp -o "src/cos_sim.o" "../src/cos_sim.cpp"
+g++ -o "cos_sim" src/cos_sim.o src/event_timer.o src/xilinx_ocl.o -lxilinxopencl -lpthread -lrt -lstdc++ -L/opt/xilinx/xrt/lib/ -fopenmp -Wl,-rpath-link,/opt/xilinx/xrt/lib
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ l
+total 294668
+-rw-rw-r-- 1 ec2-user ec2-user      1561 Oct 19 09:52 makefile
+-rw-rw-r-- 1 ec2-user ec2-user      1148 Oct 19 09:53 cos_sim_Hardware.build.ui.log
+-rw-rw-r-- 1 ec2-user ec2-user       199 Oct 19 09:53 guidance.pb
+-rw-rw-r-- 1 ec2-user ec2-user       735 Oct 19 09:53 guidance.json
+-rw-rw-r-- 1 ec2-user ec2-user    337460 Oct 19 09:53 guidance.html
+-rw-rw-r-- 1 ec2-user ec2-user 300294929 Oct 19 12:20 cos_sim.xclbin
+-rw-rw-r-- 1 ec2-user ec2-user     48480 Oct 19 13:19 cos_sim.awsxclbin
+drwxrwxr-x 2 ec2-user ec2-user        64 Oct 19 13:21 src
+-rwxrwxr-x 1 ec2-user ec2-user   1033416 Oct 19 13:21 cos_sim
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./cos_sim cos_sim.awsxclbin 100000
+[INFO] No Of Vectors: 100000
+[INFO] No Of Elements: 25600000
+[INFO] Loading cos_sim.awsxclbin to program the board.
+[INFO] Cosine Similarity experiment completed successfully!
+[INFO] Max cosine value [SW]: [39608] : 0.278775
+[INFO] Max cosine value [HW]: [39608] : 0.278775
+--------------- Key execution times ---------------
+[ET] Create Data Set                  :  748.719 ms
+[ET] Compute Cosine Similarity on CPU :   29.219 ms
+[ET] Subdividing Buffers              :    0.020 ms
+[ET] Send/Execute/Receive sub buffers :    0.365 ms
+[ET] Wait for kernels to complete     :   16.501 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./cos_sim cos_sim.awsxclbin 1000000
+[INFO] No Of Vectors: 1000000
+[INFO] No Of Elements: 256000000
+[INFO] Loading cos_sim.awsxclbin to program the board.
+[INFO] Cosine Similarity experiment completed successfully!
+[INFO] Max cosine value [SW]: [789173] : 0.306598
+[INFO] Max cosine value [HW]: [789173] : 0.306598
+--------------- Key execution times ---------------
+[ET] Create Data Set                  : 7033.431 ms
+[ET] Compute Cosine Similarity on CPU :  288.393 ms
+[ET] Subdividing Buffers              :    0.022 ms
+[ET] Send/Execute/Receive sub buffers :    0.384 ms
+[ET] Wait for kernels to complete     :  154.742 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ cd -
+/home/ec2-user/workspace/cos_sim/src
+[ec2-user@ip-172-31-88-240 src]$
+[ec2-user@ip-172-31-88-240 src]$
+[ec2-user@ip-172-31-88-240 src]$
+[ec2-user@ip-172-31-88-240 src]$
+[ec2-user@ip-172-31-88-240 src]$ vim cos_sim.cpp
+[ec2-user@ip-172-31-88-240 src]$
+[ec2-user@ip-172-31-88-240 src]$
+[ec2-user@ip-172-31-88-240 src]$ cd -
+/home/ec2-user/workspace/cos_sim/Hardware
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ make
+g++ -std=c++1y -DVITIS_PLATFORM=xilinx_aws-vu9p-f1_shell-v04261818_201920_2 -D__USE_XOPEN2K8 -I/opt/xilinx/xrt/include/ -I/tools/Xilinx/Vivado/2021.1/include/ -O2 -g -Wall -c -fmessage-length=0 -fopenmp -o "src/cos_sim.o" "../src/cos_sim.cpp"
+g++ -o "cos_sim" src/cos_sim.o src/event_timer.o src/xilinx_ocl.o -lxilinxopencl -lpthread -lrt -lstdc++ -L/opt/xilinx/xrt/lib/ -fopenmp -Wl,-rpath-link,/opt/xilinx/xrt/lib
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ l
+total 294676
+-rw-rw-r-- 1 ec2-user ec2-user      1561 Oct 19 09:52 makefile
+-rw-rw-r-- 1 ec2-user ec2-user      1148 Oct 19 09:53 cos_sim_Hardware.build.ui.log
+-rw-rw-r-- 1 ec2-user ec2-user       199 Oct 19 09:53 guidance.pb
+-rw-rw-r-- 1 ec2-user ec2-user       735 Oct 19 09:53 guidance.json
+-rw-rw-r-- 1 ec2-user ec2-user    337460 Oct 19 09:53 guidance.html
+-rw-rw-r-- 1 ec2-user ec2-user 300294929 Oct 19 12:20 cos_sim.xclbin
+-rw-rw-r-- 1 ec2-user ec2-user     48480 Oct 19 13:19 cos_sim.awsxclbin
+drwxrwxr-x 2 ec2-user ec2-user        64 Oct 19 13:30 src
+-rwxrwxr-x 1 ec2-user ec2-user   1041984 Oct 19 13:30 cos_sim
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./cos_sim cos_sim.awsxclbin 1000000
+[INFO] No Of Vectors: 1000000
+[INFO] No Of Elements: 256000000
+[INFO] Loading cos_sim.awsxclbin to program the board.
+[INFO] Cosine Similarity experiment completed successfully!
+[INFO] Max cosine value [SW]: [703369] : 0.276078
+[INFO] Max cosine value [HW]: [703369] : 0.276078
+--------------- Key execution times ---------------
+[ET] Create Data Set                           : 7240.467 ms
+[ET] Compute Cosine Similarity on CPU          :  288.931 ms
+[ET] Compute Cosine Similarity on CPU [OpenMP] :   54.427 ms
+[ET] Subdividing Buffers                       :    0.025 ms
+[ET] Send/Execute/Receive sub buffers          :    0.504 ms
+[ET] Wait for kernels to complete              :  154.534 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./cos_sim cos_sim.awsxclbin 256
+[INFO] No Of Vectors: 256
+[INFO] No Of Elements: 65536
+[INFO] Loading cos_sim.awsxclbin to program the board.
+[INFO] Cosine Similarity experiment completed successfully!
+[INFO] Max cosine value [SW]: [130] : 0.0800857
+[INFO] Max cosine value [HW]: [130] : 0.0800857
+--------------- Key execution times ---------------
+[ET] Create Data Set                           :    1.849 ms
+[ET] Compute Cosine Similarity on CPU          :    0.071 ms
+[ET] Compute Cosine Similarity on CPU [OpenMP] :    0.277 ms
+[ET] Subdividing Buffers                       :    0.016 ms
+[ET] Send/Execute/Receive sub buffers          :    0.633 ms
+[ET] Wait for kernels to complete              :    0.813 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./cos_sim cos_sim.awsxclbin 256
+[INFO] No Of Vectors: 256
+[INFO] No Of Elements: 65536
+[INFO] Loading cos_sim.awsxclbin to program the board.
+[INFO] Cosine Similarity experiment completed successfully!
+[INFO] Max cosine value [SW]: [125] : 0.128158
+[INFO] Max cosine value [HW]: [125] : 0.128158
+--------------- Key execution times ---------------
+[ET] Create Data Set                           :    1.830 ms
+[ET] Compute Cosine Similarity on CPU          :    0.071 ms
+[ET] Compute Cosine Similarity on CPU [OpenMP] :    0.229 ms
+[ET] Subdividing Buffers                       :    0.014 ms
+[ET] Send/Execute/Receive sub buffers          :    0.479 ms
+[ET] Wait for kernels to complete              :    0.956 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./cos_sim cos_sim.awsxclbin 256
+[INFO] No Of Vectors: 256
+[INFO] No Of Elements: 65536
+[INFO] Loading cos_sim.awsxclbin to program the board.
+[INFO] Cosine Similarity experiment completed successfully!
+[INFO] Max cosine value [SW]: [61] : 0.144762
+[INFO] Max cosine value [HW]: [61] : 0.144762
+--------------- Key execution times ---------------
+[ET] Create Data Set                           :    1.787 ms
+[ET] Compute Cosine Similarity on CPU          :    0.071 ms
+[ET] Compute Cosine Similarity on CPU [OpenMP] :    0.243 ms
+[ET] Subdividing Buffers                       :    0.015 ms
+[ET] Send/Execute/Receive sub buffers          :    0.496 ms
+[ET] Wait for kernels to complete              :    1.321 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./cos_sim cos_sim.awsxclbin 256
+[INFO] No Of Vectors: 256
+[INFO] No Of Elements: 65536
+[INFO] Loading cos_sim.awsxclbin to program the board.
+[INFO] Cosine Similarity experiment completed successfully!
+[INFO] Max cosine value [SW]: [81] : 0.122045
+[INFO] Max cosine value [HW]: [81] : 0.122045
+--------------- Key execution times ---------------
+[ET] Create Data Set                           :    1.825 ms
+[ET] Compute Cosine Similarity on CPU          :    0.077 ms
+[ET] Compute Cosine Similarity on CPU [OpenMP] :    0.256 ms
+[ET] Subdividing Buffers                       :    0.016 ms
+[ET] Send/Execute/Receive sub buffers          :    0.482 ms
+[ET] Wait for kernels to complete              :    1.020 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./cos_sim cos_sim.awsxclbin 256
+[INFO] No Of Vectors: 256
+[INFO] No Of Elements: 65536
+[INFO] Loading cos_sim.awsxclbin to program the board.
+[INFO] Cosine Similarity experiment completed successfully!
+[INFO] Max cosine value [SW]: [83] : 0.115365
+[INFO] Max cosine value [HW]: [83] : 0.115365
+--------------- Key execution times ---------------
+[ET] Create Data Set                           :    1.922 ms
+[ET] Compute Cosine Similarity on CPU          :    0.072 ms
+[ET] Compute Cosine Similarity on CPU [OpenMP] :    0.252 ms
+[ET] Subdividing Buffers                       :    0.016 ms
+[ET] Send/Execute/Receive sub buffers          :    0.462 ms
+[ET] Wait for kernels to complete              :    1.239 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./cos_sim cos_sim.awsxclbin 256
+[INFO] No Of Vectors: 256
+[INFO] No Of Elements: 65536
+[INFO] Loading cos_sim.awsxclbin to program the board.
+[INFO] Cosine Similarity experiment completed successfully!
+[INFO] Max cosine value [SW]: [240] : 0.122608
+[INFO] Max cosine value [HW]: [240] : 0.122608
+--------------- Key execution times ---------------
+[ET] Create Data Set                           :    1.869 ms
+[ET] Compute Cosine Similarity on CPU          :    0.071 ms
+[ET] Compute Cosine Similarity on CPU [OpenMP] :    0.247 ms
+[ET] Subdividing Buffers                       :    0.015 ms
+[ET] Send/Execute/Receive sub buffers          :    0.563 ms
+[ET] Wait for kernels to complete              :    0.943 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./cos_sim cos_sim.awsxclbin 512
+[INFO] No Of Vectors: 512
+[INFO] No Of Elements: 131072
+[INFO] Loading cos_sim.awsxclbin to program the board.
+[INFO] Cosine Similarity experiment completed successfully!
+[INFO] Max cosine value [SW]: [149] : 0.131819
+[INFO] Max cosine value [HW]: [149] : 0.131819
+--------------- Key execution times ---------------
+[ET] Create Data Set                           :    3.559 ms
+[ET] Compute Cosine Similarity on CPU          :    0.158 ms
+[ET] Compute Cosine Similarity on CPU [OpenMP] :    0.253 ms
+[ET] Subdividing Buffers                       :    0.015 ms
+[ET] Send/Execute/Receive sub buffers          :    0.496 ms
+[ET] Wait for kernels to complete              :    1.036 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./cos_sim cos_sim.awsxclbin 512
+[INFO] No Of Vectors: 512
+[INFO] No Of Elements: 131072
+[INFO] Loading cos_sim.awsxclbin to program the board.
+[INFO] Cosine Similarity experiment completed successfully!
+[INFO] Max cosine value [SW]: [111] : 0.176186
+[INFO] Max cosine value [HW]: [111] : 0.176186
+--------------- Key execution times ---------------
+[ET] Create Data Set                           :    3.571 ms
+[ET] Compute Cosine Similarity on CPU          :    0.143 ms
+[ET] Compute Cosine Similarity on CPU [OpenMP] :    0.279 ms
+[ET] Subdividing Buffers                       :    0.016 ms
+[ET] Send/Execute/Receive sub buffers          :    0.430 ms
+[ET] Wait for kernels to complete              :    1.015 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./cos_sim cos_sim.awsxclbin 1024
+[INFO] No Of Vectors: 1024
+[INFO] No Of Elements: 262144
+[INFO] Loading cos_sim.awsxclbin to program the board.
+[INFO] Cosine Similarity experiment completed successfully!
+[INFO] Max cosine value [SW]: [652] : 0.11219
+[INFO] Max cosine value [HW]: [652] : 0.11219
+--------------- Key execution times ---------------
+[ET] Create Data Set                           :    7.214 ms
+[ET] Compute Cosine Similarity on CPU          :    0.279 ms
+[ET] Compute Cosine Similarity on CPU [OpenMP] :    0.295 ms
+[ET] Subdividing Buffers                       :    0.016 ms
+[ET] Send/Execute/Receive sub buffers          :    0.440 ms
+[ET] Wait for kernels to complete              :    1.182 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./cos_sim cos_sim.awsxclbin 1024
+[INFO] No Of Vectors: 1024
+[INFO] No Of Elements: 262144
+[INFO] Loading cos_sim.awsxclbin to program the board.
+[INFO] Cosine Similarity experiment completed successfully!
+[INFO] Max cosine value [SW]: [706] : 0.15292
+[INFO] Max cosine value [HW]: [706] : 0.15292
+--------------- Key execution times ---------------
+[ET] Create Data Set                           :    7.119 ms
+[ET] Compute Cosine Similarity on CPU          :    0.275 ms
+[ET] Compute Cosine Similarity on CPU [OpenMP] :    0.305 ms
+[ET] Subdividing Buffers                       :    0.018 ms
+[ET] Send/Execute/Receive sub buffers          :    0.844 ms
+[ET] Wait for kernels to complete              :    0.863 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./cos_sim cos_sim.awsxclbin 1024
+[INFO] No Of Vectors: 1024
+[INFO] No Of Elements: 262144
+[INFO] Loading cos_sim.awsxclbin to program the board.
+[INFO] Cosine Similarity experiment completed successfully!
+[INFO] Max cosine value [SW]: [479] : 0.23662
+[INFO] Max cosine value [HW]: [479] : 0.23662
+--------------- Key execution times ---------------
+[ET] Create Data Set                           :    7.616 ms
+[ET] Compute Cosine Similarity on CPU          :    0.290 ms
+[ET] Compute Cosine Similarity on CPU [OpenMP] :    0.293 ms
+[ET] Subdividing Buffers                       :    0.018 ms
+[ET] Send/Execute/Receive sub buffers          :    0.585 ms
+[ET] Wait for kernels to complete              :    1.359 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./cos_sim cos_sim.awsxclbin 2048
+[INFO] No Of Vectors: 2048
+[INFO] No Of Elements: 524288
+[INFO] Loading cos_sim.awsxclbin to program the board.
+[INFO] Cosine Similarity experiment completed successfully!
+[INFO] Max cosine value [SW]: [1494] : 0.286989
+[INFO] Max cosine value [HW]: [1494] : 0.286989
+--------------- Key execution times ---------------
+[ET] Create Data Set                           :   14.456 ms
+[ET] Compute Cosine Similarity on CPU          :    0.580 ms
+[ET] Compute Cosine Similarity on CPU [OpenMP] :    0.374 ms
+[ET] Subdividing Buffers                       :    0.016 ms
+[ET] Send/Execute/Receive sub buffers          :    0.470 ms
+[ET] Wait for kernels to complete              :    1.218 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./cos_sim cos_sim.awsxclbin 2048
+[INFO] No Of Vectors: 2048
+[INFO] No Of Elements: 524288
+[INFO] Loading cos_sim.awsxclbin to program the board.
+[INFO] Cosine Similarity experiment completed successfully!
+[INFO] Max cosine value [SW]: [1182] : 0.158794
+[INFO] Max cosine value [HW]: [1182] : 0.158794
+--------------- Key execution times ---------------
+[ET] Create Data Set                           :   15.410 ms
+[ET] Compute Cosine Similarity on CPU          :    0.579 ms
+[ET] Compute Cosine Similarity on CPU [OpenMP] :    0.360 ms
+[ET] Subdividing Buffers                       :    0.016 ms
+[ET] Send/Execute/Receive sub buffers          :    0.761 ms
+[ET] Wait for kernels to complete              :    0.926 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./cos_sim cos_sim.awsxclbin 4096
+[INFO] No Of Vectors: 4096
+[INFO] No Of Elements: 1048576
+[INFO] Loading cos_sim.awsxclbin to program the board.
+[INFO] Cosine Similarity experiment completed successfully!
+[INFO] Max cosine value [SW]: [1820] : 0.243088
+[INFO] Max cosine value [HW]: [1820] : 0.243088
+--------------- Key execution times ---------------
+[ET] Create Data Set                           :   28.767 ms
+[ET] Compute Cosine Similarity on CPU          :    1.113 ms
+[ET] Compute Cosine Similarity on CPU [OpenMP] :    0.467 ms
+[ET] Subdividing Buffers                       :    0.016 ms
+[ET] Send/Execute/Receive sub buffers          :    0.678 ms
+[ET] Wait for kernels to complete              :    1.007 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./cos_sim cos_sim.awsxclbin 4096
+[INFO] No Of Vectors: 4096
+[INFO] No Of Elements: 1048576
+[INFO] Loading cos_sim.awsxclbin to program the board.
+[INFO] Cosine Similarity experiment completed successfully!
+[INFO] Max cosine value [SW]: [2859] : 0.179345
+[INFO] Max cosine value [HW]: [2859] : 0.179345
+--------------- Key execution times ---------------
+[ET] Create Data Set                           :   30.673 ms
+[ET] Compute Cosine Similarity on CPU          :    1.175 ms
+[ET] Compute Cosine Similarity on CPU [OpenMP] :    0.484 ms
+[ET] Subdividing Buffers                       :    0.016 ms
+[ET] Send/Execute/Receive sub buffers          :    0.688 ms
+[ET] Wait for kernels to complete              :    1.310 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./cos_sim cos_sim.awsxclbin 4096
+[INFO] No Of Vectors: 4096
+[INFO] No Of Elements: 1048576
+[INFO] Loading cos_sim.awsxclbin to program the board.
+[INFO] Cosine Similarity experiment completed successfully!
+[INFO] Max cosine value [SW]: [2947] : 0.161343
+[INFO] Max cosine value [HW]: [2947] : 0.161343
+--------------- Key execution times ---------------
+[ET] Create Data Set                           :   28.651 ms
+[ET] Compute Cosine Similarity on CPU          :    1.113 ms
+[ET] Compute Cosine Similarity on CPU [OpenMP] :    0.457 ms
+[ET] Subdividing Buffers                       :    0.016 ms
+[ET] Send/Execute/Receive sub buffers          :    0.479 ms
+[ET] Wait for kernels to complete              :    1.325 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./cos_sim cos_sim.awsxclbin 8192
+[INFO] No Of Vectors: 8192
+[INFO] No Of Elements: 2097152
+[INFO] Loading cos_sim.awsxclbin to program the board.
+[INFO] Cosine Similarity experiment completed successfully!
+[INFO] Max cosine value [SW]: [5392] : 0.206489
+[INFO] Max cosine value [HW]: [5392] : 0.206489
+--------------- Key execution times ---------------
+[ET] Create Data Set                           :   56.895 ms
+[ET] Compute Cosine Similarity on CPU          :    2.224 ms
+[ET] Compute Cosine Similarity on CPU [OpenMP] :    0.683 ms
+[ET] Subdividing Buffers                       :    0.015 ms
+[ET] Send/Execute/Receive sub buffers          :    0.431 ms
+[ET] Wait for kernels to complete              :    2.194 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./cos_sim cos_sim.awsxclbin 8192
+[INFO] No Of Vectors: 8192
+[INFO] No Of Elements: 2097152
+[INFO] Loading cos_sim.awsxclbin to program the board.
+[INFO] Cosine Similarity experiment completed successfully!
+[INFO] Max cosine value [SW]: [1968] : 0.201221
+[INFO] Max cosine value [HW]: [1968] : 0.201221
+--------------- Key execution times ---------------
+[ET] Create Data Set                           :   57.110 ms
+[ET] Compute Cosine Similarity on CPU          :    2.237 ms
+[ET] Compute Cosine Similarity on CPU [OpenMP] :    0.650 ms
+[ET] Subdividing Buffers                       :    0.019 ms
+[ET] Send/Execute/Receive sub buffers          :    0.405 ms
+[ET] Wait for kernels to complete              :    2.183 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./cos_sim cos_sim.awsxclbin 16384
+[INFO] No Of Vectors: 16384
+[INFO] No Of Elements: 4194304
+[INFO] Loading cos_sim.awsxclbin to program the board.
+[INFO] Cosine Similarity experiment completed successfully!
+[INFO] Max cosine value [SW]: [15328] : 0.214208
+[INFO] Max cosine value [HW]: [15328] : 0.214208
+--------------- Key execution times ---------------
+[ET] Create Data Set                           :  114.152 ms
+[ET] Compute Cosine Similarity on CPU          :    4.558 ms
+[ET] Compute Cosine Similarity on CPU [OpenMP] :    1.147 ms
+[ET] Subdividing Buffers                       :    0.020 ms
+[ET] Send/Execute/Receive sub buffers          :    0.710 ms
+[ET] Wait for kernels to complete              :    3.057 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./cos_sim cos_sim.awsxclbin 16384
+[INFO] No Of Vectors: 16384
+[INFO] No Of Elements: 4194304
+[INFO] Loading cos_sim.awsxclbin to program the board.
+[INFO] Cosine Similarity experiment completed successfully!
+[INFO] Max cosine value [SW]: [14955] : 0.215594
+[INFO] Max cosine value [HW]: [14955] : 0.215594
+--------------- Key execution times ---------------
+[ET] Create Data Set                           :  114.879 ms
+[ET] Compute Cosine Similarity on CPU          :    4.516 ms
+[ET] Compute Cosine Similarity on CPU [OpenMP] :    1.130 ms
+[ET] Subdividing Buffers                       :    0.021 ms
+[ET] Send/Execute/Receive sub buffers          :    0.463 ms
+[ET] Wait for kernels to complete              :    3.521 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./cos_sim cos_sim.awsxclbin 16384
+[INFO] No Of Vectors: 16384
+[INFO] No Of Elements: 4194304
+[INFO] Loading cos_sim.awsxclbin to program the board.
+[INFO] Cosine Similarity experiment completed successfully!
+[INFO] Max cosine value [SW]: [10377] : 0.259289
+[INFO] Max cosine value [HW]: [10377] : 0.259289
+--------------- Key execution times ---------------
+[ET] Create Data Set                           :  113.633 ms
+[ET] Compute Cosine Similarity on CPU          :    4.470 ms
+[ET] Compute Cosine Similarity on CPU [OpenMP] :    1.101 ms
+[ET] Subdividing Buffers                       :    0.016 ms
+[ET] Send/Execute/Receive sub buffers          :    0.399 ms
+[ET] Wait for kernels to complete              :    3.384 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./cos_sim cos_sim.awsxclbin 32768
+[INFO] No Of Vectors: 32768
+[INFO] No Of Elements: 8388608
+[INFO] Loading cos_sim.awsxclbin to program the board.
+[INFO] Cosine Similarity experiment completed successfully!
+[INFO] Max cosine value [SW]: [24127] : 0.239468
+[INFO] Max cosine value [HW]: [24127] : 0.239468
+--------------- Key execution times ---------------
+[ET] Create Data Set                           :  244.164 ms
+[ET] Compute Cosine Similarity on CPU          :    9.484 ms
+[ET] Compute Cosine Similarity on CPU [OpenMP] :    2.033 ms
+[ET] Subdividing Buffers                       :    0.024 ms
+[ET] Send/Execute/Receive sub buffers          :    0.542 ms
+[ET] Wait for kernels to complete              :    5.882 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./cos_sim cos_sim.awsxclbin 32768
+[INFO] No Of Vectors: 32768
+[INFO] No Of Elements: 8388608
+[INFO] Loading cos_sim.awsxclbin to program the board.
+[INFO] Cosine Similarity experiment completed successfully!
+[INFO] Max cosine value [SW]: [21915] : 0.225505
+[INFO] Max cosine value [HW]: [21915] : 0.225505
+--------------- Key execution times ---------------
+[ET] Create Data Set                           :  230.320 ms
+[ET] Compute Cosine Similarity on CPU          :    9.144 ms
+[ET] Compute Cosine Similarity on CPU [OpenMP] :    2.002 ms
+[ET] Subdividing Buffers                       :    0.022 ms
+[ET] Send/Execute/Receive sub buffers          :    0.477 ms
+[ET] Wait for kernels to complete              :    5.902 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./cos_sim cos_sim.awsxclbin 32768
+[INFO] No Of Vectors: 32768
+[INFO] No Of Elements: 8388608
+[INFO] Loading cos_sim.awsxclbin to program the board.
+[INFO] Cosine Similarity experiment completed successfully!
+[INFO] Max cosine value [SW]: [28125] : 0.290711
+[INFO] Max cosine value [HW]: [28125] : 0.290711
+--------------- Key execution times ---------------
+[ET] Create Data Set                           :  230.524 ms
+[ET] Compute Cosine Similarity on CPU          :    9.129 ms
+[ET] Compute Cosine Similarity on CPU [OpenMP] :    2.049 ms
+[ET] Subdividing Buffers                       :    0.022 ms
+[ET] Send/Execute/Receive sub buffers          :    0.475 ms
+[ET] Wait for kernels to complete              :    5.896 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./cos_sim cos_sim.awsxclbin 65536
+[INFO] No Of Vectors: 65536
+[INFO] No Of Elements: 16777216
+[INFO] Loading cos_sim.awsxclbin to program the board.
+[INFO] Cosine Similarity experiment completed successfully!
+[INFO] Max cosine value [SW]: [29230] : 0.239731
+[INFO] Max cosine value [HW]: [29230] : 0.239731
+--------------- Key execution times ---------------
+[ET] Create Data Set                           :  462.583 ms
+[ET] Compute Cosine Similarity on CPU          :   18.455 ms
+[ET] Compute Cosine Similarity on CPU [OpenMP] :    3.885 ms
+[ET] Subdividing Buffers                       :    0.023 ms
+[ET] Send/Execute/Receive sub buffers          :    0.494 ms
+[ET] Wait for kernels to complete              :   11.029 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./cos_sim cos_sim.awsxclbin 65536
+[INFO] No Of Vectors: 65536
+[INFO] No Of Elements: 16777216
+[INFO] Loading cos_sim.awsxclbin to program the board.
+[INFO] Cosine Similarity experiment completed successfully!
+[INFO] Max cosine value [SW]: [16498] : 0.244247
+[INFO] Max cosine value [HW]: [16498] : 0.244247
+--------------- Key execution times ---------------
+[ET] Create Data Set                           :  461.640 ms
+[ET] Compute Cosine Similarity on CPU          :   18.429 ms
+[ET] Compute Cosine Similarity on CPU [OpenMP] :    4.076 ms
+[ET] Subdividing Buffers                       :    0.018 ms
+[ET] Send/Execute/Receive sub buffers          :    0.493 ms
+[ET] Wait for kernels to complete              :   11.006 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./cos_sim cos_sim.awsxclbin 65536
+[INFO] No Of Vectors: 65536
+[INFO] No Of Elements: 16777216
+[INFO] Loading cos_sim.awsxclbin to program the board.
+[INFO] Cosine Similarity experiment completed successfully!
+[INFO] Max cosine value [SW]: [55557] : 0.259147
+[INFO] Max cosine value [HW]: [55557] : 0.259147
+--------------- Key execution times ---------------
+[ET] Create Data Set                           :  488.031 ms
+[ET] Compute Cosine Similarity on CPU          :   18.432 ms
+[ET] Compute Cosine Similarity on CPU [OpenMP] :    3.844 ms
+[ET] Subdividing Buffers                       :    0.024 ms
+[ET] Send/Execute/Receive sub buffers          :    0.474 ms
+[ET] Wait for kernels to complete              :   10.950 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./cos_sim cos_sim.awsxclbin 131072
+[INFO] No Of Vectors: 131072
+[INFO] No Of Elements: 33554432
+[INFO] Loading cos_sim.awsxclbin to program the board.
+[INFO] Cosine Similarity experiment completed successfully!
+[INFO] Max cosine value [SW]: [109251] : 0.359767
+[INFO] Max cosine value [HW]: [109251] : 0.359767
+--------------- Key execution times ---------------
+[ET] Create Data Set                           :  920.981 ms
+[ET] Compute Cosine Similarity on CPU          :   37.723 ms
+[ET] Compute Cosine Similarity on CPU [OpenMP] :    7.541 ms
+[ET] Subdividing Buffers                       :    0.024 ms
+[ET] Send/Execute/Receive sub buffers          :    0.538 ms
+[ET] Wait for kernels to complete              :   21.404 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./cos_sim cos_sim.awsxclbin 131072
+[INFO] No Of Vectors: 131072
+[INFO] No Of Elements: 33554432
+[INFO] Loading cos_sim.awsxclbin to program the board.
+[INFO] Cosine Similarity experiment completed successfully!
+[INFO] Max cosine value [SW]: [126382] : 0.274921
+[INFO] Max cosine value [HW]: [126382] : 0.274921
+--------------- Key execution times ---------------
+[ET] Create Data Set                           :  922.958 ms
+[ET] Compute Cosine Similarity on CPU          :   37.828 ms
+[ET] Compute Cosine Similarity on CPU [OpenMP] :    7.533 ms
+[ET] Subdividing Buffers                       :    0.024 ms
+[ET] Send/Execute/Receive sub buffers          :    0.476 ms
+[ET] Wait for kernels to complete              :   21.095 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./cos_sim cos_sim.awsxclbin 131072
+[INFO] No Of Vectors: 131072
+[INFO] No Of Elements: 33554432
+[INFO] Loading cos_sim.awsxclbin to program the board.
+[INFO] Cosine Similarity experiment completed successfully!
+[INFO] Max cosine value [SW]: [93957] : 0.234852
+[INFO] Max cosine value [HW]: [93957] : 0.234852
+--------------- Key execution times ---------------
+[ET] Create Data Set                           :  926.646 ms
+[ET] Compute Cosine Similarity on CPU          :   37.824 ms
+[ET] Compute Cosine Similarity on CPU [OpenMP] :    7.586 ms
+[ET] Subdividing Buffers                       :    0.024 ms
+[ET] Send/Execute/Receive sub buffers          :    0.483 ms
+[ET] Wait for kernels to complete              :   21.372 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./cos_sim cos_sim.awsxclbin 131072
+[INFO] No Of Vectors: 131072
+[INFO] No Of Elements: 33554432
+[INFO] Loading cos_sim.awsxclbin to program the board.
+[INFO] Cosine Similarity experiment completed successfully!
+[INFO] Max cosine value [SW]: [87729] : 0.233161
+[INFO] Max cosine value [HW]: [87729] : 0.233161
+--------------- Key execution times ---------------
+[ET] Create Data Set                           :  920.675 ms
+[ET] Compute Cosine Similarity on CPU          :   37.746 ms
+[ET] Compute Cosine Similarity on CPU [OpenMP] :    7.476 ms
+[ET] Subdividing Buffers                       :    0.023 ms
+[ET] Send/Execute/Receive sub buffers          :    0.510 ms
+[ET] Wait for kernels to complete              :   21.440 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./cos_sim cos_sim.awsxclbin 262144
+[INFO] No Of Vectors: 262144
+[INFO] No Of Elements: 67108864
+[INFO] Loading cos_sim.awsxclbin to program the board.
+[INFO] Cosine Similarity experiment completed successfully!
+[INFO] Max cosine value [SW]: [247914] : 0.295611
+[INFO] Max cosine value [HW]: [247914] : 0.295611
+--------------- Key execution times ---------------
+[ET] Create Data Set                           : 1842.021 ms
+[ET] Compute Cosine Similarity on CPU          :   75.503 ms
+[ET] Compute Cosine Similarity on CPU [OpenMP] :   14.832 ms
+[ET] Subdividing Buffers                       :    0.024 ms
+[ET] Send/Execute/Receive sub buffers          :    0.575 ms
+[ET] Wait for kernels to complete              :   41.210 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./cos_sim cos_sim.awsxclbin 262144
+[INFO] No Of Vectors: 262144
+[INFO] No Of Elements: 67108864
+[INFO] Loading cos_sim.awsxclbin to program the board.
+[INFO] Cosine Similarity experiment completed successfully!
+[INFO] Max cosine value [SW]: [181667] : 0.274635
+[INFO] Max cosine value [HW]: [181667] : 0.274635
+--------------- Key execution times ---------------
+[ET] Create Data Set                           : 1847.727 ms
+[ET] Compute Cosine Similarity on CPU          :   75.759 ms
+[ET] Compute Cosine Similarity on CPU [OpenMP] :   14.784 ms
+[ET] Subdividing Buffers                       :    0.025 ms
+[ET] Send/Execute/Receive sub buffers          :    0.508 ms
+[ET] Wait for kernels to complete              :   41.424 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./cos_sim cos_sim.awsxclbin 262144
+[INFO] No Of Vectors: 262144
+[INFO] No Of Elements: 67108864
+[INFO] Loading cos_sim.awsxclbin to program the board.
+[INFO] Cosine Similarity experiment completed successfully!
+[INFO] Max cosine value [SW]: [249394] : 0.303704
+[INFO] Max cosine value [HW]: [249394] : 0.303704
+--------------- Key execution times ---------------
+[ET] Create Data Set                           : 1843.518 ms
+[ET] Compute Cosine Similarity on CPU          :   75.350 ms
+[ET] Compute Cosine Similarity on CPU [OpenMP] :   14.768 ms
+[ET] Subdividing Buffers                       :    0.024 ms
+[ET] Send/Execute/Receive sub buffers          :    0.570 ms
+[ET] Wait for kernels to complete              :   41.173 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./cos_sim cos_sim.awsxclbin 524288
+[INFO] No Of Vectors: 524288
+[INFO] No Of Elements: 134217728
+[INFO] Loading cos_sim.awsxclbin to program the board.
+[INFO] Cosine Similarity experiment completed successfully!
+[INFO] Max cosine value [SW]: [449191] : 0.28015
+[INFO] Max cosine value [HW]: [449191] : 0.28015
+--------------- Key execution times ---------------
+[ET] Create Data Set                           : 3686.554 ms
+[ET] Compute Cosine Similarity on CPU          :  150.811 ms
+[ET] Compute Cosine Similarity on CPU [OpenMP] :   28.955 ms
+[ET] Subdividing Buffers                       :    0.025 ms
+[ET] Send/Execute/Receive sub buffers          :    2.046 ms
+[ET] Wait for kernels to complete              :   81.763 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./cos_sim cos_sim.awsxclbin 524288
+[INFO] No Of Vectors: 524288
+[INFO] No Of Elements: 134217728
+[INFO] Loading cos_sim.awsxclbin to program the board.
+[INFO] Cosine Similarity experiment completed successfully!
+[INFO] Max cosine value [SW]: [383518] : 0.323417
+[INFO] Max cosine value [HW]: [383518] : 0.323417
+--------------- Key execution times ---------------
+[ET] Create Data Set                           : 3688.160 ms
+[ET] Compute Cosine Similarity on CPU          :  151.257 ms
+[ET] Compute Cosine Similarity on CPU [OpenMP] :   28.964 ms
+[ET] Subdividing Buffers                       :    0.024 ms
+[ET] Send/Execute/Receive sub buffers          :    0.526 ms
+[ET] Wait for kernels to complete              :   81.526 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./cos_sim cos_sim.awsxclbin 524288
+[INFO] No Of Vectors: 524288
+[INFO] No Of Elements: 134217728
+[INFO] Loading cos_sim.awsxclbin to program the board.
+[INFO] Cosine Similarity experiment completed successfully!
+[INFO] Max cosine value [SW]: [515520] : 0.293945
+[INFO] Max cosine value [HW]: [515520] : 0.293945
+--------------- Key execution times ---------------
+[ET] Create Data Set                           : 3688.500 ms
+[ET] Compute Cosine Similarity on CPU          :  151.513 ms
+[ET] Compute Cosine Similarity on CPU [OpenMP] :   29.239 ms
+[ET] Subdividing Buffers                       :    0.023 ms
+[ET] Send/Execute/Receive sub buffers          :    0.538 ms
+[ET] Wait for kernels to complete              :   81.424 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./cos_sim cos_sim.awsxclbin 1048576
+[INFO] No Of Vectors: 1048576
+[INFO] No Of Elements: 268435456
+[INFO] Loading cos_sim.awsxclbin to program the board.
+[INFO] Cosine Similarity experiment completed successfully!
+[INFO] Max cosine value [SW]: [495098] : 0.304643
+[INFO] Max cosine value [HW]: [495098] : 0.304643
+--------------- Key execution times ---------------
+[ET] Create Data Set                           : 7372.585 ms
+[ET] Compute Cosine Similarity on CPU          :  302.173 ms
+[ET] Compute Cosine Similarity on CPU [OpenMP] :   57.276 ms
+[ET] Subdividing Buffers                       :    0.015 ms
+[ET] Send/Execute/Receive sub buffers          :    0.477 ms
+[ET] Wait for kernels to complete              :  161.715 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./cos_sim cos_sim.awsxclbin 1048576
+[INFO] No Of Vectors: 1048576
+[INFO] No Of Elements: 268435456
+[INFO] Loading cos_sim.awsxclbin to program the board.
+[INFO] Cosine Similarity experiment completed successfully!
+[INFO] Max cosine value [SW]: [732354] : 0.308237
+[INFO] Max cosine value [HW]: [732354] : 0.308237
+--------------- Key execution times ---------------
+[ET] Create Data Set                           : 11266.212 ms
+[ET] Compute Cosine Similarity on CPU          :  303.707 ms
+[ET] Compute Cosine Similarity on CPU [OpenMP] :   57.088 ms
+[ET] Subdividing Buffers                       :    0.024 ms
+[ET] Send/Execute/Receive sub buffers          :    0.507 ms
+[ET] Wait for kernels to complete              :  161.576 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./cos_sim cos_sim.awsxclbin 1048576
+[INFO] No Of Vectors: 1048576
+[INFO] No Of Elements: 268435456
+[INFO] Loading cos_sim.awsxclbin to program the board.
+[INFO] Cosine Similarity experiment completed successfully!
+[INFO] Max cosine value [SW]: [972818] : 0.288066
+[INFO] Max cosine value [HW]: [972818] : 0.288066
+--------------- Key execution times ---------------
+[ET] Create Data Set                           : 7372.915 ms
+[ET] Compute Cosine Similarity on CPU          :  302.470 ms
+[ET] Compute Cosine Similarity on CPU [OpenMP] :   57.428 ms
+[ET] Subdividing Buffers                       :    0.023 ms
+[ET] Send/Execute/Receive sub buffers          :    0.570 ms
+[ET] Wait for kernels to complete              :  161.892 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./cos_sim cos_sim.awsxclbin 2097152
+[INFO] No Of Vectors: 2097152
+[INFO] No Of Elements: 536870912
+[INFO] Loading cos_sim.awsxclbin to program the board.
+[INFO] Cosine Similarity experiment completed successfully!
+[INFO] Max cosine value [SW]: [1795482] : 0.295107
+[INFO] Max cosine value [HW]: [1795482] : 0.295107
+--------------- Key execution times ---------------
+[ET] Create Data Set                           : 15248.103 ms
+[ET] Compute Cosine Similarity on CPU          :  609.475 ms
+[ET] Compute Cosine Similarity on CPU [OpenMP] :  114.394 ms
+[ET] Subdividing Buffers                       :    0.024 ms
+[ET] Send/Execute/Receive sub buffers          :    0.502 ms
+[ET] Wait for kernels to complete              :  322.358 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./cos_sim cos_sim.awsxclbin 2097152
+[INFO] No Of Vectors: 2097152
+[INFO] No Of Elements: 536870912
+[INFO] Loading cos_sim.awsxclbin to program the board.
+[INFO] Cosine Similarity experiment completed successfully!
+[INFO] Max cosine value [SW]: [1808608] : 0.316099
+[INFO] Max cosine value [HW]: [1808608] : 0.316099
+--------------- Key execution times ---------------
+[ET] Create Data Set                           : 14738.167 ms
+[ET] Compute Cosine Similarity on CPU          :  603.885 ms
+[ET] Compute Cosine Similarity on CPU [OpenMP] :  113.469 ms
+[ET] Subdividing Buffers                       :    0.020 ms
+[ET] Send/Execute/Receive sub buffers          :    0.538 ms
+[ET] Wait for kernels to complete              :  322.315 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ 
+[ec2-user@ip-172-31-88-240 Hardware]$ ./cos_sim cos_sim.awsxclbin 4194304
+[INFO] No Of Vectors: 4194304
+[INFO] No Of Elements: 1073741824
+[INFO] Loading cos_sim.awsxclbin to program the board.
+[INFO] Cosine Similarity experiment completed successfully!
+[INFO] Max cosine value [SW]: [3354417] : 0.307137
+[INFO] Max cosine value [HW]: [3354417] : 0.307137
+--------------- Key execution times ---------------
+[ET] Create Data Set                           : 29516.469 ms
+[ET] Compute Cosine Similarity on CPU          : 1208.934 ms
+[ET] Compute Cosine Similarity on CPU [OpenMP] :  225.995 ms
+[ET] Subdividing Buffers                       :    0.017 ms
+[ET] Send/Execute/Receive sub buffers          :    0.509 ms
+[ET] Wait for kernels to complete              :  643.631 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./cos_sim cos_sim.awsxclbin 4194304
+[INFO] No Of Vectors: 4194304
+[INFO] No Of Elements: 1073741824
+[INFO] Loading cos_sim.awsxclbin to program the board.
+[INFO] Cosine Similarity experiment completed successfully!
+[INFO] Max cosine value [SW]: [3786521] : 0.320613
+[INFO] Max cosine value [HW]: [3786521] : 0.320613
+--------------- Key execution times ---------------
+[ET] Create Data Set                           : 29481.938 ms
+[ET] Compute Cosine Similarity on CPU          : 1211.544 ms
+[ET] Compute Cosine Similarity on CPU [OpenMP] :  225.917 ms
+[ET] Subdividing Buffers                       :    0.022 ms
+[ET] Send/Execute/Receive sub buffers          :    0.524 ms
+[ET] Wait for kernels to complete              :  643.683 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
