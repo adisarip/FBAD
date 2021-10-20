@@ -166,7 +166,7 @@ int main(int argc, char *argv[])
     // FPGA image
     std::cout << "Loading " << binaryName << " to program the board" << std::endl
               << std::endl;
-    et.add("OpenCL Initialization");
+    et.add("OpenCL Initialization");z
 
     // This application will use the first Xilinx device found in the system
     swm::XilinxOcl xocl;
