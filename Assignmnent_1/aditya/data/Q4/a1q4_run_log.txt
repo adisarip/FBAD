@@ -1,0 +1,1024 @@
+[ec2-user@ip-172-31-88-240 Hardware]$ ./wide_vadd_a1q4 wide_vadd_a1q4.awsxclbin 1024
+-- Parallelizing the Data Path --
+
+Loading wide_vadd_a1q4.awsxclbin to program the board.
+
+Running kernel test XRT-allocated buffers and wide data path:
+
+
+OCL-mapped contiguous buffer example complete successfully!
+
+--------------- Key execution times ---------------
+Software VADD run                :    0.240 ms
+Subdividing Buffers              :    0.005 ms
+Send/Execute/Receive Sub buffers :    0.095 ms
+Wait for the kernel to complete  :    0.264 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./wide_vadd_a1q4 wide_vadd_a1q4.awsxclbin 1024
+-- Parallelizing the Data Path --
+
+Loading wide_vadd_a1q4.awsxclbin to program the board.
+
+Running kernel test XRT-allocated buffers and wide data path:
+
+
+OCL-mapped contiguous buffer example complete successfully!
+
+--------------- Key execution times ---------------
+Software VADD run                :    0.227 ms
+Subdividing Buffers              :    0.005 ms
+Send/Execute/Receive Sub buffers :    0.106 ms
+Wait for the kernel to complete  :    0.591 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./wide_vadd_a1q4 wide_vadd_a1q4.awsxclbin 1024
+-- Parallelizing the Data Path --
+
+Loading wide_vadd_a1q4.awsxclbin to program the board.
+
+Running kernel test XRT-allocated buffers and wide data path:
+
+
+OCL-mapped contiguous buffer example complete successfully!
+
+--------------- Key execution times ---------------
+Software VADD run                :    0.235 ms
+Subdividing Buffers              :    0.005 ms
+Send/Execute/Receive Sub buffers :    0.163 ms
+Wait for the kernel to complete  :    0.191 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./wide_vadd_a1q4 wide_vadd_a1q4.awsxclbin 1024
+-- Parallelizing the Data Path --
+
+Loading wide_vadd_a1q4.awsxclbin to program the board.
+
+Running kernel test XRT-allocated buffers and wide data path:
+
+
+OCL-mapped contiguous buffer example complete successfully!
+
+--------------- Key execution times ---------------
+Software VADD run                :    0.226 ms
+Subdividing Buffers              :    0.005 ms
+Send/Execute/Receive Sub buffers :    0.163 ms
+Wait for the kernel to complete  :    0.230 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./wide_vadd_a1q4 wide_vadd_a1q4.awsxclbin 1024
+-- Parallelizing the Data Path --
+
+Loading wide_vadd_a1q4.awsxclbin to program the board.
+
+Running kernel test XRT-allocated buffers and wide data path:
+
+
+OCL-mapped contiguous buffer example complete successfully!
+
+--------------- Key execution times ---------------
+Software VADD run                :    0.226 ms
+Subdividing Buffers              :    0.005 ms
+Send/Execute/Receive Sub buffers :    0.129 ms
+Wait for the kernel to complete  :    0.211 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./wide_vadd_a1q4 wide_vadd_a1q4.awsxclbin 1024
+-- Parallelizing the Data Path --
+
+Loading wide_vadd_a1q4.awsxclbin to program the board.
+
+Running kernel test XRT-allocated buffers and wide data path:
+
+
+OCL-mapped contiguous buffer example complete successfully!
+
+--------------- Key execution times ---------------
+Software VADD run                :    0.221 ms
+Subdividing Buffers              :    0.005 ms
+Send/Execute/Receive Sub buffers :    0.115 ms
+Wait for the kernel to complete  :    0.252 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./wide_vadd_a1q4 wide_vadd_a1q4.awsxclbin 1024
+-- Parallelizing the Data Path --
+
+Loading wide_vadd_a1q4.awsxclbin to program the board.
+
+Running kernel test XRT-allocated buffers and wide data path:
+
+
+OCL-mapped contiguous buffer example complete successfully!
+
+--------------- Key execution times ---------------
+Software VADD run                :    0.224 ms
+Subdividing Buffers              :    0.005 ms
+Send/Execute/Receive Sub buffers :    0.137 ms
+Wait for the kernel to complete  :    0.214 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./wide_vadd_a1q4 wide_vadd_a1q4.awsxclbin 1024
+-- Parallelizing the Data Path --
+
+Loading wide_vadd_a1q4.awsxclbin to program the board.
+
+Running kernel test XRT-allocated buffers and wide data path:
+
+
+OCL-mapped contiguous buffer example complete successfully!
+
+--------------- Key execution times ---------------
+Software VADD run                :    0.231 ms
+Subdividing Buffers              :    0.005 ms
+Send/Execute/Receive Sub buffers :    0.102 ms
+Wait for the kernel to complete  :    0.257 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./wide_vadd_a1q4 wide_vadd_a1q4.awsxclbin 1024
+-- Parallelizing the Data Path --
+
+Loading wide_vadd_a1q4.awsxclbin to program the board.
+
+Running kernel test XRT-allocated buffers and wide data path:
+
+
+OCL-mapped contiguous buffer example complete successfully!
+
+--------------- Key execution times ---------------
+Software VADD run                :    0.233 ms
+Subdividing Buffers              :    0.005 ms
+Send/Execute/Receive Sub buffers :    0.154 ms
+Wait for the kernel to complete  :    0.202 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./wide_vadd_a1q4 wide_vadd_a1q4.awsxclbin 1024
+-- Parallelizing the Data Path --
+
+Loading wide_vadd_a1q4.awsxclbin to program the board.
+
+Running kernel test XRT-allocated buffers and wide data path:
+
+
+OCL-mapped contiguous buffer example complete successfully!
+
+--------------- Key execution times ---------------
+Software VADD run                :    0.222 ms
+Subdividing Buffers              :    0.004 ms
+Send/Execute/Receive Sub buffers :    0.104 ms
+Wait for the kernel to complete  :    0.224 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./wide_vadd_a1q4 wide_vadd_a1q4.awsxclbin 1024
+-- Parallelizing the Data Path --
+
+Loading wide_vadd_a1q4.awsxclbin to program the board.
+
+Running kernel test XRT-allocated buffers and wide data path:
+
+
+OCL-mapped contiguous buffer example complete successfully!
+
+--------------- Key execution times ---------------
+Software VADD run                :    0.506 ms
+Subdividing Buffers              :    0.005 ms
+Send/Execute/Receive Sub buffers :    0.174 ms
+Wait for the kernel to complete  :    0.236 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./wide_vadd_a1q4 wide_vadd_a1q4.awsxclbin 2048
+-- Parallelizing the Data Path --
+
+Loading wide_vadd_a1q4.awsxclbin to program the board.
+
+Running kernel test XRT-allocated buffers and wide data path:
+
+
+OCL-mapped contiguous buffer example complete successfully!
+
+--------------- Key execution times ---------------
+Software VADD run                :    0.247 ms
+Subdividing Buffers              :    0.005 ms
+Send/Execute/Receive Sub buffers :    0.151 ms
+Wait for the kernel to complete  :    0.188 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./wide_vadd_a1q4 wide_vadd_a1q4.awsxclbin 2048
+-- Parallelizing the Data Path --
+
+Loading wide_vadd_a1q4.awsxclbin to program the board.
+
+Running kernel test XRT-allocated buffers and wide data path:
+
+
+OCL-mapped contiguous buffer example complete successfully!
+
+--------------- Key execution times ---------------
+Software VADD run                :    0.229 ms
+Subdividing Buffers              :    0.005 ms
+Send/Execute/Receive Sub buffers :    0.112 ms
+Wait for the kernel to complete  :    0.248 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./wide_vadd_a1q4 wide_vadd_a1q4.awsxclbin 2048
+-- Parallelizing the Data Path --
+
+Loading wide_vadd_a1q4.awsxclbin to program the board.
+
+Running kernel test XRT-allocated buffers and wide data path:
+
+
+OCL-mapped contiguous buffer example complete successfully!
+
+--------------- Key execution times ---------------
+Software VADD run                :    0.223 ms
+Subdividing Buffers              :    0.004 ms
+Send/Execute/Receive Sub buffers :    0.146 ms
+Wait for the kernel to complete  :    0.204 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./wide_vadd_a1q4 wide_vadd_a1q4.awsxclbin 2048
+-- Parallelizing the Data Path --
+
+Loading wide_vadd_a1q4.awsxclbin to program the board.
+
+Running kernel test XRT-allocated buffers and wide data path:
+
+
+OCL-mapped contiguous buffer example complete successfully!
+
+--------------- Key execution times ---------------
+Software VADD run                :    0.245 ms
+Subdividing Buffers              :    0.009 ms
+Send/Execute/Receive Sub buffers :    0.171 ms
+Wait for the kernel to complete  :    0.246 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./wide_vadd_a1q4 wide_vadd_a1q4.awsxclbin 4096
+-- Parallelizing the Data Path --
+
+Loading wide_vadd_a1q4.awsxclbin to program the board.
+
+Running kernel test XRT-allocated buffers and wide data path:
+
+
+OCL-mapped contiguous buffer example complete successfully!
+
+--------------- Key execution times ---------------
+Software VADD run                :    0.263 ms
+Subdividing Buffers              :    0.005 ms
+Send/Execute/Receive Sub buffers :    0.140 ms
+Wait for the kernel to complete  :    0.213 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./wide_vadd_a1q4 wide_vadd_a1q4.awsxclbin 4096
+-- Parallelizing the Data Path --
+
+Loading wide_vadd_a1q4.awsxclbin to program the board.
+
+Running kernel test XRT-allocated buffers and wide data path:
+
+
+OCL-mapped contiguous buffer example complete successfully!
+
+--------------- Key execution times ---------------
+Software VADD run                :    0.268 ms
+Subdividing Buffers              :    0.006 ms
+Send/Execute/Receive Sub buffers :    0.171 ms
+Wait for the kernel to complete  :    0.229 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./wide_vadd_a1q4 wide_vadd_a1q4.awsxclbin 4096
+-- Parallelizing the Data Path --
+
+Loading wide_vadd_a1q4.awsxclbin to program the board.
+
+Running kernel test XRT-allocated buffers and wide data path:
+
+
+OCL-mapped contiguous buffer example complete successfully!
+
+--------------- Key execution times ---------------
+Software VADD run                :    0.233 ms
+Subdividing Buffers              :    0.005 ms
+Send/Execute/Receive Sub buffers :    0.141 ms
+Wait for the kernel to complete  :    0.204 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./wide_vadd_a1q4 wide_vadd_a1q4.awsxclbin 4096
+-- Parallelizing the Data Path --
+
+Loading wide_vadd_a1q4.awsxclbin to program the board.
+
+Running kernel test XRT-allocated buffers and wide data path:
+
+
+OCL-mapped contiguous buffer example complete successfully!
+
+--------------- Key execution times ---------------
+Software VADD run                :    0.241 ms
+Subdividing Buffers              :    0.005 ms
+Send/Execute/Receive Sub buffers :    0.169 ms
+Wait for the kernel to complete  :    0.227 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./wide_vadd_a1q4 wide_vadd_a1q4.awsxclbin 4096
+-- Parallelizing the Data Path --
+
+Loading wide_vadd_a1q4.awsxclbin to program the board.
+
+Running kernel test XRT-allocated buffers and wide data path:
+
+
+OCL-mapped contiguous buffer example complete successfully!
+
+--------------- Key execution times ---------------
+Software VADD run                :    0.230 ms
+Subdividing Buffers              :    0.005 ms
+Send/Execute/Receive Sub buffers :    0.165 ms
+Wait for the kernel to complete  :    0.192 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./wide_vadd_a1q4 wide_vadd_a1q4.awsxclbin 4096
+-- Parallelizing the Data Path --
+
+Loading wide_vadd_a1q4.awsxclbin to program the board.
+
+Running kernel test XRT-allocated buffers and wide data path:
+
+
+OCL-mapped contiguous buffer example complete successfully!
+
+--------------- Key execution times ---------------
+Software VADD run                :    0.247 ms
+Subdividing Buffers              :    0.005 ms
+Send/Execute/Receive Sub buffers :    0.145 ms
+Wait for the kernel to complete  :    0.255 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./wide_vadd_a1q4 wide_vadd_a1q4.awsxclbin 8192
+-- Parallelizing the Data Path --
+
+Loading wide_vadd_a1q4.awsxclbin to program the board.
+
+Running kernel test XRT-allocated buffers and wide data path:
+
+
+OCL-mapped contiguous buffer example complete successfully!
+
+--------------- Key execution times ---------------
+Software VADD run                :    0.537 ms
+Subdividing Buffers              :    0.005 ms
+Send/Execute/Receive Sub buffers :    0.134 ms
+Wait for the kernel to complete  :    0.302 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./wide_vadd_a1q4 wide_vadd_a1q4.awsxclbin 8192
+-- Parallelizing the Data Path --
+
+Loading wide_vadd_a1q4.awsxclbin to program the board.
+
+Running kernel test XRT-allocated buffers and wide data path:
+
+
+OCL-mapped contiguous buffer example complete successfully!
+
+--------------- Key execution times ---------------
+Software VADD run                :    0.241 ms
+Subdividing Buffers              :    0.006 ms
+Send/Execute/Receive Sub buffers :    0.128 ms
+Wait for the kernel to complete  :    0.230 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./wide_vadd_a1q4 wide_vadd_a1q4.awsxclbin 8192
+-- Parallelizing the Data Path --
+
+Loading wide_vadd_a1q4.awsxclbin to program the board.
+
+Running kernel test XRT-allocated buffers and wide data path:
+
+
+OCL-mapped contiguous buffer example complete successfully!
+
+--------------- Key execution times ---------------
+Software VADD run                :    0.508 ms
+Subdividing Buffers              :    0.005 ms
+Send/Execute/Receive Sub buffers :    0.147 ms
+Wait for the kernel to complete  :    0.261 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./wide_vadd_a1q4 wide_vadd_a1q4.awsxclbin 8192
+-- Parallelizing the Data Path --
+
+Loading wide_vadd_a1q4.awsxclbin to program the board.
+
+Running kernel test XRT-allocated buffers and wide data path:
+
+
+OCL-mapped contiguous buffer example complete successfully!
+
+--------------- Key execution times ---------------
+Software VADD run                :    0.231 ms
+Subdividing Buffers              :    0.005 ms
+Send/Execute/Receive Sub buffers :    0.095 ms
+Wait for the kernel to complete  :    0.274 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./wide_vadd_a1q4 wide_vadd_a1q4.awsxclbin 8192
+-- Parallelizing the Data Path --
+
+Loading wide_vadd_a1q4.awsxclbin to program the board.
+
+Running kernel test XRT-allocated buffers and wide data path:
+
+
+OCL-mapped contiguous buffer example complete successfully!
+
+--------------- Key execution times ---------------
+Software VADD run                :    0.277 ms
+Subdividing Buffers              :    0.005 ms
+Send/Execute/Receive Sub buffers :    0.101 ms
+Wait for the kernel to complete  :    0.258 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./wide_vadd_a1q4 wide_vadd_a1q4.awsxclbin 16384
+-- Parallelizing the Data Path --
+
+Loading wide_vadd_a1q4.awsxclbin to program the board.
+
+Running kernel test XRT-allocated buffers and wide data path:
+
+
+OCL-mapped contiguous buffer example complete successfully!
+
+--------------- Key execution times ---------------
+Software VADD run                :    0.249 ms
+Subdividing Buffers              :    0.017 ms
+Send/Execute/Receive Sub buffers :    0.627 ms
+Wait for kernels to complete     :    0.771 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./wide_vadd_a1q4 wide_vadd_a1q4.awsxclbin 16384
+-- Parallelizing the Data Path --
+
+Loading wide_vadd_a1q4.awsxclbin to program the board.
+
+Running kernel test XRT-allocated buffers and wide data path:
+
+
+OCL-mapped contiguous buffer example complete successfully!
+
+--------------- Key execution times ---------------
+Software VADD run                :    0.248 ms
+Subdividing Buffers              :    0.019 ms
+Send/Execute/Receive Sub buffers :    0.646 ms
+Wait for kernels to complete     :    0.490 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./wide_vadd_a1q4 wide_vadd_a1q4.awsxclbin 16384
+-- Parallelizing the Data Path --
+
+Loading wide_vadd_a1q4.awsxclbin to program the board.
+
+Running kernel test XRT-allocated buffers and wide data path:
+
+
+OCL-mapped contiguous buffer example complete successfully!
+
+--------------- Key execution times ---------------
+Software VADD run                :    0.369 ms
+Subdividing Buffers              :    0.019 ms
+Send/Execute/Receive Sub buffers :    0.344 ms
+Wait for kernels to complete     :    0.805 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./wide_vadd_a1q4 wide_vadd_a1q4.awsxclbin 32768
+-- Parallelizing the Data Path --
+
+Loading wide_vadd_a1q4.awsxclbin to program the board.
+
+Running kernel test XRT-allocated buffers and wide data path:
+
+
+OCL-mapped contiguous buffer example complete successfully!
+
+--------------- Key execution times ---------------
+Software VADD run                :    0.263 ms
+Subdividing Buffers              :    0.017 ms
+Send/Execute/Receive Sub buffers :    0.721 ms
+Wait for kernels to complete     :    0.513 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./wide_vadd_a1q4 wide_vadd_a1q4.awsxclbin 32768
+-- Parallelizing the Data Path --
+
+Loading wide_vadd_a1q4.awsxclbin to program the board.
+
+Running kernel test XRT-allocated buffers and wide data path:
+
+
+OCL-mapped contiguous buffer example complete successfully!
+
+--------------- Key execution times ---------------
+Software VADD run                :    0.249 ms
+Subdividing Buffers              :    0.017 ms
+Send/Execute/Receive Sub buffers :    0.531 ms
+Wait for kernels to complete     :    0.627 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./wide_vadd_a1q4 wide_vadd_a1q4.awsxclbin 32768
+-- Parallelizing the Data Path --
+
+Loading wide_vadd_a1q4.awsxclbin to program the board.
+
+Running kernel test XRT-allocated buffers and wide data path:
+
+
+OCL-mapped contiguous buffer example complete successfully!
+
+--------------- Key execution times ---------------
+Software VADD run                :    0.247 ms
+Subdividing Buffers              :    0.017 ms
+Send/Execute/Receive Sub buffers :    1.148 ms
+Wait for kernels to complete     :    0.127 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./wide_vadd_a1q4 wide_vadd_a1q4.awsxclbin 65536
+-- Parallelizing the Data Path --
+
+Loading wide_vadd_a1q4.awsxclbin to program the board.
+
+Running kernel test XRT-allocated buffers and wide data path:
+
+
+OCL-mapped contiguous buffer example complete successfully!
+
+--------------- Key execution times ---------------
+Software VADD run                :    0.292 ms
+Subdividing Buffers              :    0.019 ms
+Send/Execute/Receive Sub buffers :    0.770 ms
+Wait for kernels to complete     :    0.593 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./wide_vadd_a1q4 wide_vadd_a1q4.awsxclbin 65536
+-- Parallelizing the Data Path --
+
+Loading wide_vadd_a1q4.awsxclbin to program the board.
+
+Running kernel test XRT-allocated buffers and wide data path:
+
+
+OCL-mapped contiguous buffer example complete successfully!
+
+--------------- Key execution times ---------------
+Software VADD run                :    0.278 ms
+Subdividing Buffers              :    0.021 ms
+Send/Execute/Receive Sub buffers :    0.540 ms
+Wait for kernels to complete     :    0.814 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./wide_vadd_a1q4 wide_vadd_a1q4.awsxclbin 65536
+-- Parallelizing the Data Path --
+
+Loading wide_vadd_a1q4.awsxclbin to program the board.
+
+Running kernel test XRT-allocated buffers and wide data path:
+
+
+OCL-mapped contiguous buffer example complete successfully!
+
+--------------- Key execution times ---------------
+Software VADD run                :    0.291 ms
+Subdividing Buffers              :    0.020 ms
+Send/Execute/Receive Sub buffers :    0.799 ms
+Wait for kernels to complete     :    0.635 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./wide_vadd_a1q4 wide_vadd_a1q4.awsxclbin 131072
+-- Parallelizing the Data Path --
+
+Loading wide_vadd_a1q4.awsxclbin to program the board.
+
+Running kernel test XRT-allocated buffers and wide data path:
+
+
+OCL-mapped contiguous buffer example complete successfully!
+
+--------------- Key execution times ---------------
+Software VADD run                :    0.322 ms
+Subdividing Buffers              :    0.021 ms
+Send/Execute/Receive Sub buffers :    0.635 ms
+Wait for kernels to complete     :    1.111 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./wide_vadd_a1q4 wide_vadd_a1q4.awsxclbin 131072
+-- Parallelizing the Data Path --
+
+Loading wide_vadd_a1q4.awsxclbin to program the board.
+
+Running kernel test XRT-allocated buffers and wide data path:
+
+
+OCL-mapped contiguous buffer example complete successfully!
+
+--------------- Key execution times ---------------
+Software VADD run                :    0.569 ms
+Subdividing Buffers              :    0.020 ms
+Send/Execute/Receive Sub buffers :    0.523 ms
+Wait for kernels to complete     :    0.953 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./wide_vadd_a1q4 wide_vadd_a1q4.awsxclbin 131072
+-- Parallelizing the Data Path --
+
+Loading wide_vadd_a1q4.awsxclbin to program the board.
+
+Running kernel test XRT-allocated buffers and wide data path:
+
+
+OCL-mapped contiguous buffer example complete successfully!
+
+--------------- Key execution times ---------------
+Software VADD run                :    0.339 ms
+Subdividing Buffers              :    0.024 ms
+Send/Execute/Receive Sub buffers :    0.738 ms
+Wait for kernels to complete     :    0.694 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./wide_vadd_a1q4 wide_vadd_a1q4.awsxclbin 131072
+-- Parallelizing the Data Path --
+
+Loading wide_vadd_a1q4.awsxclbin to program the board.
+
+Running kernel test XRT-allocated buffers and wide data path:
+
+
+OCL-mapped contiguous buffer example complete successfully!
+
+--------------- Key execution times ---------------
+Software VADD run                :    0.318 ms
+Subdividing Buffers              :    0.018 ms
+Send/Execute/Receive Sub buffers :    1.094 ms
+Wait for kernels to complete     :    0.406 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./wide_vadd_a1q4 wide_vadd_a1q4.awsxclbin 131072
+-- Parallelizing the Data Path --
+
+Loading wide_vadd_a1q4.awsxclbin to program the board.
+
+Running kernel test XRT-allocated buffers and wide data path:
+
+
+OCL-mapped contiguous buffer example complete successfully!
+
+--------------- Key execution times ---------------
+Software VADD run                :    0.352 ms
+Subdividing Buffers              :    0.023 ms
+Send/Execute/Receive Sub buffers :    0.977 ms
+Wait for kernels to complete     :    0.504 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./wide_vadd_a1q4 wide_vadd_a1q4.awsxclbin 262144
+-- Parallelizing the Data Path --
+
+Loading wide_vadd_a1q4.awsxclbin to program the board.
+
+Running kernel test XRT-allocated buffers and wide data path:
+
+
+OCL-mapped contiguous buffer example complete successfully!
+
+--------------- Key execution times ---------------
+Software VADD run                :    0.412 ms
+Subdividing Buffers              :    0.024 ms
+Send/Execute/Receive Sub buffers :    0.382 ms
+Wait for kernels to complete     :    1.334 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./wide_vadd_a1q4 wide_vadd_a1q4.awsxclbin 262144
+-- Parallelizing the Data Path --
+
+Loading wide_vadd_a1q4.awsxclbin to program the board.
+
+Running kernel test XRT-allocated buffers and wide data path:
+
+
+OCL-mapped contiguous buffer example complete successfully!
+
+--------------- Key execution times ---------------
+Software VADD run                :    0.418 ms
+Subdividing Buffers              :    0.020 ms
+Send/Execute/Receive Sub buffers :    0.742 ms
+Wait for kernels to complete     :    0.931 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./wide_vadd_a1q4 wide_vadd_a1q4.awsxclbin 524288
+-- Parallelizing the Data Path --
+
+Loading wide_vadd_a1q4.awsxclbin to program the board.
+
+Running kernel test XRT-allocated buffers and wide data path:
+
+
+OCL-mapped contiguous buffer example complete successfully!
+
+--------------- Key execution times ---------------
+Software VADD run                :    0.586 ms
+Subdividing Buffers              :    0.022 ms
+Send/Execute/Receive Sub buffers :    0.622 ms
+Wait for kernels to complete     :    1.147 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./wide_vadd_a1q4 wide_vadd_a1q4.awsxclbin 524288
+-- Parallelizing the Data Path --
+
+Loading wide_vadd_a1q4.awsxclbin to program the board.
+
+Running kernel test XRT-allocated buffers and wide data path:
+
+
+OCL-mapped contiguous buffer example complete successfully!
+
+--------------- Key execution times ---------------
+Software VADD run                :    0.583 ms
+Subdividing Buffers              :    0.021 ms
+Send/Execute/Receive Sub buffers :    0.456 ms
+Wait for kernels to complete     :    1.529 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./wide_vadd_a1q4 wide_vadd_a1q4.awsxclbin 524288
+-- Parallelizing the Data Path --
+
+Loading wide_vadd_a1q4.awsxclbin to program the board.
+
+Running kernel test XRT-allocated buffers and wide data path:
+
+
+OCL-mapped contiguous buffer example complete successfully!
+
+--------------- Key execution times ---------------
+Software VADD run                :    0.596 ms
+Subdividing Buffers              :    0.019 ms
+Send/Execute/Receive Sub buffers :    0.479 ms
+Wait for kernels to complete     :    1.449 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./wide_vadd_a1q4 wide_vadd_a1q4.awsxclbin 1048576
+-- Parallelizing the Data Path --
+
+Loading wide_vadd_a1q4.awsxclbin to program the board.
+
+Running kernel test XRT-allocated buffers and wide data path:
+
+
+OCL-mapped contiguous buffer example complete successfully!
+
+--------------- Key execution times ---------------
+Software VADD run                :    0.917 ms
+Subdividing Buffers              :    0.022 ms
+Send/Execute/Receive Sub buffers :    0.468 ms
+Wait for kernels to complete     :    1.735 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./wide_vadd_a1q4 wide_vadd_a1q4.awsxclbin 1048576
+-- Parallelizing the Data Path --
+
+Loading wide_vadd_a1q4.awsxclbin to program the board.
+
+Running kernel test XRT-allocated buffers and wide data path:
+
+
+OCL-mapped contiguous buffer example complete successfully!
+
+--------------- Key execution times ---------------
+Software VADD run                :    0.899 ms
+Subdividing Buffers              :    0.021 ms
+Send/Execute/Receive Sub buffers :    0.517 ms
+Wait for kernels to complete     :    1.696 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./wide_vadd_a1q4 wide_vadd_a1q4.awsxclbin 1048576
+-- Parallelizing the Data Path --
+
+Loading wide_vadd_a1q4.awsxclbin to program the board.
+
+Running kernel test XRT-allocated buffers and wide data path:
+
+
+OCL-mapped contiguous buffer example complete successfully!
+
+--------------- Key execution times ---------------
+Software VADD run                :    0.927 ms
+Subdividing Buffers              :    0.020 ms
+Send/Execute/Receive Sub buffers :    0.439 ms
+Wait for kernels to complete     :    1.774 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./wide_vadd_a1q4 wide_vadd_a1q4.awsxclbin 2097152
+-- Parallelizing the Data Path --
+
+Loading wide_vadd_a1q4.awsxclbin to program the board.
+
+Running kernel test XRT-allocated buffers and wide data path:
+
+
+OCL-mapped contiguous buffer example complete successfully!
+
+--------------- Key execution times ---------------
+Software VADD run                :    1.555 ms
+Subdividing Buffers              :    0.023 ms
+Send/Execute/Receive Sub buffers :    0.533 ms
+Wait for kernels to complete     :    3.037 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./wide_vadd_a1q4 wide_vadd_a1q4.awsxclbin 2097152
+-- Parallelizing the Data Path --
+
+Loading wide_vadd_a1q4.awsxclbin to program the board.
+
+Running kernel test XRT-allocated buffers and wide data path:
+
+
+OCL-mapped contiguous buffer example complete successfully!
+
+--------------- Key execution times ---------------
+Software VADD run                :    1.593 ms
+Subdividing Buffers              :    0.026 ms
+Send/Execute/Receive Sub buffers :    0.681 ms
+Wait for kernels to complete     :    2.914 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./wide_vadd_a1q4 wide_vadd_a1q4.awsxclbin 2097152
+-- Parallelizing the Data Path --
+
+Loading wide_vadd_a1q4.awsxclbin to program the board.
+
+Running kernel test XRT-allocated buffers and wide data path:
+
+
+OCL-mapped contiguous buffer example complete successfully!
+
+--------------- Key execution times ---------------
+Software VADD run                :    1.539 ms
+Subdividing Buffers              :    0.022 ms
+Send/Execute/Receive Sub buffers :    0.440 ms
+Wait for kernels to complete     :    3.193 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./wide_vadd_a1q4 wide_vadd_a1q4.awsxclbin 4194304
+-- Parallelizing the Data Path --
+
+Loading wide_vadd_a1q4.awsxclbin to program the board.
+
+Running kernel test XRT-allocated buffers and wide data path:
+
+
+OCL-mapped contiguous buffer example complete successfully!
+
+--------------- Key execution times ---------------
+Software VADD run                :    2.911 ms
+Subdividing Buffers              :    0.025 ms
+Send/Execute/Receive Sub buffers :    0.466 ms
+Wait for kernels to complete     :    6.256 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./wide_vadd_a1q4 wide_vadd_a1q4.awsxclbin 4194304
+-- Parallelizing the Data Path --
+
+Loading wide_vadd_a1q4.awsxclbin to program the board.
+
+Running kernel test XRT-allocated buffers and wide data path:
+
+
+OCL-mapped contiguous buffer example complete successfully!
+
+--------------- Key execution times ---------------
+Software VADD run                :    2.965 ms
+Subdividing Buffers              :    0.028 ms
+Send/Execute/Receive Sub buffers :    1.826 ms
+Wait for kernels to complete     :    4.961 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./wide_vadd_a1q4 wide_vadd_a1q4.awsxclbin 4194304
+-- Parallelizing the Data Path --
+
+Loading wide_vadd_a1q4.awsxclbin to program the board.
+
+Running kernel test XRT-allocated buffers and wide data path:
+
+
+OCL-mapped contiguous buffer example complete successfully!
+
+--------------- Key execution times ---------------
+Software VADD run                :    2.908 ms
+Subdividing Buffers              :    0.044 ms
+Send/Execute/Receive Sub buffers :    0.546 ms
+Wait for kernels to complete     :    6.172 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./wide_vadd_a1q4 wide_vadd_a1q4.awsxclbin 8388608
+-- Parallelizing the Data Path --
+
+Loading wide_vadd_a1q4.awsxclbin to program the board.
+
+Running kernel test XRT-allocated buffers and wide data path:
+
+
+OCL-mapped contiguous buffer example complete successfully!
+
+--------------- Key execution times ---------------
+Software VADD run                :    5.850 ms
+Subdividing Buffers              :    0.029 ms
+Send/Execute/Receive Sub buffers :    0.487 ms
+Wait for kernels to complete     :   12.591 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./wide_vadd_a1q4 wide_vadd_a1q4.awsxclbin 8388608
+-- Parallelizing the Data Path --
+
+Loading wide_vadd_a1q4.awsxclbin to program the board.
+
+Running kernel test XRT-allocated buffers and wide data path:
+
+
+OCL-mapped contiguous buffer example complete successfully!
+
+--------------- Key execution times ---------------
+Software VADD run                :    5.830 ms
+Subdividing Buffers              :    0.031 ms
+Send/Execute/Receive Sub buffers :    0.565 ms
+Wait for kernels to complete     :   12.565 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./wide_vadd_a1q4 wide_vadd_a1q4.awsxclbin 8388608
+-- Parallelizing the Data Path --
+
+Loading wide_vadd_a1q4.awsxclbin to program the board.
+
+Running kernel test XRT-allocated buffers and wide data path:
+
+
+OCL-mapped contiguous buffer example complete successfully!
+
+--------------- Key execution times ---------------
+Software VADD run                :    5.882 ms
+Subdividing Buffers              :    0.028 ms
+Send/Execute/Receive Sub buffers :    0.445 ms
+Wait for kernels to complete     :   12.661 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./wide_vadd_a1q4 wide_vadd_a1q4.awsxclbin 16777216
+-- Parallelizing the Data Path --
+
+Loading wide_vadd_a1q4.awsxclbin to program the board.
+
+Running kernel test XRT-allocated buffers and wide data path:
+
+
+OCL-mapped contiguous buffer example complete successfully!
+
+--------------- Key execution times ---------------
+Software VADD run                :   11.580 ms
+Subdividing Buffers              :    0.030 ms
+Send/Execute/Receive Sub buffers :    0.442 ms
+Wait for kernels to complete     :   25.272 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./wide_vadd_a1q4 wide_vadd_a1q4.awsxclbin 16777216
+-- Parallelizing the Data Path --
+
+Loading wide_vadd_a1q4.awsxclbin to program the board.
+
+Running kernel test XRT-allocated buffers and wide data path:
+
+
+OCL-mapped contiguous buffer example complete successfully!
+
+--------------- Key execution times ---------------
+Software VADD run                :   11.520 ms
+Subdividing Buffers              :    0.030 ms
+Send/Execute/Receive Sub buffers :    0.506 ms
+Wait for kernels to complete     :   25.262 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$ ./wide_vadd_a1q4 wide_vadd_a1q4.awsxclbin 16777216
+-- Parallelizing the Data Path --
+
+Loading wide_vadd_a1q4.awsxclbin to program the board.
+
+Running kernel test XRT-allocated buffers and wide data path:
+
+
+OCL-mapped contiguous buffer example complete successfully!
+
+--------------- Key execution times ---------------
+Software VADD run                :   11.426 ms
+Subdividing Buffers              :    0.029 ms
+Send/Execute/Receive Sub buffers :    0.573 ms
+Wait for kernels to complete     :   25.240 ms
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
+[ec2-user@ip-172-31-88-240 Hardware]$
