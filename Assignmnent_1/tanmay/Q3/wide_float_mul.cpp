@@ -27,24 +27,16 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
 EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 **********/
 
-
 #include "event_timer.hpp"
 
 #include <iostream>
 #include <memory>
 #include <string>
-#include <cstdlib>
-#include <random>
 
 // Xilinx OpenCL and XRT includes
 #include "xilinx_ocl.hpp"
 
-using namespace std;
-
-void vmul_sw(float *a,
-             float *b,
-             float *c,
-             uint32_t size)
+void vadd_sw(float *a, float *b, float *c, uint32_t size)
 {
     for (uint32_t i = 0; i < size; i++)
     {
@@ -56,37 +48,33 @@ int main(int argc, char *argv[])
 {
     // Initialize an event timer we'll use for monitoring the application
     EventTimer et;
-
-    // Check if the binary file & no of elements are passed as arguments
-    if (argc != 3)
+    // Check if the binary file is passed as argument
+    if (argc < 2 || argc > 4)
     {
-      cout << "Usage: " << argv[0] << " <XCLBIN File> <num_elements>" << endl;
-      return EXIT_FAILURE;
+        std::cout << "Usage: " << argv[0] << " <XCLBIN File>" << std::endl;
+        return EXIT_FAILURE;
     }
-
     // Copy binary name
-    char* binaryName = argv[1];
-
-    uint32_t num_elements = 4096; // default
-    try
+    char *binaryName = argv[1];
+    // Get target and set BUFSIZE 1024 times bigger for hw runs
+    uint32_t BUFSIZE;
+    if (argc == 3)
     {
-        num_elements = stoi(argv[2]);
+        BUFSIZE = std::stoi(argv[2]);
     }
-    catch (const invalid_argument val)
+    else
     {
-        cerr << "Invalid argument in position 2 (" << argv[2] << ") program expects an integer as number of elements" << endl;
-        return EXIT_FAILURE;
-    }
-    catch (const out_of_range val)
-    {
-        cerr << "Number of elements out of range, try with a number lower than 2147483648" << endl;
-        return EXIT_FAILURE;
+        char *target = getenv("XCL_EMULATION_MODE");
+        BUFSIZE = (strcmp(target , "hw")	 == 0) ? (1024 * 1024 * 32) : (1024 * 32);
     }
 
-    cout << "-- Parallelizing the Data Path --" << endl << endl;
+    std::cout << "-- Parallelizing the Data Path --" << std::endl
+              << std::endl;
 
-    // Initialize the runtime (including a command queue) and load the FPGA image
-    cout << "Loading " << binaryName << " to program the board." << endl << endl;
+    // Initialize the runtime (including a command queue) and load the
+    // FPGA image
+    std::cout << "Loading " << binaryName << " to program the board" << std::endl
+              << std::endl;
     et.add("OpenCL Initialization");
 
     // This application will use the first Xilinx device found in the system
@@ -94,36 +82,40 @@ int main(int argc, char *argv[])
     xocl.initialize(binaryName);
 
     cl::CommandQueue q = xocl.get_command_queue();
-    cl::Kernel krnl = xocl.get_kernel("wide_vmul");
+    cl::Kernel krnl = xocl.get_kernel("wide_vadd");
     et.finish();
 
     /// New code for example 01
-    cout << "Running kernel test XRT-allocated buffers and wide data path:" << endl << endl;
+    std::cout << "Running kernel test XRT-allocated buffers and wide data path:" << std::endl
+              << std::endl;
 
-    // Map our user-allocated buffers as OpenCL buffers using a shared host pointer
+    // Map our user-allocated buffers as OpenCL buffers using a shared
+    // host pointer
     et.add("Allocate contiguous OpenCL buffers");
     cl_mem_ext_ptr_t bank_ext;
-    bank_ext.flags = 0 | XCL_MEM_TOPOLOGY;
-    bank_ext.obj   = NULL;
+    bank_ext.flags = 2 | XCL_MEM_TOPOLOGY;
+    bank_ext.obj = NULL;
     bank_ext.param = 0;
     cl::Buffer a_buf(xocl.get_context(),
                      static_cast<cl_mem_flags>(CL_MEM_READ_ONLY),
-                     num_elements * sizeof(float),
+                     BUFSIZE * sizeof(float),
                      NULL,
                      NULL);
     cl::Buffer b_buf(xocl.get_context(),
                      static_cast<cl_mem_flags>(CL_MEM_READ_ONLY),
-                     num_elements * sizeof(float),
+                     BUFSIZE * sizeof(float),
                      NULL,
                      NULL);
     cl::Buffer c_buf(xocl.get_context(),
                      static_cast<cl_mem_flags>(CL_MEM_READ_WRITE),
-                     num_elements * sizeof(float),
+                     BUFSIZE * sizeof(float),
                      NULL,
                      NULL);
     cl::Buffer d_buf(xocl.get_context(),
-                     static_cast<cl_mem_flags>(CL_MEM_READ_WRITE | CL_MEM_ALLOC_HOST_PTR | CL_MEM_EXT_PTR_XILINX),
-                     num_elements * sizeof(float),
+                     static_cast<cl_mem_flags>(CL_MEM_READ_WRITE |
+                                               CL_MEM_ALLOC_HOST_PTR |
+                                               CL_MEM_EXT_PTR_XILINX),
+                     BUFSIZE * sizeof(float),
                      &bank_ext,
                      NULL);
     et.finish();
@@ -136,39 +128,37 @@ int main(int argc, char *argv[])
     krnl.setArg(0, a_buf);
     krnl.setArg(1, b_buf);
     krnl.setArg(2, c_buf);
-    krnl.setArg(3, num_elements);
+    krnl.setArg(3, BUFSIZE);
 
     et.add("Map buffers to user space pointers");
     float *a = (float *)q.enqueueMapBuffer(a_buf,
                                            CL_TRUE,
                                            CL_MAP_WRITE,
                                            0,
-                                           num_elements * sizeof(float));
+                                           BUFSIZE * sizeof(float));
     float *b = (float *)q.enqueueMapBuffer(b_buf,
-                                           CL_TRUE,
-                                           CL_MAP_WRITE,
-                                           0,
-                                           num_elements * sizeof(float));
+                                              CL_TRUE,
+                                              CL_MAP_WRITE,
+                                              0,
+                                              BUFSIZE * sizeof(float));
     float *d = (float *)q.enqueueMapBuffer(d_buf,
                                            CL_TRUE,
                                            CL_MAP_WRITE | CL_MAP_READ,
                                            0,
-                                           num_elements * sizeof(float));
+                                           BUFSIZE * sizeof(float));
     et.finish();
 
-    std::default_random_engine engine;
-    std::normal_distribution<float> dist(0, 50); // range 0 - 1000
     et.add("Populating buffer inputs");
-    for (uint32_t i = 0; i < num_elements; i++)
+    for (uint32_t i = 0; i < BUFSIZE; i++)
     {
-        a[i] = dist(engine) * ((rand() % 2) ? 1 : -1);
-        b[i] = dist(engine) * ((rand() % 2) ? 1 : -1);
+        a[i] = (float)(i);
+        b[i] = (float)(2 * i);
     }
     et.finish();
 
     // For comparison, let's have the CPU calculate the result
-    et.add("Software VADD run");
-    vmul_sw(a, b, d, num_elements);
+    et.add("Software v mult run");
+    vadd_sw(a, b, d, BUFSIZE);
     et.finish();
 
     // Send the buffers down to the Alveo card
@@ -189,41 +179,46 @@ int main(int argc, char *argv[])
                                            CL_TRUE,
                                            CL_MAP_READ,
                                            0,
-                                           num_elements * sizeof(float));
+                                           BUFSIZE * sizeof(float));
     et.finish();
-
 
     // Verify the results
     bool verified = true;
-    for (uint32_t i = 0; i < num_elements; i++)
+    for (uint32_t i = 0; i < BUFSIZE; i++)
     {
         if (c[i] != d[i])
         {
             verified = false;
-            cout << "ERROR: software and hardware vadd do not match: "
-                 << c[i] << "!=" << d[i] << " at position " << i << endl;
+            std::cout << "ERROR: software and hardware vadd do not match: "
+                      << c[i] << "!=" << d[i] << " at position " << i << std::endl;
             break;
         }
     }
 
     if (verified)
     {
-        cout << endl << "OCL-mapped contiguous buffer example complete successfully!" << endl << endl;
+        std::cout
+            << std::endl
+            << "OCL-mapped contiguous buffer example complete successfully!"
+            << std::endl
+            << std::endl;
     }
     else
     {
-        cout << endl << "OCL-mapped contiguous buffer example complete! (with errors)" << endl << endl;
+        std::cout
+            << std::endl
+            << "OCL-mapped contiguous buffer example complete! (with errors)"
+            << std::endl
+            << std::endl;
     }
 
-    cout << "--------------- Key execution times ---------------" << endl;
-
+    std::cout << "--------------- Key execution times ---------------" << std::endl;
 
     q.enqueueUnmapMemObject(a_buf, a);
     q.enqueueUnmapMemObject(b_buf, b);
     q.enqueueUnmapMemObject(c_buf, c);
     q.enqueueUnmapMemObject(d_buf, d);
     q.finish();
-
 
     et.print();
 }

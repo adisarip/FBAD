@@ -35,10 +35,17 @@ Description:
     'ap_int.h' file.
 *******************************************************************************/
 
+//Including to use ap_uint<> datatype
 #include <stdio.h>
 #include <string.h>
 
-#define BUFFER_SIZE 64
+#define BUFFER_SIZE 1024
+#define DATAWIDTH 512
+#define VECTOR_SIZE (DATAWIDTH / 32) // vector size is 16 (512/32 = 16)
+
+//TRIPCOUNT identifier
+const unsigned int c_chunk_sz = BUFFER_SIZE;
+const unsigned int c_size     = VECTOR_SIZE;
 
 /*
     Vector Addition Kernel Implementation using uint512_dt datatype
@@ -50,45 +57,58 @@ Description:
    */
 extern "C"
 {
-    void wide_vmul(const float* in1,  // Read-Only Vector 1
-                   const float* in2,  // Read-Only Vector 2
-                   float* out,        // Output Result
-                   unsigned int size) // Size in integer
+    void wide_vadd(
+        const float *in1, // Read-Only Vector 1
+        const float *in2, // Read-Only Vector 2
+        float *out,       // Output Result
+        int size               // Size in integer
+    )
     {
-        #pragma HLS INTERFACE m_axi port = in1 max_read_burst_length = 32  offset = slave bundle = gmem0
-        #pragma HLS INTERFACE m_axi port = in2 max_read_burst_length = 32  offset = slave bundle = gmem1
-        #pragma HLS INTERFACE m_axi port = out max_write_burst_length = 32 offset = slave bundle = gmem2
-        #pragma HLS INTERFACE s_axilite port = in1 bundle = control
-        #pragma HLS INTERFACE s_axilite port = in2 bundle = control
-        #pragma HLS INTERFACE s_axilite port = out bundle = control
-        #pragma HLS INTERFACE s_axilite port = size bundle = control
-        #pragma HLS INTERFACE s_axilite port = return bundle = control
+#pragma HLS INTERFACE m_axi port = in1 offset = slave bundle = gmem
+#pragma HLS INTERFACE m_axi port = in2 offset = slave bundle = gmem1
+#pragma HLS INTERFACE m_axi port = out offset = slave bundle = gmem2
+#pragma HLS INTERFACE s_axilite port = in1 bundle = control
+#pragma HLS INTERFACE s_axilite port = in2 bundle = control
+#pragma HLS INTERFACE s_axilite port = out bundle = control
+#pragma HLS INTERFACE s_axilite port = size bundle = control
+#pragma HLS INTERFACE s_axilite port = return bundle = control
 
         float v1_local[BUFFER_SIZE]; // Local memory to store vector1
-        float v2_local[BUFFER_SIZE]; // Local memory to store vector2
+        float v2_local[BUFFER_SIZE];
+
+        // Input vector size for integer vectors. However kernel is directly
+        // accessing 512bit data (total 16 elements). So total number of read
+        // from global memory is calculated here:
+        int size_in16 = size;
 
         //Per iteration of this loop perform BUFFER_SIZE vector addition
-        for (unsigned int i = 0; i < size; i += BUFFER_SIZE)
-        {
-            //#pragma HLS PIPELINE
-            #pragma HLS DATAFLOW
-            #pragma HLS stream variable = v1_local depth = 64
-            #pragma HLS stream variable = v2_local depth = 64
+        for (int i = 0; i < size_in16; i += BUFFER_SIZE) {
+//#pragma HLS PIPELINE
+#pragma HLS DATAFLOW
+#pragma HLS stream variable = v1_local depth = 64
+#pragma HLS stream variable = v2_local depth = 64
 
-            unsigned int chunk_size = ((i + BUFFER_SIZE) > size) ? (size - i) : BUFFER_SIZE;
+            int chunk_size = BUFFER_SIZE;
 
-            v1_rd:
-            for (unsigned int j = 0; j < chunk_size; j++)
-            {
-                #pragma HLS PIPELINE
+            //boundary checks
+            if ((i + BUFFER_SIZE) > size_in16)
+                chunk_size = size_in16 - i;
+
+        //burst read from both input vectors at the same time from global memory to local memory
+        v1_rd:
+            for (int j = 0; j < chunk_size; j++) {
+#pragma HLS pipeline
+#pragma HLS LOOP_TRIPCOUNT min = 1 max = 64
                 v1_local[j] = in1[i + j];
                 v2_local[j] = in2[i + j];
             }
 
-            v2_rd_mul:
-            for (int j = 0; j < chunk_size; j++)
-            {
-                #pragma HLS PIPELINE
+        //burst read second vector and perform vector addition
+        v2_rd_add:
+            for (int j = 0; j < chunk_size; j++) {
+#pragma HLS pipeline
+#pragma HLS LOOP_TRIPCOUNT min = 1 max = 64
+
                 out[i + j] = v1_local[j] * v2_local[j];
             }
         }
