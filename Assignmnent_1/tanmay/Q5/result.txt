@@ -1,0 +1,100 @@
+Found Platform
+Platform Name: Xilinx
+INFO: Reading query_kernel2.awsxclbin
+Loading: 'query_kernel2.awsxclbin'
+Trying to program device[0]: xilinx_aws-vu9p-f1_shell-v04261818_201920_2
+Device[0]: program successful!
+2048
+CPU time:	0.757626 ms 
+FPGA time:	0.864931 ms 
+Throughput:	9.03251 Mb/sFinish 
+Found Platform
+Platform Name: Xilinx
+INFO: Reading query_kernel2.awsxclbin
+Loading: 'query_kernel2.awsxclbin'
+Trying to program device[0]: xilinx_aws-vu9p-f1_shell-v04261818_201920_2
+Device[0]: program successful!
+4096
+CPU time:	1.09857 ms 
+FPGA time:	1.85606 ms 
+Throughput:	8.41835 Mb/sFinish 
+Found Platform
+Platform Name: Xilinx
+INFO: Reading query_kernel2.awsxclbin
+Loading: 'query_kernel2.awsxclbin'
+Trying to program device[0]: xilinx_aws-vu9p-f1_shell-v04261818_201920_2
+Device[0]: program successful!
+8192
+CPU time:	2.18333 ms 
+FPGA time:	3.58039 ms 
+Throughput:	8.7281 Mb/sFinish 
+Found Platform
+Platform Name: Xilinx
+INFO: Reading query_kernel2.awsxclbin
+Loading: 'query_kernel2.awsxclbin'
+Trying to program device[0]: xilinx_aws-vu9p-f1_shell-v04261818_201920_2
+Device[0]: program successful!
+16384
+CPU time:	4.44422 ms 
+FPGA time:	7.16698 ms 
+Throughput:	8.72055 Mb/sFinish 
+Found Platform
+Platform Name: Xilinx
+INFO: Reading query_kernel2.awsxclbin
+Loading: 'query_kernel2.awsxclbin'
+Trying to program device[0]: xilinx_aws-vu9p-f1_shell-v04261818_201920_2
+Device[0]: program successful!
+32768
+CPU time:	8.97795 ms 
+FPGA time:	13.4871 ms 
+Throughput:	9.26808 Mb/sFinish 
+Found Platform
+Platform Name: Xilinx
+INFO: Reading query_kernel2.awsxclbin
+Loading: 'query_kernel2.awsxclbin'
+Trying to program device[0]: xilinx_aws-vu9p-f1_shell-v04261818_201920_2
+Device[0]: program successful!
+65536
+CPU time:	19.0334 ms 
+FPGA time:	28.9076 ms 
+Throughput:	8.64824 Mb/sFinish 
+Found Platform
+Platform Name: Xilinx
+INFO: Reading query_kernel2.awsxclbin
+Loading: 'query_kernel2.awsxclbin'
+Trying to program device[0]: xilinx_aws-vu9p-f1_shell-v04261818_201920_2
+Device[0]: program successful!
+131072
+CPU time:	38.0451 ms 
+FPGA time:	54.8245 ms 
+Throughput:	9.12001 Mb/sFinish 
+Found Platform
+Platform Name: Xilinx
+INFO: Reading query_kernel2.awsxclbin
+Loading: 'query_kernel2.awsxclbin'
+Trying to program device[0]: xilinx_aws-vu9p-f1_shell-v04261818_201920_2
+Device[0]: program successful!
+262144
+CPU time:	74.8772 ms 
+FPGA time:	109.119 ms 
+Throughput:	9.16434 Mb/sFinish 
+Found Platform
+Platform Name: Xilinx
+INFO: Reading query_kernel2.awsxclbin
+Loading: 'query_kernel2.awsxclbin'
+Trying to program device[0]: xilinx_aws-vu9p-f1_shell-v04261818_201920_2
+Device[0]: program successful!
+524288
+CPU time:	152.357 ms 
+FPGA time:	215.357 ms 
+Throughput:	9.28689 Mb/sFinish 
+Found Platform
+Platform Name: Xilinx
+INFO: Reading query_kernel2.awsxclbin
+Loading: 'query_kernel2.awsxclbin'
+Trying to program device[0]: xilinx_aws-vu9p-f1_shell-v04261818_201920_2
+Device[0]: program successful!
+1048576
+CPU time:	303.656 ms 
+FPGA time:	425.91 ms 
+Throughput:	9.39165 Mb/sFinish 
