@@ -9,10 +9,11 @@
 #define uint unsigned int
 
 extern "C"{
-	void AdaptiveThreshold(
+void AdaptiveThreshold(
 			unsigned short width,
 			unsigned short height,
+			unsigned short size,
 			int *src ,
 			unsigned char *dst
-			) ;
+			)	 ;
 }

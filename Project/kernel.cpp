@@ -17,11 +17,11 @@ extern "C"{
 		uint arr[MAX_SIZE][ MAX_IMAGE_WIDTH] ;
 #pragma HLS ARRAY_PARTITION variable=arr type=complete dim=2
 
-		arr[0][0] =src[0] ;
-		Read_f_line:for (int i =1 ; i < width  ; i++){
-#pragma HLS pipeline
-			arr[0][i] = src[i] + arr[0][i-1];
+		Load_data:for(int i =0 ; i< size*width ; i++){
+#pragma HLS PIPELINE
+			arr[i/width][i%width] = src[i] ;
 		}
+
 
 	}
 }
