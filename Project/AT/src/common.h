@@ -3,17 +3,17 @@
 #include <assert.h>
 
 // TODO Check image resolution of dslr and update it here.
-#define MAX_IMAGE_WIDTH   1920
-#define MAX_IMAGE_HEIGHT  1080
-#define MAX_SIZE          19
+#define MAX_IMAGE_WIDTH     1920
+#define MAX_IMAGE_HEIGHT    1080
+#define MAX_SIZE 		19
 #define uint unsigned int
-
+#define max(a , b) a> b? a:b
 extern "C"{
-
-void AdaptiveThreshold(unsigned short width,
-                       unsigned short height,
-                       unsigned short size,
-                       int *src,
-                       unsigned char *dst);
+void AdaptiveThreshold(
+			uint width,
+			uint height,
+			uint size,
+			unsigned char *src ,
+			unsigned char *dst
+			)	 ;
 }
-
