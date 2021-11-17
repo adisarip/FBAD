@@ -7,7 +7,7 @@
 #define MAX_IMAGE_HEIGHT    1080
 #define MAX_SIZE 		19
 #define uint unsigned int
-#define max(a , b) a> b? a:b
+
 extern "C"{
 void AdaptiveThreshold(
 			uint width,
