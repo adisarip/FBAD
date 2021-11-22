@@ -3,6 +3,7 @@
 #include <opencv2/imgproc/imgproc.hpp>
 
 #include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -87,9 +88,9 @@ void thresholdIntegral(cv::Mat &inputMat, cv::Mat &outputMat)
             sum = p_y2[x2] - p_y1[x2] - p_y2[x1] + p_y1[x1];
 
             if ((int)(p_inputMat[j] * count) < (int)(sum * (1.0 - T)))
-                p_outputMat[j] = 255;
-            else
                 p_outputMat[j] = 0;
+            else
+                p_outputMat[j] = 255;
         }
     }
 }
@@ -109,12 +110,11 @@ int main(int argc, char *argv[])
     // Show source image
     try
     {
-        cv::imshow("src", src);
+        //cv::imshow("src", src);
     }
     catch (const cv::Exception &e)
     {
-        cout << "Are we headless?" << endl;
-        headless = true;
+        cout << "Invalid Image" << endl;
     }
 
     // Transform source image to gray
@@ -123,7 +123,6 @@ int main(int argc, char *argv[])
     if (src.channels() == 3)
     {
         cv::cvtColor(src, gray, cv::COLOR_BGR2GRAY);
-
         // Show gray image
         cv::imshow("gray", gray);
     }
@@ -132,35 +131,15 @@ int main(int argc, char *argv[])
         gray = src;
     }
 
-    cout << "TEST" << endl;
-
-    // Converting into binary
-    cv::Mat bw1;
-    cv::adaptiveThreshold(gray, bw1, 255, cv::ADAPTIVE_THRESH_MEAN_C, cv::THRESH_BINARY, 15, -2);
-
-    // Show binary image
-    if (headless)
-    {
-        cv::imwrite("opencv_test_image.jpg", bw1);
-    }
-    else
-    {
-        cv::imshow("opencv_test_image", bw1);
-    }
-
     // binary image 2 - Integral Image
     cv::Mat bw2 = cv::Mat::zeros(gray.size(), CV_8UC1);
     thresholdIntegral(gray, bw2);
+    //cv::imshow("at_image", bw2);
+    cv::imwrite("at_image.jpg", bw2);
 
-    // Show binary image
-    if (headless)
-    {
-        cv::imwrite("opencv_test_image_integral.jpg", bw2);
-    }
-    else
-    {
-        cv::imshow("opencv_test_image_integral", bw2);
-    }
+    cout << "rows: " << bw2.rows << " | cols: " << bw2.cols << " | size: " << bw2.size << endl;
+
+    cout << "data: " << bw2.data[3456] << " | element type: " << bw2.type()  << " | sizeof(uchar): " << sizeof(uchar) << endl;
 
     cv::waitKey(0);
     return 0;
