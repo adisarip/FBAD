@@ -31,7 +31,7 @@
 *.exe
 *.out
 *.app
-at_ocv_test
+at_test
 
 # Directories
 .DS_Store
