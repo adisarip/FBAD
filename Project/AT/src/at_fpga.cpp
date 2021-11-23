@@ -2,17 +2,18 @@
 #include <string.h>
 #include <assert.h>
 #include "at_common.h"
-#include "hls_stream.h"
+#include <iostream>
+using namespace std;
 
 void performAdaptiveThresholding(IN  uint width,
                                  IN  uint height,
                                  IN  uint filter_size,
                                  IN  const uint8* srcImage,
-                                 IN  uint8* integralImage,
+                                 IN  uint* integralImage,
                                  OUT uint8* dstImage)
 {
     int x1, x2, y1, y2, area, sum;
-    float T = 0.15; // Threshold value for comparison
+    int T = 15; // Threshold value for comparison
 
     for (uint i = 0; i < height; i++)
     {
@@ -24,8 +25,11 @@ void performAdaptiveThresholding(IN  uint width,
         y1 = i - filter_size/2;
         y2 = i + filter_size/2;
         // checking boundaries
-        y1 = (y1 < 0) ? 0: y1;
+        y1 = (y1 < 0) ? 0 : y1;
         y2 = (y2 > height-1) ? (height-1) : y2;
+
+        if (i ==0 || i == 48 || i == 100 || i == 479)
+            cout << "[D][" << i << "] y1=" << y1 << " | y2=" << y2 << endl;
 
         for (uint j=0; j < width; j++)
         {
@@ -43,13 +47,23 @@ void performAdaptiveThresholding(IN  uint width,
             // Computing the integral image for the rectangular region
             // I(x,y) = s(x2,y2) - s(x2,y1-1) - s(x1-1,y2) + s(x1-1,y1-1)
             x1 = (0 == x1) ? x1 : (x1-1);
-            y1 = (0 == x1) ? y1 : (y1-1);
-            sum = integralImage[x2*width + y2]
-                - integralImage[x2*width + y1]
-                - integralImage[x1*width + y2]
-                + integralImage[x1*width + y1];
+            y1 = (0 == y1) ? y1 : (y1-1);
+            sum = (int)integralImage[y2*width + x2]
+                - (int)integralImage[y1*width + x2]
+                - (int)integralImage[y2*width + x1]
+                + (int)integralImage[y1*width + x1];
 
-            dstImage[i*width + j] = ((srcImage[i*width + j] * area) < (sum * (1.0 - T))) ? 0 : 255;
+            //cout << "(x1,y1)<>(x2,y2):" << "(" << x1 << "," << y1 << ")" << "<>(" << x2 << "," << y2 << ")" << endl;
+            if ((int)(srcImage[i*width + j] * area) < (sum * (100 - T)/100))
+            {
+                dstImage[i*width + j] = 0;
+                //cout << "[" << i*width + j << "] 0.A:" << (int)(srcImage[i*width + j] * area) << " | 0.B:" << (int)(sum * (1.0 - T)) << endl;
+            }
+            else
+            {
+                dstImage[i*width + j] = 255;
+                //cout << "[" << i*width + j << "] 255.A:" << (int)(srcImage[i*width + j] * area) << " | 255.B:" << (int)(sum * (1.0 - T)) << endl;
+            }
         }
     }
 }
@@ -57,26 +71,26 @@ void performAdaptiveThresholding(IN  uint width,
 void computeIntegralImage(IN  uint width,
                           IN  uint height,
                           IN  const uint8* srcImage,
-                          OUT uint8* integralImage)
+                          OUT uint* integralImage)
 {
     integralImage[0] = srcImage[0];
     first_row_ii:
-    for (uint8 j=1 ; j < width; j++)
+    for (uint j=1 ; j < width; j++)
     {
         #pragma HLS UNROLL factor=64
         integralImage[j] += integralImage[j-1] + srcImage[j];
     }
 
-    int sum[IMAGE_WIDTH];
+    uint sum[IMAGE_WIDTH];
     remaining_rows_ii:
-    for (uint8 i=1; i < height; i++)
+    for (uint i=1; i < height; i++)
     {
         #pragma HLS PIPELINE
 
         // Compute all the individual row sums
         sum[0] = srcImage[i*width];
         compute_sum_vector:
-        for (uint8 k=1; k<width; k++)
+        for (uint k=1; k<width; k++)
         {
             #pragma HLS UNROLL factor=64
             sum[k] = sum[k-1] + srcImage[i*width + k];
@@ -84,11 +98,15 @@ void computeIntegralImage(IN  uint width,
 
         // Compute the Integral Image using the row sums
         compute_ii:
-        for (uint8 j=0 ; j < width; j++)
+        for (uint j=0 ; j < width; j++)
         {
             #pragma HLS UNROLL factor=512
             integralImage[i*width + j] = integralImage[(i-1)*width + j] + sum[j];
         }
+        /*for (int x=0; x < height; x++)
+        {
+            cout << "FPGA:II["<<x<<"][76]: " << integralImage[x*width + 76] << endl;
+        }*/
     }
 }
 
@@ -101,23 +119,28 @@ void adaptiveThresholdingKernel(IN  uint width,
                                 IN  uint8* srcImage,
                                 OUT uint8* dstImage)
 {
+    cout << "[D] width : " << width << endl;
+    cout << "[D] height : " << height << endl;
+    cout << "[D] size : " << size << endl;
     assert(width <= IMAGE_WIDTH);
     assert (height <= IMAGE_HEIGHT);
-    assert(size <= FILTER_SIZE);
 
     #pragma HLS DATAFLOW
-    uint8 integralImage[IMAGE_WIDTH * IMAGE_HEIGHT];
+    uint integralImage[IMAGE_WIDTH * IMAGE_HEIGHT];
+    cout << "[D] computeIntegralImage" << endl;
     computeIntegralImage(IN  width,
                          IN  height,
                          IN  srcImage,
                          OUT integralImage);
 
+    cout << "[D] performAdaptiveThresholding" << endl;
     performAdaptiveThresholding(IN  width,
                                 IN  height,
                                 IN  size,
                                 IN  srcImage,
                                 IN  integralImage,
                                 OUT dstImage);
+    cout << "[D] Kernel Complete" << endl;
 }
 
 } // extern "C"

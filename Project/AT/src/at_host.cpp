@@ -39,7 +39,7 @@ void adaptiveThresholdingHost(cv::Mat &inputMat, cv::Mat &outputMat)
     // Values for image filter/kernel sizes & Threshold size.
     // Values taken based on the paper.
     int S = MAX(nRows, nCols) / 8;
-    double T = 0.15;
+    int T = 15;
 
     // Perform adaptive thresholding
     int s2 = S / 2;
@@ -70,12 +70,22 @@ void adaptiveThresholdingHost(cv::Mat &inputMat, cv::Mat &outputMat)
 
             // compute the area of the SxS rectangular region
             area = (x2 - x1) * (y2 - y1);
-            // Computing the integral image for the rectangular region
-            // (x1,y1) to (x2,y2) assuming x2 >= x1 & y2 >= y1.
+            // Computing the integral image for the rectangular region (x1,y1) to (x2,y2)
             // I(x,y) = s(x2,y2) - s(x2,y1-1) - s(x1-1,y2) + s(x1-1,y1-1)
             x1 = (0 == x1) ? x1 : (x1-1);
             sum = p_y2[x2] - p_y1[x2] - p_y2[x1] + p_y1[x1];
-            p_outputMat[j] = ((int)(p_inputMat[j] * area) < (int)(sum * (1.0 - T))) ? 0 : 255;
+            //p_outputMat[j] = ((int)(p_inputMat[j] * area) < (int)(sum * (1.0 - T))) ? 0 : 255;
+            //cout << "(x1,y1)<>(x2,y2):" << "(" << x1 << "," << y1 << ")" << "<>(" << x2 << "," << y2 << ")" << endl;
+            if ((int)(p_inputMat[j] * area) < (sum * (100 - T)/100))
+            {
+                p_outputMat[j] = 0;
+                //cout << "[" << j << "]0.A:" << (int)(p_inputMat[j] * area) << " | 0.B:" << (int)(sum * (1.0 - T)) << endl;
+            }
+            else
+            {
+                p_outputMat[j] = 255;
+                //cout << "[" << j << "]255.A:" << (int)(p_inputMat[j] * area) << " | 255.B:" << (int)(sum * (1.0 - T)) << endl;
+            }
         }
     }
 }
@@ -93,9 +103,10 @@ int main(int argc, char *argv[])
     char* binaryName = argv[1];
 
     // Load the image
+    cv::Mat src;
     try
     {
-        cv::Mat src = cv::imread(argv[2], cv::IMREAD_GRAYSCALE);
+        src = cv::imread(argv[2], cv::IMREAD_GRAYSCALE);
     }
     catch(cl::Error &err)
     {
@@ -142,7 +153,9 @@ int main(int argc, char *argv[])
         adaptiveThresholdingHost(grayed_image, host_at_image);
         cv::imwrite("host_at_image.jpg", host_at_image);
         et.finish();
-        cv::waitKey(0);
+
+        uint8 host_dst_image[IMAGE_WIDTH * IMAGE_HEIGHT];
+        memcpy(host_dst_image, host_at_image.data, IMAGE_WIDTH * IMAGE_HEIGHT);
 
         // FPGA: computing the adaptive threshold of the image
         // Map our user-allocated buffers as OpenCL buffers
@@ -171,9 +184,9 @@ int main(int argc, char *argv[])
         // in which they need to be allocated
         uint height = grayed_image.rows;
         uint width  = grayed_image.cols;
-        uint filter_size = FILTER_SIZE;
-        krnl.setArg(0, height);
-        krnl.setArg(1, width);
+        uint filter_size = MAX(IMAGE_WIDTH, IMAGE_HEIGHT) / 8;
+        krnl.setArg(0, width);
+        krnl.setArg(1, height);
         krnl.setArg(2, filter_size);
         krnl.setArg(3, src_image_buf);
         krnl.setArg(4, dst_image_buf);
@@ -183,15 +196,8 @@ int main(int argc, char *argv[])
                                                       CL_MAP_WRITE,
                                                       0,
                                                       IMAGE_WIDTH * IMAGE_HEIGHT * sizeof(uint8));
-        uint8* dst_image = (uint8*)q.enqueueMapBuffer(dst_image_buf,
-                                                      CL_TRUE,
-                                                      CL_MAP_READ,
-                                                      0,
-                                                      IMAGE_WIDTH * IMAGE_HEIGHT * sizeof(uint8));
 
-        // @TODO:
         // Now load the input image into src_image as a byte-stream
-        // opencv::input_image --> src_image
         memcpy(src_image, grayed_image.data, height * width);
 
         // Send the image buffers down to the FPGA card
@@ -204,18 +210,55 @@ int main(int argc, char *argv[])
         et.add("[ET] OCL Enqueue task");
         q.enqueueTask(krnl, NULL, &event_sp);
         et.add("[ET] Wait for kernel to complete");
-        clWaitForEvents(1, (const cl_event*)&event_sp)
-
+        clWaitForEvents(1, (const cl_event*)&event_sp);
         et.finish();
 
-        // @TODO:
+        uint8* dst_image = (uint8*)q.enqueueMapBuffer(dst_image_buf,
+                                                      CL_TRUE,
+                                                      CL_MAP_READ,
+                                                      0,
+                                                      IMAGE_WIDTH * IMAGE_HEIGHT * sizeof(uint8));
+
+        // @TODO: Remove all the DEBUG statements
+        // DEBUG statements - Start
+        uint c=0, g=0, ei=0, ez=0, ni=0, nz=0;
+        for (uint x=0; x<height*width; x++)
+        {
+            if (host_dst_image[x] != dst_image[x])
+            {
+                c++;
+                if ((uint)host_dst_image[x] == 0 && (uint)dst_image[x] == 255)
+                    ni++;
+                if ((uint)host_dst_image[x] == 255 && (uint)dst_image[x] == 0)
+                    nz++;
+            }
+            else
+            {
+                g++;
+                if ((uint)dst_image[x] == 0 && (uint)host_dst_image[x] == 0)
+                    ez++;
+                if ((uint)dst_image[x] == 255 && (uint)host_dst_image[x] == 255)
+                    ei++;
+            }
+        }
+        cout << "Equal elements:" << g << " | no of 255==255: " << ei << " | no of 0==0:" << ez << endl;
+        cout << "Not Equal elements:" << c << " | no of 0!=255: " << ni << " | no of 255!=0:" << nz << endl;
+        uint a=0, b=0;
+        for (uint y=0; y<width*height; y++)
+        {
+            if ((int)dst_image[y] == 0)
+                a++;
+            if ((int)dst_image[y] == 255)
+                b++;
+        }
+        cout << "dst_image[y]=0: " << a << " | dst_image[y]=255:" << b << endl;
+
+        // DEBUG statements - Finish
+
         // Now write the output byte-stream as an jpeg image
-        // dst_image --> opencv::input_image
-        // cv::imwrite()
-        cout << "dst_image"
-             << " | rows: " << dst_image.rows
-             << " | cols: " << dst_image.cols
-             << " | size: " << dst_image.size << endl;
+        cv::Mat fpga_at_image(height, width, CV_8UC1, &dst_image[0]);
+        cv::imwrite("fpga_at_image.jpg", fpga_at_image);
+        cv::waitKey(0);
     }
     catch(cl::Error &err)
     {
