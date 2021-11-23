@@ -12,7 +12,6 @@
 #include <opencv2/imgproc/imgproc.hpp>
 using namespace std;
 
-
 void adaptiveThresholdingHost(cv::Mat &inputMat, cv::Mat &outputMat)
 {
     // accept only char type matrices
@@ -80,11 +79,35 @@ void adaptiveThresholdingHost(cv::Mat &inputMat, cv::Mat &outputMat)
             {
                 p_outputMat[j] = 0;
                 //cout << "[" << j << "]0.A:" << (int)(p_inputMat[j] * area) << " | 0.B:" << (int)(sum * (1.0 - T)) << endl;
+                if ((i*nCols+j) >= 20486 && (i*nCols+j) <= 20491)
+                {
+                    cout << "HOST[" << i*nCols+j << "]"
+                         << " | 255.A:" << (int)(p_inputMat[j] * area)
+                         << " | 255.B:" << (sum * (100 - T)/100)
+                         << " | sum=" << sum
+                         //<< " | (x1,y1)<>(x2,y2):" << "(" << x1 << "," << y1 << ")" << "<>(" << x2 << "," << y2 << ")" << endl;
+                         << " | II(x2,y2)=" << p_y2[x2]
+                         << " | II(x2,y1)=" << p_y1[x2]
+                         << " | II(x1,y2)=" << p_y2[x1]
+                         << " | II(x1,y1)=" << p_y1[x1] << endl;
+                }
             }
             else
             {
                 p_outputMat[j] = 255;
                 //cout << "[" << j << "]255.A:" << (int)(p_inputMat[j] * area) << " | 255.B:" << (int)(sum * (1.0 - T)) << endl;
+                if ((i*nCols+j) >= 20486 && (i*nCols+j) <= 20491)
+                {
+                    cout << "HOST[" << i*nCols+j << "]"
+                         << " | 255.A:" << (int)(p_inputMat[j] * area)
+                         << " | 255.B:" << (sum * (100 - T)/100)
+                         << " | sum=" << sum
+                         //<< " | (x1,y1)<>(x2,y2):" << "(" << x1 << "," << y1 << ")" << "<>(" << x2 << "," << y2 << ")" << endl;
+                         << " | II(x2,y2)=" << p_y2[x2]
+                         << " | II(x2,y1)=" << p_y1[x2]
+                         << " | II(x1,y2)=" << p_y2[x1]
+                         << " | II(x1,y1)=" << p_y1[x1] << endl;
+                }
             }
         }
     }
@@ -154,11 +177,12 @@ int main(int argc, char *argv[])
         cv::imwrite("host_at_image.jpg", host_at_image);
         et.finish();
 
-        uint8 host_dst_image[IMAGE_WIDTH * IMAGE_HEIGHT];
-        memcpy(host_dst_image, host_at_image.data, IMAGE_WIDTH * IMAGE_HEIGHT);
-
         // FPGA: computing the adaptive threshold of the image
         // Map our user-allocated buffers as OpenCL buffers
+        uint height = grayed_image.rows;
+        uint width  = grayed_image.cols;
+        uint filter_size = MAX(width, height) / 8;
+
         cl_mem_ext_ptr_t bank0_ext = {0};
         cl_mem_ext_ptr_t bank2_ext = {0};
         bank0_ext.flags = 0 | XCL_MEM_TOPOLOGY;
@@ -170,32 +194,29 @@ int main(int argc, char *argv[])
 
         cl::Buffer src_image_buf(xocl.get_context(),
                                  static_cast<cl_mem_flags>(CL_MEM_READ_ONLY | CL_MEM_EXT_PTR_XILINX),
-                                 IMAGE_WIDTH * IMAGE_HEIGHT * sizeof(uint8),
+                                 width * height * sizeof(uchar),
                                  &bank0_ext,
                                  NULL);
         cl::Buffer dst_image_buf(xocl.get_context(),
                                  static_cast<cl_mem_flags>(CL_MEM_READ_ONLY | CL_MEM_EXT_PTR_XILINX),
-                                 IMAGE_WIDTH * IMAGE_HEIGHT * sizeof(uint8),
+                                 width * height * sizeof(uchar),
                                  &bank2_ext,
                                  NULL);
 
         // Although we'll change these later, we'll set the buffers as kernel
         // arguments prior to mapping so that XRT can resolve the physical memory
         // in which they need to be allocated
-        uint height = grayed_image.rows;
-        uint width  = grayed_image.cols;
-        uint filter_size = MAX(IMAGE_WIDTH, IMAGE_HEIGHT) / 8;
         krnl.setArg(0, width);
         krnl.setArg(1, height);
         krnl.setArg(2, filter_size);
         krnl.setArg(3, src_image_buf);
         krnl.setArg(4, dst_image_buf);
 
-        uint8* src_image = (uint8*)q.enqueueMapBuffer(src_image_buf,
+        uchar* src_image = (uchar*)q.enqueueMapBuffer(src_image_buf,
                                                       CL_TRUE,
                                                       CL_MAP_WRITE,
                                                       0,
-                                                      IMAGE_WIDTH * IMAGE_HEIGHT * sizeof(uint8));
+                                                      width * height * sizeof(uchar));
 
         // Now load the input image into src_image as a byte-stream
         memcpy(src_image, grayed_image.data, height * width);
@@ -213,32 +234,34 @@ int main(int argc, char *argv[])
         clWaitForEvents(1, (const cl_event*)&event_sp);
         et.finish();
 
-        uint8* dst_image = (uint8*)q.enqueueMapBuffer(dst_image_buf,
+        uchar* dst_image = (uchar*)q.enqueueMapBuffer(dst_image_buf,
                                                       CL_TRUE,
                                                       CL_MAP_READ,
                                                       0,
-                                                      IMAGE_WIDTH * IMAGE_HEIGHT * sizeof(uint8));
+                                                      width * height * sizeof(uchar));
 
         // @TODO: Remove all the DEBUG statements
         // DEBUG statements - Start
+        uchar host_dst_image[width * height];
+        memcpy(host_dst_image, host_at_image.data, width * height);
         uint c=0, g=0, ei=0, ez=0, ni=0, nz=0;
         for (uint x=0; x<height*width; x++)
         {
             if (host_dst_image[x] != dst_image[x])
             {
                 c++;
-                if ((uint)host_dst_image[x] == 0 && (uint)dst_image[x] == 255)
-                    ni++;
+                if ((uint)host_dst_image[x] == 0 && (uint)dst_image[x] == 255) ni++;
                 if ((uint)host_dst_image[x] == 255 && (uint)dst_image[x] == 0)
+                {
                     nz++;
+                    //cout << "255!=0: idx=" << x << endl;
+                }
             }
             else
             {
                 g++;
-                if ((uint)dst_image[x] == 0 && (uint)host_dst_image[x] == 0)
-                    ez++;
-                if ((uint)dst_image[x] == 255 && (uint)host_dst_image[x] == 255)
-                    ei++;
+                if ((uint)dst_image[x] == 0 && (uint)host_dst_image[x] == 0)     ez++;
+                if ((uint)dst_image[x] == 255 && (uint)host_dst_image[x] == 255) ei++;
             }
         }
         cout << "Equal elements:" << g << " | no of 255==255: " << ei << " | no of 0==0:" << ez << endl;
@@ -246,10 +269,8 @@ int main(int argc, char *argv[])
         uint a=0, b=0;
         for (uint y=0; y<width*height; y++)
         {
-            if ((int)dst_image[y] == 0)
-                a++;
-            if ((int)dst_image[y] == 255)
-                b++;
+            if ((int)dst_image[y] == 0)   a++;
+            if ((int)dst_image[y] == 255) b++;
         }
         cout << "dst_image[y]=0: " << a << " | dst_image[y]=255:" << b << endl;
 

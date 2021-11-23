@@ -3,8 +3,8 @@
 #define OUT
 
 // TODO Check image resolution of dslr and update it here.
-#define IMAGE_WIDTH  640 // no of columns
-#define IMAGE_HEIGHT 480 // no of rows
+#define MAX_IMAGE_WIDTH  1920 // no of columns
+#define MAX_IMAGE_HEIGHT 1080 // no of rows
 
 typedef unsigned int  uint;
-typedef unsigned char uint8;
+typedef unsigned char uchar;
