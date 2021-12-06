@@ -2,7 +2,6 @@
 #include <string.h>
 #include <assert.h>
 #include "at_common.h"
-#include <iostream>
 using namespace std;
 
 void performAdaptiveThresholding(IN  uint width,
@@ -49,42 +48,13 @@ void performAdaptiveThresholding(IN  uint width,
                 - (int)integralImage[y2*(width+1) + x1]
                 + (int)integralImage[y1*(width+1) + x1];
 
-            //cout << "(x1,y1)<>(x2,y2):" << "(" << x1 << "," << y1 << ")" << "<>(" << x2 << "," << y2 << ")" << endl;
             if ((int)(srcImage[i*width + j] * area) < (sum * (100 - T)/100))
             {
                 dstImage[i*width + j] = 0;
-                //cout << "[" << i*width + j << "] 0.A:" << (int)(srcImage[i*width + j] * area) << " | 0.B:" << (int)(sum * (1.0 - T)) << endl;
-                if ((i == 42 && j >=18 && j<=24) || (i == 43 && j >=18 && j<=24))
-                {
-                    cout << "FPGA[" << i*width + j << "]["<<i<<","<<j<<"]["<<x1<<","<<y1<<"]["<<x2<<","<<y2<<"]"
-                         << " | 0.A:" << (int)(srcImage[i*width + j] * area)
-                         << " | 0.B:" << (sum * (100 - T)/100)
-                         << " | sum=" << sum
-                         << " | area=" << area
-                         //<< " | (x1,y1)<>(x2,y2):" << "(" << x1 << "," << y1 << ")" << "<>(" << x2 << "," << y2 << ")" << endl;
-                         << " | II(x2,y2)=" << (int)integralImage[y2*(width+1) + x2]
-                         << " | II(x2,y1)=" << (int)integralImage[y1*(width+1) + x2]
-                         << " | II(x1,y2)=" << (int)integralImage[y2*(width+1) + x1]
-                         << " | II(x1,y1)=" << (int)integralImage[y1*(width+1) + x1] << endl;
-                }
             }
             else
             {
                 dstImage[i*width + j] = 255;
-                //cout << "[" << i*width + j << "] 255.A:" << (int)(srcImage[i*width + j] * area) << " | 255.B:" << (int)(sum * (1.0 - T)) << endl;
-                if ((i == 42 && j >=18 && j<=24) || (i == 43 && j >=18 && j<=24))
-                {
-                    cout << "FPGA[" << i*width + j << "]["<<i<<","<<j<<"]["<<x1<<","<<y1<<"]["<<x2<<","<<y2<<"]"
-                         << " | 255.A:" << (int)(srcImage[i*width + j] * area)
-                         << " | 255.B:" << (sum * (100 - T)/100)
-                         << " | sum=" << sum
-                         << " | area=" << area
-                         //<< " | (x1,y1)<>(x2,y2):" << "(" << x1 << "," << y1 << ")" << "<>(" << x2 << "," << y2 << ")" << endl;
-                         << " | II(x2,y2)=" << (int)integralImage[y2*(width+1) + x2]
-                         << " | II(x2,y1)=" << (int)integralImage[y1*(width+1) + x2]
-                         << " | II(x1,y2)=" << (int)integralImage[y2*(width+1) + x1]
-                         << " | II(x1,y1)=" << (int)integralImage[y1*(width+1) + x1] << endl;
-                }
             }
         }
     }

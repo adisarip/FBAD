@@ -32,20 +32,8 @@ void adaptiveThresholdingHost(cv::Mat &inputMat, cv::Mat &outputMat)
     cv::Mat integralMat;
     cv::integral(inputMat, integralMat);
 
-    cout << "HOST:inputMat.size():" << inputMat.size() << endl;
-    cout << "HOST:integralMat.size():" << integralMat.size() << endl;
-
     CV_Assert(integralMat.depth() == CV_32S);
     CV_Assert(sizeof(int) == 4);
-
-    /*for (uint y=0; y<3; y++)
-    {
-        int* p_y = integralMat.ptr<int>(y);
-        for (int x=0; x<nCols; x++)
-        {
-            cout << "HOST:II:["<<x<<"]["<<y<<"]" << p_y[x] << endl;
-        }
-    }*/
 
     // Values for image filter/kernel sizes & Threshold size.
     // Values taken based on the paper.
@@ -85,43 +73,14 @@ void adaptiveThresholdingHost(cv::Mat &inputMat, cv::Mat &outputMat)
             // I(x,y) = s(x2,y2) - s(x2,y1-1) - s(x1-1,y2) + s(x1-1,y1-1)
             x1 = (0 == x1) ? x1 : (x1-1);
             sum = p_y2[x2] - p_y1[x2] - p_y2[x1] + p_y1[x1];
-            //p_outputMat[j] = ((int)(p_inputMat[j] * area) < (int)(sum * (1.0 - T))) ? 0 : 255;
-            //cout << "(x1,y1)<>(x2,y2):" << "(" << x1 << "," << y1 << ")" << "<>(" << x2 << "," << y2 << ")" << endl;
+
             if ((int)(p_inputMat[j] * area) < (sum * (100 - T)/100))
             {
                 p_outputMat[j] = 0;
-                //cout << "[" << j << "]0.A:" << (int)(p_inputMat[j] * area) << " | 0.B:" << (int)(sum * (1.0 - T)) << endl;
-                if ((i == 42 && j >=18 && j<=24) || (i == 43 && j >=18 && j<=24))
-                {
-                    cout << "HOST[" << i*nCols+j << "]["<<i<<","<<j<<"]["<<x1<<","<<y1<<"]["<<x2<<","<<y2<<"]"
-                         << " | 0.A:" << (int)(p_inputMat[j] * area)
-                         << " | 0.B:" << (sum * (100 - T)/100)
-                         << " | sum=" << sum
-                         << " | area=" << area
-                         //<< " | (x1,y1)<>(x2,y2):" << "(" << x1 << "," << y1 << ")" << "<>(" << x2 << "," << y2 << ")" << endl;
-                         << " | II(x2,y2)=" << p_y2[x2]
-                         << " | II(x2,y1)=" << p_y1[x2]
-                         << " | II(x1,y2)=" << p_y2[x1]
-                         << " | II(x1,y1)=" << p_y1[x1] << endl;
-                }
             }
             else
             {
                 p_outputMat[j] = 255;
-                //cout << "[" << j << "]255.A:" << (int)(p_inputMat[j] * area) << " | 255.B:" << (int)(sum * (1.0 - T)) << endl;
-                if ((i == 42 && j >=18 && j<=24) || (i == 43 && j >=18 && j<=24))
-                {
-                    cout << "HOST[" << i*nCols+j << "]["<<i<<","<<j<<"]["<<x1<<","<<y1<<"]["<<x2<<","<<y2<<"]"
-                         << " | 255.A:" << (int)(p_inputMat[j] * area)
-                         << " | 255.B:" << (sum * (100 - T)/100)
-                         << " | sum=" << sum
-                         << " | area=" << area
-                         //<< " | (x1,y1)<>(x2,y2):" << "(" << x1 << "," << y1 << ")" << "<>(" << x2 << "," << y2 << ")" << endl;
-                         << " | II(x2,y2)=" << p_y2[x2]
-                         << " | II(x2,y1)=" << p_y1[x2]
-                         << " | II(x1,y2)=" << p_y2[x1]
-                         << " | II(x1,y1)=" << p_y1[x1] << endl;
-                }
             }
         }
     }
@@ -238,7 +197,6 @@ int main(int argc, char *argv[])
         memcpy(src_image, fpga_grayed_image.data, height * width);
 
         // Send the image buffers down to the FPGA card
-        cout << "[INFO] FPGA: Perform Adaptive Thresholding" << endl;
         et.add("[ET] Memory object migration enqueue");
         cl::Event event_sp;
         q.enqueueMigrateMemObjects({src_image_buf, dst_image_buf}, 0, NULL, &event_sp);
@@ -256,46 +214,9 @@ int main(int argc, char *argv[])
                                                       0,
                                                       width * height * sizeof(uchar));
 
-        // @TODO: Remove all the DEBUG statements
-        // DEBUG statements - Start
-        uchar host_dst_image[width * height];
-        memcpy(host_dst_image, host_at_image.data, width * height);
-        uint c=0, g=0, ei=0, ez=0, ni=0, nz=0;
-        for (uint x=0; x<height*width; x++)
-        {
-            if (host_dst_image[x] != dst_image[x])
-            {
-                c++;
-                //cout << "[H!=F]["<<x/width<<","<<x%width<<"]: idx=" << x << endl;
-                if ((uint)host_dst_image[x] == 0 && (uint)dst_image[x] == 255) ni++;
-                if ((uint)host_dst_image[x] == 255 && (uint)dst_image[x] == 0)
-                {
-                    nz++;
-                }
-            }
-            else
-            {
-                g++;
-                if ((uint)dst_image[x] == 0 && (uint)host_dst_image[x] == 0)     ez++;
-                if ((uint)dst_image[x] == 255 && (uint)host_dst_image[x] == 255) ei++;
-            }
-        }
-        cout << "Equal elements:" << g << " | no of 255==255: " << ei << " | no of 0==0:" << ez << endl;
-        cout << "Not Equal elements:" << c << " | no of 0!=255: " << ni << " | no of 255!=0:" << nz << endl;
-        uint a=0, b=0;
-        for (uint y=0; y<width*height; y++)
-        {
-            if ((int)dst_image[y] == 0)   a++;
-            if ((int)dst_image[y] == 255) b++;
-        }
-        cout << "dst_image[y]=0: " << a << " | dst_image[y]=255:" << b << endl;
-
-        // DEBUG statements - Finish
-
         // Now write the output byte-stream as an jpeg image
         cv::Mat fpga_at_image(height, width, CV_8UC1, &dst_image[0]);
         cv::imwrite("fpga_at_image.jpg", fpga_at_image);
-        cv::waitKey(0);
     }
     catch(cl::Error &err)
     {
