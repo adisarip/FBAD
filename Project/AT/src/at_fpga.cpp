@@ -91,10 +91,19 @@ void adaptiveThresholdingKernel(IN  uint width,
                                 IN  uchar* srcImage,
                                 OUT uchar* dstImage)
 {
+    #pragma HLS INTERFACE m_axi port=srcImage max_read_burst_length=64 offset=slave bundle=gmem0
+    #pragma HLS INTERFACE m_axi port=dstImage max_read_burst_length=64 offset=slave bundle=gmem2
+    #pragma HLS INTERFACE s_axilite port = srcImage bundle = control
+    #pragma HLS INTERFACE s_axilite port = dstImage bundle = control
+    #pragma HLS INTERFACE s_axilite port = width    bundle = control
+    #pragma HLS INTERFACE s_axilite port = height   bundle = control
+    #pragma HLS INTERFACE s_axilite port = size     bundle = control
+    #pragma HLS INTERFACE s_axilite port = return   bundle = control
+
     assert(width <= MAX_IMAGE_WIDTH);
     assert(height <= MAX_IMAGE_HEIGHT);
 
-    #pragma HLS DATAFLOW
+    //#pragma HLS DATAFLOW
     uint integralImage[MAX_IMAGE_WIDTH * MAX_IMAGE_HEIGHT];
     for (uint x=0 ; x <MAX_IMAGE_WIDTH; x++)
     {
