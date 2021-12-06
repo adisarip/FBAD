@@ -104,7 +104,7 @@ void adaptiveThresholdingKernel(IN  uint width,
     assert(height <= MAX_IMAGE_HEIGHT);
 
     //#pragma HLS DATAFLOW
-    uint integralImage[MAX_IMAGE_WIDTH * MAX_IMAGE_HEIGHT];
+    uint integralImage[MAX_IMAGE_WIDTH+1 * MAX_IMAGE_HEIGHT+1];
     for (uint x=0 ; x <MAX_IMAGE_WIDTH; x++)
     {
         #pragma HLS UNROLL
