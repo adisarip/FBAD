@@ -217,6 +217,11 @@ int main(int argc, char *argv[])
         // Now write the output byte-stream as an jpeg image
         cv::Mat fpga_at_image(height, width, CV_8UC1, &dst_image[0]);
         cv::imwrite("fpga_at_image.jpg", fpga_at_image);
+        cout << "--------------- Key execution times ---------------" << endl;
+        q.enqueueUnmapMemObject(src_image_buf, src_image);
+        q.enqueueUnmapMemObject(dst_image_buf, dst_image);
+        q.finish();
+        et.print();
     }
     catch(cl::Error &err)
     {
