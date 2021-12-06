@@ -32,8 +32,20 @@ void adaptiveThresholdingHost(cv::Mat &inputMat, cv::Mat &outputMat)
     cv::Mat integralMat;
     cv::integral(inputMat, integralMat);
 
+    cout << "HOST:inputMat.size():" << inputMat.size() << endl;
+    cout << "HOST:integralMat.size():" << integralMat.size() << endl;
+
     CV_Assert(integralMat.depth() == CV_32S);
     CV_Assert(sizeof(int) == 4);
+
+    /*for (uint y=0; y<3; y++)
+    {
+        int* p_y = integralMat.ptr<int>(y);
+        for (int x=0; x<nCols; x++)
+        {
+            cout << "HOST:II:["<<x<<"]["<<y<<"]" << p_y[x] << endl;
+        }
+    }*/
 
     // Values for image filter/kernel sizes & Threshold size.
     // Values taken based on the paper.
@@ -79,12 +91,13 @@ void adaptiveThresholdingHost(cv::Mat &inputMat, cv::Mat &outputMat)
             {
                 p_outputMat[j] = 0;
                 //cout << "[" << j << "]0.A:" << (int)(p_inputMat[j] * area) << " | 0.B:" << (int)(sum * (1.0 - T)) << endl;
-                if ((i*nCols+j) >= 20486 && (i*nCols+j) <= 20491)
+                if ((i == 42 && j >=18 && j<=24) || (i == 43 && j >=18 && j<=24))
                 {
-                    cout << "HOST[" << i*nCols+j << "]"
-                         << " | 255.A:" << (int)(p_inputMat[j] * area)
-                         << " | 255.B:" << (sum * (100 - T)/100)
+                    cout << "HOST[" << i*nCols+j << "]["<<i<<","<<j<<"]["<<x1<<","<<y1<<"]["<<x2<<","<<y2<<"]"
+                         << " | 0.A:" << (int)(p_inputMat[j] * area)
+                         << " | 0.B:" << (sum * (100 - T)/100)
                          << " | sum=" << sum
+                         << " | area=" << area
                          //<< " | (x1,y1)<>(x2,y2):" << "(" << x1 << "," << y1 << ")" << "<>(" << x2 << "," << y2 << ")" << endl;
                          << " | II(x2,y2)=" << p_y2[x2]
                          << " | II(x2,y1)=" << p_y1[x2]
@@ -96,12 +109,13 @@ void adaptiveThresholdingHost(cv::Mat &inputMat, cv::Mat &outputMat)
             {
                 p_outputMat[j] = 255;
                 //cout << "[" << j << "]255.A:" << (int)(p_inputMat[j] * area) << " | 255.B:" << (int)(sum * (1.0 - T)) << endl;
-                if ((i*nCols+j) >= 20486 && (i*nCols+j) <= 20491)
+                if ((i == 42 && j >=18 && j<=24) || (i == 43 && j >=18 && j<=24))
                 {
-                    cout << "HOST[" << i*nCols+j << "]"
+                    cout << "HOST[" << i*nCols+j << "]["<<i<<","<<j<<"]["<<x1<<","<<y1<<"]["<<x2<<","<<y2<<"]"
                          << " | 255.A:" << (int)(p_inputMat[j] * area)
                          << " | 255.B:" << (sum * (100 - T)/100)
                          << " | sum=" << sum
+                         << " | area=" << area
                          //<< " | (x1,y1)<>(x2,y2):" << "(" << x1 << "," << y1 << ")" << "<>(" << x2 << "," << y2 << ")" << endl;
                          << " | II(x2,y2)=" << p_y2[x2]
                          << " | II(x2,y1)=" << p_y1[x2]
@@ -158,6 +172,8 @@ int main(int argc, char *argv[])
         grayed_image = src;
     }
 
+    cv::Mat fpga_grayed_image = grayed_image.clone();
+
     // This application will use the first Xilinx device found in the system
     swm::XilinxOcl xocl;
     xocl.initialize(binaryName);
@@ -198,7 +214,7 @@ int main(int argc, char *argv[])
                                  &bank0_ext,
                                  NULL);
         cl::Buffer dst_image_buf(xocl.get_context(),
-                                 static_cast<cl_mem_flags>(CL_MEM_READ_ONLY | CL_MEM_EXT_PTR_XILINX),
+                                 static_cast<cl_mem_flags>(CL_MEM_READ_WRITE | CL_MEM_EXT_PTR_XILINX),
                                  width * height * sizeof(uchar),
                                  &bank2_ext,
                                  NULL);
@@ -219,7 +235,7 @@ int main(int argc, char *argv[])
                                                       width * height * sizeof(uchar));
 
         // Now load the input image into src_image as a byte-stream
-        memcpy(src_image, grayed_image.data, height * width);
+        memcpy(src_image, fpga_grayed_image.data, height * width);
 
         // Send the image buffers down to the FPGA card
         cout << "[INFO] FPGA: Perform Adaptive Thresholding" << endl;
@@ -250,11 +266,11 @@ int main(int argc, char *argv[])
             if (host_dst_image[x] != dst_image[x])
             {
                 c++;
+                //cout << "[H!=F]["<<x/width<<","<<x%width<<"]: idx=" << x << endl;
                 if ((uint)host_dst_image[x] == 0 && (uint)dst_image[x] == 255) ni++;
                 if ((uint)host_dst_image[x] == 255 && (uint)dst_image[x] == 0)
                 {
                     nz++;
-                    //cout << "255!=0: idx=" << x << endl;
                 }
             }
             else
