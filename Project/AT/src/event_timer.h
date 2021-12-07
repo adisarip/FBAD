@@ -28,8 +28,8 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 **********/
 
 
-#ifndef EVENT_TIMER_HPP__
-#define EVENT_TIMER_HPP__
+#ifndef EVENT_TIMER_H
+#define EVENT_TIMER_H
 
 #include <chrono>
 #include <string>

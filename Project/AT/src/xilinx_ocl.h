@@ -27,7 +27,7 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
 EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 **********/
 
-#ifndef XILINX_OCL_H_
+#ifndef XILINX_OCL_H
 #define XILINX_OCL_H
 
 #pragma once
@@ -38,7 +38,7 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define CL_HPP_MINIMUM_OPENCL_VERSION 120
 #define CL_HPP_ENABLE_PROGRAM_CONSTRUCTION_FROM_ARRAY_COMPATIBILITY 1
 
-#include "line_exception.hpp"
+#include "line_exception.h"
 
 #include <CL/cl2.hpp> //"/opt/intel/opencl-1.2-4.4.0.117/include/CL/cl.h"
 #include <CL/cl_ext_xilinx.h>

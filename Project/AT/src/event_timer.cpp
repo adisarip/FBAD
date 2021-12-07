@@ -28,7 +28,7 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 **********/
 
 
-#include "event_timer.hpp"
+#include "event_timer.h"
 
 #include <iomanip>
 #include <iostream>
