@@ -12,7 +12,8 @@
 #include <opencv2/imgproc/imgproc.hpp>
 using namespace std;
 
-void adaptiveThresholdingHost(cv::Mat &inputMat, cv::Mat &outputMat)
+void adaptiveThresholdingHost(cv::Mat &inputMat,
+                              cv::Mat &outputMat)
 {
     // accept only char type matrices
     CV_Assert(!inputMat.empty());
@@ -172,10 +173,15 @@ int main(int argc, char *argv[])
                                  width * height * sizeof(uchar),
                                  &bank0_ext,
                                  NULL);
+        cl::Buffer int_image_buf(xocl.get_context(),
+                                 static_cast<cl_mem_flags>(CL_MEM_READ_WRITE | CL_MEM_EXT_PTR_XILINX),
+                                 (width+1) * (height+1) * sizeof(uint),
+                                 &bank2_ext,
+                                 NULL);
         cl::Buffer dst_image_buf(xocl.get_context(),
                                  static_cast<cl_mem_flags>(CL_MEM_READ_WRITE | CL_MEM_EXT_PTR_XILINX),
                                  width * height * sizeof(uchar),
-                                 &bank2_ext,
+                                 &bank0_ext,
                                  NULL);
 
         // Although we'll change these later, we'll set the buffers as kernel
@@ -185,21 +191,27 @@ int main(int argc, char *argv[])
         krnl.setArg(1, height);
         krnl.setArg(2, filter_size);
         krnl.setArg(3, src_image_buf);
-        krnl.setArg(4, dst_image_buf);
+        krnl.setArg(4, int_image_buf);
+        krnl.setArg(5, dst_image_buf);
 
         uchar* src_image = (uchar*)q.enqueueMapBuffer(src_image_buf,
                                                       CL_TRUE,
                                                       CL_MAP_WRITE,
                                                       0,
                                                       width * height * sizeof(uchar));
-
+        uchar* int_image = (uchar*)q.enqueueMapBuffer(int_image_buf,
+                                                      CL_TRUE,
+                                                      CL_MAP_WRITE,
+                                                      0,
+                                                      (width+1) * (height+1) * sizeof(uint));
         // Now load the input image into src_image as a byte-stream
         memcpy(src_image, fpga_grayed_image.data, height * width);
+        memset(int_image, 0, (width+1) * (height+1) * sizeof(uint));
 
         // Send the image buffers down to the FPGA card
         et.add("[ET] Memory object migration enqueue");
         cl::Event event_sp;
-        q.enqueueMigrateMemObjects({src_image_buf, dst_image_buf}, 0, NULL, &event_sp);
+        q.enqueueMigrateMemObjects({src_image_buf, int_image_buf, dst_image_buf}, 0, NULL, &event_sp);
         clWaitForEvents(1, (const cl_event*)&event_sp);
 
         et.add("[ET] OCL Enqueue task");
@@ -217,10 +229,12 @@ int main(int argc, char *argv[])
         // Now write the output byte-stream as an jpeg image
         cv::Mat fpga_at_image(height, width, CV_8UC1, &dst_image[0]);
         cv::imwrite("fpga_at_image.jpg", fpga_at_image);
-        cout << "--------------- Key execution times ---------------" << endl;
+
         q.enqueueUnmapMemObject(src_image_buf, src_image);
         q.enqueueUnmapMemObject(dst_image_buf, dst_image);
         q.finish();
+
+        cout << "--------------- Key execution times ---------------" << endl;
         et.print();
     }
     catch(cl::Error &err)
