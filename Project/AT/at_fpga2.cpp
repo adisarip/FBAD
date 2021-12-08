@@ -3,10 +3,10 @@
 
 #define MAX_SIZE 137
 
-void compute(uint intImage[MAX_SIZE][MAX_IMAGE_WIDTH +1 ],unsigned char *src  ,uint height,uint width, int i , uint size , unsigned char ans[MAX_IMAGE_WIDTH]){
-	uint x1,  x2 ,y1 , y2, area , sum ,  T = 15 ;
+void compute(int *intImage ,unsigned char *src  ,int height,int width, int i , int size , unsigned char ans[MAX_IMAGE_WIDTH]){
+	int x1,  x2 ,y1 , y2, area , sum ,  T = 15 ;
     
-	for (uint j = 0 ; j < width; j++){
+	for (int j = 0 ; j < width; j++){
 #pragma HLS UNROLL factor=512
 #pragma HLS dependence variable=intImage type=inter dependent=false
 #pragma HLS dependence variable=ans type=inter dependent=false
@@ -19,10 +19,11 @@ void compute(uint intImage[MAX_SIZE][MAX_IMAGE_WIDTH +1 ],unsigned char *src  ,u
 
 		area = (x2-x1)*(y2-y1) ;
         x1 = (0 == x1) ? x1 : (x1-1);
-        sum = intImage[y2%size][x2 ]
-			-intImage[y1%size][x2 ]
-			- intImage[y2%size][x1 ]
-			+ intImage[y1%size][x1 ];
+
+        sum = intImage[(y2%size)*width+ x2 ]
+			- intImage[(y1%size)*width+ x2 ]
+			- intImage[(y2%size)*width+ x1 ]
+			+ intImage[(y1%size)*width+ x1 ];
 		if (src[i*width + j]*area < sum* (100 - T) /100 ){
 			ans[j]  = 0 ;
 		}else {
@@ -32,11 +33,11 @@ void compute(uint intImage[MAX_SIZE][MAX_IMAGE_WIDTH +1 ],unsigned char *src  ,u
 	}
 }
 
-void intergralimage(uint intImage[MAX_SIZE][MAX_IMAGE_WIDTH+1 ], uint width ,int i ,uint size ){
+void intergralimage(int *intImage , int width ,int i ,int size ){
 #pragma HLS PIPELINE
-	intImage[i%size][0] += intImage[(i-1)%size ][0] ;// split in two sum and above addition .
+	intImage[(i%size)*width ] += intImage[((i-1)%size)*width ] ;// split in two sum and above addition .
 	Row:for (int j = 1 ; j < width ; j++){
-		intImage[i%size][j] += intImage[(i-1)%size][j] -intImage[(i-1)%size][j-1];
+		intImage[(i%size)*width +  j] += intImage[((i-1)%size) *width+j] -intImage[((i-1)%size) *width+j-1];
 	}
 }
 
@@ -48,12 +49,10 @@ extern "C"{
 			unsigned char *src ,
 			unsigned char *dst
 			) {
-    #pragma HLS INTERFACE m_axi port=srcImage max_read_burst_length=64  offset=slave bundle=gmem0
-    #pragma HLS INTERFACE m_axi port=intImage max_write_burst_length=64 offset=slave bundle=gmem2
-    #pragma HLS INTERFACE m_axi port=dstImage max_write_burst_length=64 offset=slave bundle=gmem0
-    #pragma HLS INTERFACE s_axilite port = srcImage bundle = control
-    #pragma HLS INTERFACE s_axilite port = intImage bundle = control
-    #pragma HLS INTERFACE s_axilite port = dstImage bundle = control
+    #pragma HLS INTERFACE m_axi port=src max_read_burst_length=64  offset=slave bundle=gmem0
+    #pragma HLS INTERFACE m_axi port=dst max_write_burst_length=64 offset=slave bundle=gmem2
+    #pragma HLS INTERFACE s_axilite port = src bundle = control
+    #pragma HLS INTERFACE s_axilite port = dst bundle = control
     #pragma HLS INTERFACE s_axilite port = width    bundle = control
     #pragma HLS INTERFACE s_axilite port = height   bundle = control
     #pragma HLS INTERFACE s_axilite port = size     bundle = control
@@ -61,45 +60,45 @@ extern "C"{
 		assert(width <= MAX_IMAGE_WIDTH) ;
 		assert (height <= MAX_IMAGE_HEIGHT) ;
 		assert(size <= MAX_SIZE) ;
-		uint intImage[MAX_SIZE][ MAX_IMAGE_WIDTH +1 ] ;
+		int intImage[MAX_SIZE*( MAX_IMAGE_WIDTH +1) ] ;
         
 		unsigned char ans[MAX_IMAGE_WIDTH] ;
 #pragma HLS intImageAY_PARTITION variable=intImage type=complete dim=2
 
-		Load_data:for(uint i =0 ; i< size*width ; i++){// break into i j.
+		Load_data:for(int i =0 ; i< size*width ; i++){// break into i j.
 #pragma HLS PIPELINE
 #pragma HLS unroll factor=64
-			intImage[i/width][i%width] = src[i] ;
+			intImage[i] = src[i] ;
 		}
 
-		First_II:for (uint i =1 ; i < width; i ++){
-			intImage[0][i] +=intImage[0][i-1];
+		First_II:for (int i =1 ; i < width; i ++){
+			intImage[i] +=intImage[ i-1];
 		}
 
-		Rest_II:for (uint i=1 ;i < size; i++ ){
+		Rest_II:for (int i=1 ;i < size; i++ ){
 			intergralimage(intImage, width, i, size);
 		}
 
-		Starting_loop:for (uint i= 0; i< size/2;i++){
-			compute(intImage, height, width, i, size, ans);
-			Transfer_out:for (uint j= 0; j < width; j++ ){
+		Starting_loop:for (int i= 0; i< size/2;i++){
+			compute(intImage,src, height, width, i, size, ans);
+			Transfer_out:for (int j= 0; j < width; j++ ){
 #pragma HLS PIPELINE
 #pragma HLS unroll factor=64
 				dst[i*width+j] = ans[j] ;
 			}
 		}
-		Main_loop:for (uint i= size/2; i< height;i++){
+		Main_loop:for (int i= size/2; i< height;i++){
 
-			Transfer_in2:for (uint j= 0; j < width; j++ ){
+			Transfer_in2:for (int j= 0; j < width; j++ ){
 #pragma HLS PIPELINE
 #pragma HLS unroll factor=64
-				intImage[i%size][j] = src[i*width + j ] ;
+				intImage[(i%size)*width +j] = src[i*width + j ] ;
 			}
 
 			intergralimage(intImage, width, i, size);
-			compute(intImage, height, width, i, size, ans);
+			compute(intImage,src, height, width, i, size, ans);
 
-			Transfer_out2:for (uint j= 0; j < width; j++ ){
+			Transfer_out2:for (int j= 0; j < width; j++ ){
 #pragma HLS PIPELINE
 #pragma HLS unroll factor=64
 				dst[i*width+j] = ans[j] ;
