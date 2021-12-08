@@ -70,6 +70,7 @@ void adaptiveThresholdingHost(cv::Mat &inputMat,
 
             // compute the area of the SxS rectangular region
             area = (x2 - x1) * (y2 - y1);
+
             // Computing the integral image for the rectangular region (x1,y1) to (x2,y2)
             // I(x,y) = s(x2,y2) - s(x2,y1-1) - s(x1-1,y2) + s(x1-1,y1-1)
             x1 = (0 == x1) ? x1 : (x1-1);
@@ -157,7 +158,7 @@ int main(int argc, char *argv[])
         // Map our user-allocated buffers as OpenCL buffers
         uint height = grayed_image.rows;
         uint width  = grayed_image.cols;
-        uint filter_size = MAX(width, height) / 8;
+        int filter_size = MAX(width, height) / 8;
 
         cl_mem_ext_ptr_t bank0_ext = {0};
         cl_mem_ext_ptr_t bank2_ext = {0};

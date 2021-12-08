@@ -1,51 +1,15 @@
 #include "at_common.h"
 #include <assert.h>
-
+#include <iostream>
 #define MAX_SIZE 137
 
-void compute(int *intImage ,unsigned char *src  ,int height,int width, int i , int size , unsigned char ans[MAX_IMAGE_WIDTH]){
-	int x1,  x2 ,y1 , y2, area , sum ,  T = 15 ;
-    
-	for (int j = 0 ; j < width; j++){
-#pragma HLS UNROLL factor=512
-#pragma HLS dependence variable=intImage type=inter dependent=false
-#pragma HLS dependence variable=ans type=inter dependent=false
 
-		x1 = 0> j-size/2? 0: j-size/2;
-		x2= width-1< j+size /2 ? width-1 : j+ size/2  ;
-		y1 = 0> i-size/2? 0: i-size/2;
-		y2= height-1< i+size /2 ? height-1 : i+ size/2  ;
-        y1 = (0 == y1) ? y1 : (y1-1);
-
-		area = (x2-x1)*(y2-y1) ;
-        x1 = (0 == x1) ? x1 : (x1-1);
-
-        sum = intImage[(y2%size)*width+ x2 ]
-			- intImage[(y1%size)*width+ x2 ]
-			- intImage[(y2%size)*width+ x1 ]
-			+ intImage[(y1%size)*width+ x1 ];
-		if (src[i*width + j]*area < sum* (100 - T) /100 ){
-			ans[j]  = 0 ;
-		}else {
-			ans[j] = 255;
-		}
-
-	}
-}
-
-void intergralimage(int *intImage , int width ,int i ,int size ){
-#pragma HLS PIPELINE
-	intImage[(i%size)*width ] += intImage[((i-1)%size)*width ] ;// split in two sum and above addition .
-	Row:for (int j = 1 ; j < width ; j++){
-		intImage[(i%size)*width +  j] += intImage[((i-1)%size) *width+j] -intImage[((i-1)%size) *width+j-1];
-	}
-}
 
 extern "C"{
 	void adaptiveThresholdingKernel(
 			uint width,
 			uint height,
-			uint size,
+			int size,
 			unsigned char *src ,
 			unsigned char *dst
 			) {
@@ -60,10 +24,9 @@ extern "C"{
 		assert(width <= MAX_IMAGE_WIDTH) ;
 		assert (height <= MAX_IMAGE_HEIGHT) ;
 		assert(size <= MAX_SIZE) ;
-		int intImage[MAX_SIZE*( MAX_IMAGE_WIDTH +1) ] ;
+		int intImage[(2+ MAX_SIZE)*( MAX_IMAGE_WIDTH +1) ] ;
         
 		unsigned char ans[MAX_IMAGE_WIDTH] ;
-#pragma HLS intImageAY_PARTITION variable=intImage type=complete dim=2
 
 		Load_data:for(int i =0 ; i< size*width ; i++){// break into i j.
 #pragma HLS PIPELINE
@@ -76,11 +39,44 @@ extern "C"{
 		}
 
 		Rest_II:for (int i=1 ;i < size; i++ ){
-			intergralimage(intImage, width, i, size);
+			intImage[(i%(size+2))*width ] += intImage[((i-1)%(size+2))*width ] ;// split in two sum and above addition .
+			Row:for (int j = 1 ; j < width ; j++){
+				intImage[(i%(size+2))*width +  j] += intImage[((i-1)%(size+2)) *width+j]+intImage[((i)%(size+2)) *width+j-1]
+																								  -intImage[((i-1)%(size+2)) *width+j-1];
+			}
 		}
 
 		Starting_loop:for (int i= 0; i< size/2;i++){
-			compute(intImage,src, height, width, i, size, ans);
+
+
+			Compute_1:for (int j = 0 ; j < width; j++){
+			#pragma HLS UNROLL factor=1024
+			#pragma HLS dependence variable=intImage type=inter dependent=false
+			#pragma HLS dependence variable=ans type=inter dependent=false
+				int x1,  x2 ,y1 , y2, area , sum ,  T = 15  ;
+				x1 = 0> j-size/2? 0: j-size/2;
+				x2= width-1< j+size /2 ? width-1 : j+ size/2  ;
+				y1 = 0> i-size/2? 0: i-size/2;
+				y2= height-1< i+size /2 ? height-1 : i+ size/2  ;
+				y1 = (0 == y1) ? y1 : (y1-1);
+
+				area = (x2-x1)*(y2-y1) ;
+				x1 = (0 == x1) ? x1 : (x1-1);
+
+				sum = intImage[(y2%(size+2))*width+ x2 ]
+					- intImage[(y1%(size+2))*width+ x2 ]
+					- intImage[(y2%(size+2))*width+ x1 ]
+					+ intImage[(y1%(size+2))*width+ x1 ];
+
+
+				if (src[i*width + j]*area < sum* (100 - T) /100 ){
+					ans[j]  = 0 ;
+				}else {
+					ans[j] = 255;
+				}
+
+			}
+
 			Transfer_out:for (int j= 0; j < width; j++ ){
 #pragma HLS PIPELINE
 #pragma HLS unroll factor=64
@@ -88,15 +84,47 @@ extern "C"{
 			}
 		}
 		Main_loop:for (int i= size/2; i< height;i++){
-
-			Transfer_in2:for (int j= 0; j < width; j++ ){
-#pragma HLS PIPELINE
-#pragma HLS unroll factor=64
-				intImage[(i%size)*width +j] = src[i*width + j ] ;
+			if (i + (size+1 )/2 < height){
+				Transfer_in2:for (int j= 0; j < width; j++ ){
+					#pragma HLS PIPELINE
+					#pragma HLS unroll factor=64
+					intImage[((i+  (size+1 )/2)%(size+2))*width +j] = src[(i+ (size+1 )/2)*width + j ] ;
+				}
+				intImage[((i+  (size+1 )/2)%(size+2))*width ] += intImage[(((i+  (size+1 )/2)-1)%(size+2))*width ] ;// split in two sum and above addition .
+				Row_2:for (int j = 1 ; j < width ; j++){
+					intImage[((i+  (size+1 )/2)%(size+2))*width +  j] += intImage[(((i+  (size+1 )/2)-1)%(size+2)) *width+j]
+																+intImage[((i+  (size+1 )/2)%(size+2)) *width+j-1]
+																-intImage[(((i+  (size+1 )/2)-1)%(size+2)) *width+j-1];
+				}
 			}
 
-			intergralimage(intImage, width, i, size);
-			compute(intImage,src, height, width, i, size, ans);
+			Compute_2:for (int j = 0 ; j < width; j++){
+			#pragma HLS UNROLL factor=1024
+			#pragma HLS dependence variable=intImage type=inter dependent=false
+			#pragma HLS dependence variable=ans type=inter dependent=false
+				int x1,  x2 ,y1 , y2, area , sum ,  T = 15  ;
+				x1 = 0> j-size/2? 0: j-size/2;
+				x2= width-1< j+size /2 ? width-1 : j+ size/2  ;
+				y1 = 0> i-size/2? 0: i-size/2;
+				y2= height-1< i+size /2 ? height-1 : i+ size/2  ;
+				y1 = (0 >= y1) ? 0 : (y1-1);
+
+				area = (x2-x1)*(y2-y1) ;
+				x1 = (0 >= x1) ? 0 : (x1-1);
+
+				sum = intImage[(y2%(size+2))*width+ x2 ]
+					- intImage[(y1%(size+2))*width+ x2 ]
+					- intImage[(y2%(size+2))*width+ x1 ]
+					+ intImage[(y1%(size+2))*width+ x1 ];
+
+
+				if (src[i*width + j]*area < sum* (100 - T) /100 ){
+					ans[j]  = 0 ;
+				}else {
+					ans[j] = 255;
+				}
+
+			}
 
 			Transfer_out2:for (int j= 0; j < width; j++ ){
 #pragma HLS PIPELINE
