@@ -3,8 +3,8 @@
 
 #define MAX_SIZE 137
 
-void compute(uint intImage[MAX_SIZE][MAX_IMAGE_WIDTH +1 ] ,uint height,uint width, int i , uint size , unsigned char ans[MAX_IMAGE_WIDTH]){
-	uint x1,  x2 ,y1 , y2, area , sum ,  T = 15;
+void compute(uint intImage[MAX_SIZE][MAX_IMAGE_WIDTH +1 ],unsigned char *src  ,uint height,uint width, int i , uint size , unsigned char ans[MAX_IMAGE_WIDTH]){
+	uint x1,  x2 ,y1 , y2, area , sum ,  T = 15 ;
     
 	for (uint j = 0 ; j < width; j++){
 #pragma HLS UNROLL factor=512
@@ -19,8 +19,15 @@ void compute(uint intImage[MAX_SIZE][MAX_IMAGE_WIDTH +1 ] ,uint height,uint widt
 
 		area = (x2-x1)*(y2-y1) ;
         x1 = (0 == x1) ? x1 : (x1-1);
-        sum = 
-		ans[j]=
+        sum = intImage[y2%size][x2 ]
+			-intImage[y1%size][x2 ]
+			- intImage[y2%size][x1 ]
+			+ intImage[y1%size][x1 ];
+		if (src[i*width + j]*area < sum* (100 - T) /100 ){
+			ans[j]  = 0 ;
+		}else {
+			ans[j] = 255;
+		}
 
 	}
 }
