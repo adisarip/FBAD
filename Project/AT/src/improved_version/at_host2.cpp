@@ -42,12 +42,12 @@ void adaptiveThresholdingHost(cv::Mat &inputMat,
     int T = 15;
 
     // Perform adaptive thresholding
-    int s2 = S / 2;
+    int s2 = S/2;
     int x1, y1, x2, y2, area, sum;
     int *p_y1, *p_y2;
     uchar *p_inputMat, *p_outputMat;
 
-    for (int i = 0; i < nRows; ++i)
+    for (int i = 0; i < nRows; i++)
     {
         y1 = i - s2;
         y2 = i + s2;
@@ -76,14 +76,7 @@ void adaptiveThresholdingHost(cv::Mat &inputMat,
             x1 = (0 == x1) ? x1 : (x1-1);
             sum = p_y2[x2] - p_y1[x2] - p_y2[x1] + p_y1[x1];
 
-            if ((int)(p_inputMat[j] * area) < (sum * (100 - T)/100))
-            {
-                p_outputMat[j] = 0;
-            }
-            else
-            {
-                p_outputMat[j] = 255;
-            }
+            p_outputMat[j] = ((int)(p_inputMat[j] * area) < (sum * (100-T)/100)) ? 0 : 255;
         }
     }
 }
@@ -192,7 +185,6 @@ int main(int argc, char *argv[])
         krnl.setArg(1, height);
         krnl.setArg(2, filter_size);
         krnl.setArg(3, src_image_buf);
-        //krnl.setArg(4, int_image_buf);
         krnl.setArg(4, dst_image_buf);
 
         uchar* src_image = (uchar*)q.enqueueMapBuffer(src_image_buf,
@@ -200,14 +192,8 @@ int main(int argc, char *argv[])
                                                       CL_MAP_WRITE,
                                                       0,
                                                       width * height * sizeof(uchar));
-        /*uchar* int_image = (uchar*)q.enqueueMapBuffer(int_image_buf,
-                                                      CL_TRUE,
-                                                      CL_MAP_WRITE,
-                                                      0,
-                                                      (width+1) * (height+1) * sizeof(uint));*/
         // Now load the input image into src_image as a byte-stream
         memcpy(src_image, fpga_grayed_image.data, height * width);
-        /*memset(int_image, 0, (width+1) * (height+1) * sizeof(uint));*/
 
         // Send the image buffers down to the FPGA card
         et.add("[ET] Memory object migration enqueue");
