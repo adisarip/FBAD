@@ -30,7 +30,7 @@ extern "C"{
 
 		Load_data:for(int i =0 ; i< size*width ; i++){// break into i j.
 #pragma HLS PIPELINE
-#pragma HLS unroll factor=64
+
 			intImage[i] = src[i] ;
 		}
 
