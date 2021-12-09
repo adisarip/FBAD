@@ -21,3 +21,4 @@ OpenCL C++ Language Specification [[HTML](https://www.khronos.org/registry/OpenC
 [List of FPGA pragmas](https://www.xilinx.com/html_docs/xilinx2019_1/sdaccel_doc/hls-pragmas-okr1504034364623.html)
 [Vitis book](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2021_1/ug1399-vitis-hls.pdf)
 [Vitis tutorial](https://www.xilinx.com/html_docs/xilinx2021_1/viVittis_doc/kme1569523964461.html)
+[Project Report](https://www.overleaf.com/project/61b1913866878b521bda7b54)
