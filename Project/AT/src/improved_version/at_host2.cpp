@@ -167,11 +167,6 @@ int main(int argc, char *argv[])
                                  width * height * sizeof(uchar),
                                  &bank0_ext,
                                  NULL);
-        /*cl::Buffer int_image_buf(xocl.get_context(),
-                                 static_cast<cl_mem_flags>(CL_MEM_READ_WRITE | CL_MEM_EXT_PTR_XILINX),
-                                 (width+1) * (height+1) * sizeof(uint),
-                                 &bank2_ext,
-                                 NULL);*/
         cl::Buffer dst_image_buf(xocl.get_context(),
                                  static_cast<cl_mem_flags>(CL_MEM_READ_WRITE | CL_MEM_EXT_PTR_XILINX),
                                  width * height * sizeof(uchar),
